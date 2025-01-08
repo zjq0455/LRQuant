@@ -6,3 +6,22 @@ Post-training quantization (PTQ) for transformer-based large foundation models (
 ## Usage
 
 LRQuant can well implement weight-only and weight-activation quantization on LLM, MLLM and ViT. You can quantize LLM and MLLM models using [LRLLM](./LRLLM), and use [LRViT](./LRViT) to quantize ViT and DeiT models.
+
+## Related Project
+[SmoothQuant: Accurate and Efficient Post-Training Quantization for Large Language Models](https://github.com/mit-han-lab/smoothquant)
+
+[OmniQuant: Omnidirectionally Calibrated Quantization for Large Language Models](https://github.com/OpenGVLab/OmniQuant.git)
+
+[AWQ: Activation-aware Weight Quantization for LLM Compression and Acceleration](https://github.com/mit-han-lab/llm-awq)
+
+[GPTQ: Accurate Post-Training Quantization for Generative Pre-trained Transformers](https://github.com/IST-DASLab/gptq)
+
+[PTQ4ViT: Post-training quantization for vision transformers with twin uniform quantization](https://github.com/hahnyuan/PTQ4ViT)
+
+[FQ-ViT: Post-Training Quantization for Fully Quantized Vision Transformer](https://github.com/megvii-research/FQ-ViT)
+
+[RepQ-ViT: Scale Reparameterization for Post-Training Quantization of Vision Transformers](https://github.com/zkkli/RepQ-ViT)
+
+
+
+

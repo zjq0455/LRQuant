@@ -1,10 +1,11 @@
-# LRQViT
+# LRQuant(+) for ViTs
 
 ## Usage
-**We provide full script to run LRQuant in `./scripts/`**. We use vit-base-patch16-224 as an example here:
+**We provide the detailed command to run LRQuant and LRQuant+ for ViTs. We use vit-base-patch16-224 as an example here**:
 1. Obtain the channel-wise scales and shifts required for initialization:
 
 ```
+cd LRViT
 python generate_act_scale_shift.py --model /PATH/TO/vit-base-patch16-224
 ```
 
@@ -18,7 +19,7 @@ CUDA_VISIBLE_DEVICES=0 python main.py \
 --wbits 4 --abits 16 --lwc
 ```
 
-3. weight-activation quantization
+3. Weight-activation quantization
 
 ```
 # W4A4
@@ -30,7 +31,7 @@ CUDA_VISIBLE_DEVICES=0 python main.py \
 ```
 
 ### LRQuant+
-2. Weight-only quantization
+4. Weight-only quantization
 ```
 # W4A16
 CUDA_VISIBLE_DEVICES=0 python main.py \
@@ -39,7 +40,7 @@ CUDA_VISIBLE_DEVICES=0 python main.py \
 --wbits 4 --abits 16 --lwc --lr_plus
 ```
 
-3. weight-activation quantization
+5. weight-activation quantization
 
 ```
 # W4A4
