@@ -268,6 +268,10 @@ def LRQuant(
             optimizer = torch.optim.AdamW(
                 [{"params":let_parameters(qlayer, use_shift),"lr":args.let_lr}, {"params":lwc_parameters(qlayer),"lr":args.lwc_lr}],weight_decay=args.wd)
             loss_scaler = utils.NativeScalerWithGradNormCount()
+
+            ema_loss1 = 1.0
+            ema_loss2 = 1.0
+            momentum = 0.95           
                    
             for epochs in range(args.epochs):
                 loss_list = []
@@ -279,13 +283,22 @@ def LRQuant(
                         smooth_and_quant_temporary(qlayer, args, True)
                         quant_out = qlayer(quant_inps[index:index+args.batch_size,], attention_mask=attention_mask_batch,position_ids=position_ids)[0]
                         loss1 =  loss_func(fp_inps[index:index+args.batch_size,], quant_out)
-                        cos1 = cossim(quant_out,fp_inps[index:index+args.batch_size,]).mean().abs()
-                        loss2 = -torch.log(cos1)
+
                         if args.lr_plus:
                             loss1 += loss_func(quant_inps_fp[index:index+args.batch_size,], quant_out)
                             cos2 = cossim(quant_inps_fp[index:index+args.batch_size,],quant_out).mean().abs()
                             loss2 -= torch.log(cos2)
-                        loss = loss1 + loss2
+                        
+                            ema_loss1 = momentum * ema_loss1 + (1 - momentum) * loss1.item()
+                            ema_loss2 = momentum * ema_loss2 + (1 - momentum) * loss2.item()
+                            norm_loss1 = loss1 / (ema_loss1 + 1e-6)
+                            norm_loss2 = loss2 / (ema_loss2 + 1e-6)
+                            loss = norm_loss1 + norm_loss2   #dynamic
+                        else:
+                            cos1 = cossim(quant_out,fp_inps[index:index+args.batch_size,]).mean().abs()
+                            loss2 = -torch.log(cos1)
+                            loss = loss1 + loss2
+
                     if not math.isfinite(loss.item()):
                         logger.info("Loss is NAN, stopping training")
                         pdb.set_trace()
