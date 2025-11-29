@@ -1,0 +1,1801 @@
+['main.py', '--model', '/share/llama-7b', '--epochs', '20', '--output_dir', './log/llama-7b-w4a4', '--eval_ppl', '--wbits', '4', '--abits', '4', '--lwc', '--let', '--lr_plus', '--rotate_rank', '1']
+[2025-05-18 02:59:25 root](main.py 256): INFO Namespace(model='/share/llama-7b', cache_dir='./cache', output_dir='./log/llama-7b-w4a4', save_dir=None, resume=None, real_quant=False, calib_dataset='wikitext2', nsamples=128, batch_size=1, seed=2, tasks='', eval_ppl=True, num_fewshot=0, wbits=4, abits=4, group_size=None, alpha=0.5, let_lr=0.005, lwc_lr=0.01, wd=0, epochs=20, rotate_rank=1, lr_plus=True, let=True, lwc=True, aug_loss=False, symmetric=False, a_dynamic_method='per_token', w_dynamic_method='per_channel', limit=-1, multigpu=False, deactive_amp=True, net=None, tta=False, act_scales=None, act_shifts=None, tta_shifts=None)
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]
+Loading checkpoint shards:  50%|█████     | 1/2 [00:00<00:00,  9.34it/s]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:00<00:00,  9.79it/s]
+vocab size:  32000
+[2025-05-18 02:59:26 root](main.py 324): INFO === start quantization ===
+[2025-05-18 02:59:26 root](main.py 330): INFO load calibration from ./cache/dataloader_llama_wikitext2_128.cache
+[2025-05-18 02:59:26 root](LRQuant.py 46): INFO Starting ...
+LlamaForCausalLM(
+  (model): LlamaModel(
+    (embed_tokens): Embedding(32000, 4096, padding_idx=0)
+    (layers): ModuleList(
+      (0-31): 32 x LlamaDecoderLayer(
+        (self_attn): LlamaSdpaAttention(
+          (q_proj): Linear(in_features=4096, out_features=4096, bias=False)
+          (k_proj): Linear(in_features=4096, out_features=4096, bias=False)
+          (v_proj): Linear(in_features=4096, out_features=4096, bias=False)
+          (o_proj): Linear(in_features=4096, out_features=4096, bias=False)
+          (rotary_emb): LlamaRotaryEmbedding()
+        )
+        (mlp): LlamaMLP(
+          (gate_proj): Linear(in_features=4096, out_features=11008, bias=False)
+          (up_proj): Linear(in_features=4096, out_features=11008, bias=False)
+          (down_proj): Linear(in_features=11008, out_features=4096, bias=False)
+          (act_fn): SiLU()
+        )
+        (input_layernorm): LlamaRMSNorm()
+        (post_attention_layernorm): LlamaRMSNorm()
+      )
+    )
+    (norm): LlamaRMSNorm()
+  )
+  (lm_head): Linear(in_features=4096, out_features=32000, bias=False)
+)
+[2025-05-18 02:59:27 root](LRQuant.py 154): INFO No attention mask caught from the first layer. Seems that model's attention works without a mask.
+[2025-05-18 02:59:27 root](LRQuant.py 173): INFO === Start quantize layer 0 ===
+32
+[2025-05-18 02:59:58 root](LRQuant.py 300): INFO layer 0 iter 0 loss:0.04905736446380615 norm:0.36768513917922974 max memory_allocated 21263.7705078125 
+[2025-05-18 03:00:27 root](LRQuant.py 300): INFO layer 0 iter 1 loss:0.021080804988741875 norm:0.07132955640554428 max memory_allocated 21263.771484375 
+[2025-05-18 03:00:56 root](LRQuant.py 300): INFO layer 0 iter 2 loss:0.01797567494213581 norm:0.07081232219934464 max memory_allocated 21263.771484375 
+[2025-05-18 03:01:25 root](LRQuant.py 300): INFO layer 0 iter 3 loss:0.016512949019670486 norm:0.06092024967074394 max memory_allocated 21263.771484375 
+[2025-05-18 03:01:54 root](LRQuant.py 300): INFO layer 0 iter 4 loss:0.015183228068053722 norm:0.047847796231508255 max memory_allocated 21263.771484375 
+[2025-05-18 03:02:23 root](LRQuant.py 300): INFO layer 0 iter 5 loss:0.014641286805272102 norm:0.049179643392562866 max memory_allocated 21263.771484375 
+[2025-05-18 03:02:59 root](LRQuant.py 300): INFO layer 0 iter 6 loss:0.014388618990778923 norm:0.04749324172735214 max memory_allocated 21263.771484375 
+[2025-05-18 03:04:03 root](LRQuant.py 300): INFO layer 0 iter 7 loss:0.014561002142727375 norm:0.052654922008514404 max memory_allocated 21263.771484375 
+[2025-05-18 03:05:07 root](LRQuant.py 300): INFO layer 0 iter 8 loss:0.015033595263957977 norm:0.05002132058143616 max memory_allocated 21263.771484375 
+[2025-05-18 03:06:12 root](LRQuant.py 300): INFO layer 0 iter 9 loss:0.014029151760041714 norm:0.04231581091880798 max memory_allocated 21263.771484375 
+[2025-05-18 03:07:16 root](LRQuant.py 300): INFO layer 0 iter 10 loss:0.013327574357390404 norm:0.034206002950668335 max memory_allocated 21263.771484375 
+[2025-05-18 03:08:20 root](LRQuant.py 300): INFO layer 0 iter 11 loss:0.0144564313814044 norm:0.05452018976211548 max memory_allocated 21263.771484375 
+[2025-05-18 03:09:24 root](LRQuant.py 300): INFO layer 0 iter 12 loss:0.013890974223613739 norm:0.04605289176106453 max memory_allocated 21263.771484375 
+[2025-05-18 03:10:28 root](LRQuant.py 300): INFO layer 0 iter 13 loss:0.013243766501545906 norm:0.035338982939720154 max memory_allocated 21263.771484375 
+[2025-05-18 03:11:32 root](LRQuant.py 300): INFO layer 0 iter 14 loss:0.013092592358589172 norm:0.03545728325843811 max memory_allocated 21263.771484375 
+[2025-05-18 03:12:36 root](LRQuant.py 300): INFO layer 0 iter 15 loss:0.013422265648841858 norm:0.04154118895530701 max memory_allocated 21263.771484375 
+[2025-05-18 03:13:41 root](LRQuant.py 300): INFO layer 0 iter 16 loss:0.013779413886368275 norm:0.04889252781867981 max memory_allocated 21263.771484375 
+[2025-05-18 03:14:45 root](LRQuant.py 300): INFO layer 0 iter 17 loss:0.013572140596807003 norm:0.043270621448755264 max memory_allocated 21263.771484375 
+[2025-05-18 03:15:49 root](LRQuant.py 300): INFO layer 0 iter 18 loss:0.013548588380217552 norm:0.0444461852312088 max memory_allocated 21263.771484375 
+[2025-05-18 03:16:53 root](LRQuant.py 300): INFO layer 0 iter 19 loss:0.013409653678536415 norm:0.043521586805582047 max memory_allocated 21263.771484375 
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+[2025-05-18 03:16:57 root](LRQuant.py 173): INFO === Start quantize layer 1 ===
+32
+[2025-05-18 03:18:05 root](LRQuant.py 300): INFO layer 1 iter 0 loss:0.08153321593999863 norm:1.2194534540176392 max memory_allocated 21263.927734375 
+[2025-05-18 03:19:09 root](LRQuant.py 300): INFO layer 1 iter 1 loss:0.04975471645593643 norm:0.060974135994911194 max memory_allocated 21263.927734375 
+[2025-05-18 03:20:14 root](LRQuant.py 300): INFO layer 1 iter 2 loss:0.04597248136997223 norm:0.041745223104953766 max memory_allocated 21263.927734375 
+[2025-05-18 03:21:18 root](LRQuant.py 300): INFO layer 1 iter 3 loss:0.04389500990509987 norm:0.035885900259017944 max memory_allocated 21263.927734375 
+[2025-05-18 03:22:22 root](LRQuant.py 300): INFO layer 1 iter 4 loss:0.04280221834778786 norm:0.030385391786694527 max memory_allocated 21263.927734375 
+[2025-05-18 03:23:26 root](LRQuant.py 300): INFO layer 1 iter 5 loss:0.04254864528775215 norm:0.03423584997653961 max memory_allocated 21263.927734375 
+[2025-05-18 03:24:30 root](LRQuant.py 300): INFO layer 1 iter 6 loss:0.042176198214292526 norm:0.03360747545957565 max memory_allocated 21263.927734375 
+[2025-05-18 03:25:34 root](LRQuant.py 300): INFO layer 1 iter 7 loss:0.04208742827177048 norm:0.03693085163831711 max memory_allocated 21263.927734375 
+[2025-05-18 03:26:38 root](LRQuant.py 300): INFO layer 1 iter 8 loss:0.0419311448931694 norm:0.0355326309800148 max memory_allocated 21263.927734375 
+[2025-05-18 03:27:43 root](LRQuant.py 300): INFO layer 1 iter 9 loss:0.04176478832960129 norm:0.03466544300317764 max memory_allocated 21263.927734375 
+[2025-05-18 03:28:47 root](LRQuant.py 300): INFO layer 1 iter 10 loss:0.04194219410419464 norm:0.03731917217373848 max memory_allocated 21263.927734375 
+[2025-05-18 03:29:51 root](LRQuant.py 300): INFO layer 1 iter 11 loss:0.04199494794011116 norm:0.035906851291656494 max memory_allocated 21263.927734375 
+[2025-05-18 03:30:55 root](LRQuant.py 300): INFO layer 1 iter 12 loss:0.04090210050344467 norm:0.027565132826566696 max memory_allocated 21263.927734375 
+[2025-05-18 03:31:59 root](LRQuant.py 300): INFO layer 1 iter 13 loss:0.040642764419317245 norm:0.02536476030945778 max memory_allocated 21263.927734375 
+[2025-05-18 03:33:03 root](LRQuant.py 300): INFO layer 1 iter 14 loss:0.04067494720220566 norm:0.02771756425499916 max memory_allocated 21263.927734375 
+[2025-05-18 03:34:08 root](LRQuant.py 300): INFO layer 1 iter 15 loss:0.04047202318906784 norm:0.02921062335371971 max memory_allocated 21263.927734375 
+[2025-05-18 03:35:12 root](LRQuant.py 300): INFO layer 1 iter 16 loss:0.04052690789103508 norm:0.03075001947581768 max memory_allocated 21263.927734375 
+[2025-05-18 03:36:16 root](LRQuant.py 300): INFO layer 1 iter 17 loss:0.04042915627360344 norm:0.031452033668756485 max memory_allocated 21263.927734375 
+[2025-05-18 03:37:20 root](LRQuant.py 300): INFO layer 1 iter 18 loss:0.04060841351747513 norm:0.0320005938410759 max memory_allocated 21263.927734375 
+[2025-05-18 03:38:24 root](LRQuant.py 300): INFO layer 1 iter 19 loss:0.041705988347530365 norm:0.04278460890054703 max memory_allocated 21263.927734375 
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+[2025-05-18 03:38:28 root](LRQuant.py 173): INFO === Start quantize layer 2 ===
+32
+[2025-05-18 03:39:37 root](LRQuant.py 300): INFO layer 2 iter 0 loss:0.2038699984550476 norm:0.11006350070238113 max memory_allocated 21264.083984375 
+[2025-05-18 03:40:41 root](LRQuant.py 300): INFO layer 2 iter 1 loss:0.13993686437606812 norm:0.05264147371053696 max memory_allocated 21264.083984375 
+[2025-05-18 03:41:45 root](LRQuant.py 300): INFO layer 2 iter 2 loss:0.1285567581653595 norm:0.0426943376660347 max memory_allocated 21264.083984375 
+[2025-05-18 03:42:49 root](LRQuant.py 300): INFO layer 2 iter 3 loss:0.12386232614517212 norm:0.03993864357471466 max memory_allocated 21264.083984375 
+[2025-05-18 03:43:53 root](LRQuant.py 300): INFO layer 2 iter 4 loss:0.12082672864198685 norm:0.036582786589860916 max memory_allocated 21264.083984375 
+[2025-05-18 03:44:58 root](LRQuant.py 300): INFO layer 2 iter 5 loss:0.1192241758108139 norm:0.03425082564353943 max memory_allocated 21264.083984375 
+[2025-05-18 03:46:02 root](LRQuant.py 300): INFO layer 2 iter 6 loss:0.1178087592124939 norm:0.03477760776877403 max memory_allocated 21264.083984375 
+[2025-05-18 03:47:06 root](LRQuant.py 300): INFO layer 2 iter 7 loss:0.11689907312393188 norm:0.036797747015953064 max memory_allocated 21264.083984375 
+[2025-05-18 03:48:10 root](LRQuant.py 300): INFO layer 2 iter 8 loss:0.11636762320995331 norm:0.03663361072540283 max memory_allocated 21264.083984375 
+[2025-05-18 03:49:14 root](LRQuant.py 300): INFO layer 2 iter 9 loss:0.1154145747423172 norm:0.03365127369761467 max memory_allocated 21264.083984375 
+[2025-05-18 03:50:19 root](LRQuant.py 300): INFO layer 2 iter 10 loss:0.11501973867416382 norm:0.034381210803985596 max memory_allocated 21264.083984375 
+[2025-05-18 03:51:23 root](LRQuant.py 300): INFO layer 2 iter 11 loss:0.11447783559560776 norm:0.03452970087528229 max memory_allocated 21264.083984375 
+[2025-05-18 03:52:27 root](LRQuant.py 300): INFO layer 2 iter 12 loss:0.11409734189510345 norm:0.03198228403925896 max memory_allocated 21264.083984375 
+[2025-05-18 03:53:31 root](LRQuant.py 300): INFO layer 2 iter 13 loss:0.11335575580596924 norm:0.03146068751811981 max memory_allocated 21264.083984375 
+[2025-05-18 03:54:36 root](LRQuant.py 300): INFO layer 2 iter 14 loss:0.1132802665233612 norm:0.032184354960918427 max memory_allocated 21264.083984375 
+[2025-05-18 03:55:40 root](LRQuant.py 300): INFO layer 2 iter 15 loss:0.11301761120557785 norm:0.033423978835344315 max memory_allocated 21264.083984375 
+[2025-05-18 03:56:44 root](LRQuant.py 300): INFO layer 2 iter 16 loss:0.11305205523967743 norm:0.033263735473155975 max memory_allocated 21264.083984375 
+[2025-05-18 03:57:48 root](LRQuant.py 300): INFO layer 2 iter 17 loss:0.11236715316772461 norm:0.030048493295907974 max memory_allocated 21264.083984375 
+[2025-05-18 03:58:53 root](LRQuant.py 300): INFO layer 2 iter 18 loss:0.11214951425790787 norm:0.029093045741319656 max memory_allocated 21264.083984375 
+[2025-05-18 03:59:57 root](LRQuant.py 300): INFO layer 2 iter 19 loss:0.11223670840263367 norm:0.034026529639959335 max memory_allocated 21264.083984375 
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+[2025-05-18 04:00:01 root](LRQuant.py 173): INFO === Start quantize layer 3 ===
+32
+[2025-05-18 04:01:09 root](LRQuant.py 300): INFO layer 3 iter 0 loss:0.16273224353790283 norm:0.18412889540195465 max memory_allocated 21264.240234375 
+[2025-05-18 04:02:13 root](LRQuant.py 300): INFO layer 3 iter 1 loss:0.12349824607372284 norm:0.02288782224059105 max memory_allocated 21264.240234375 
+[2025-05-18 04:03:18 root](LRQuant.py 300): INFO layer 3 iter 2 loss:0.11911602318286896 norm:0.01822924241423607 max memory_allocated 21264.240234375 
+[2025-05-18 04:04:22 root](LRQuant.py 300): INFO layer 3 iter 3 loss:0.11674637347459793 norm:0.016066880896687508 max memory_allocated 21264.240234375 
+[2025-05-18 04:05:26 root](LRQuant.py 300): INFO layer 3 iter 4 loss:0.11557240039110184 norm:0.01610231027007103 max memory_allocated 21264.240234375 
+[2025-05-18 04:06:30 root](LRQuant.py 300): INFO layer 3 iter 5 loss:0.1147238090634346 norm:0.016287196427583694 max memory_allocated 21264.240234375 
+[2025-05-18 04:07:34 root](LRQuant.py 300): INFO layer 3 iter 6 loss:0.11395832151174545 norm:0.01607614755630493 max memory_allocated 21264.240234375 
+[2025-05-18 04:08:39 root](LRQuant.py 300): INFO layer 3 iter 7 loss:0.11314903199672699 norm:0.015137022361159325 max memory_allocated 21264.240234375 
+[2025-05-18 04:09:43 root](LRQuant.py 300): INFO layer 3 iter 8 loss:0.11248071491718292 norm:0.014112884178757668 max memory_allocated 21264.240234375 
+[2025-05-18 04:10:47 root](LRQuant.py 300): INFO layer 3 iter 9 loss:0.11217084527015686 norm:0.014588577672839165 max memory_allocated 21264.240234375 
+[2025-05-18 04:11:52 root](LRQuant.py 300): INFO layer 3 iter 10 loss:0.11191806197166443 norm:0.014948420226573944 max memory_allocated 21264.240234375 
+[2025-05-18 04:12:56 root](LRQuant.py 300): INFO layer 3 iter 11 loss:0.11243809014558792 norm:0.01739264279603958 max memory_allocated 21264.240234375 
+[2025-05-18 04:14:00 root](LRQuant.py 300): INFO layer 3 iter 12 loss:0.11204944550991058 norm:0.016490522772073746 max memory_allocated 21264.240234375 
+[2025-05-18 04:15:04 root](LRQuant.py 300): INFO layer 3 iter 13 loss:0.11286526918411255 norm:0.019134001806378365 max memory_allocated 21264.240234375 
+[2025-05-18 04:16:09 root](LRQuant.py 300): INFO layer 3 iter 14 loss:0.11154210567474365 norm:0.015300417318940163 max memory_allocated 21264.240234375 
+[2025-05-18 04:17:13 root](LRQuant.py 300): INFO layer 3 iter 15 loss:0.11101095378398895 norm:0.014112232252955437 max memory_allocated 21264.240234375 
+[2025-05-18 04:18:17 root](LRQuant.py 300): INFO layer 3 iter 16 loss:0.11051604896783829 norm:0.012614108622074127 max memory_allocated 21264.240234375 
+[2025-05-18 04:19:22 root](LRQuant.py 300): INFO layer 3 iter 17 loss:0.11034491658210754 norm:0.012548228725790977 max memory_allocated 21264.240234375 
+[2025-05-18 04:20:26 root](LRQuant.py 300): INFO layer 3 iter 18 loss:0.1103561669588089 norm:0.013019543141126633 max memory_allocated 21264.240234375 
+[2025-05-18 04:21:30 root](LRQuant.py 300): INFO layer 3 iter 19 loss:0.1103200688958168 norm:0.01355012133717537 max memory_allocated 21264.240234375 
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+[2025-05-18 04:21:34 root](LRQuant.py 173): INFO === Start quantize layer 4 ===
+32
+[2025-05-18 04:22:42 root](LRQuant.py 300): INFO layer 4 iter 0 loss:0.16377690434455872 norm:0.06553113460540771 max memory_allocated 21264.396484375 
+[2025-05-18 04:23:47 root](LRQuant.py 300): INFO layer 4 iter 1 loss:0.13305455446243286 norm:0.0199101772159338 max memory_allocated 21264.396484375 
+[2025-05-18 04:24:51 root](LRQuant.py 300): INFO layer 4 iter 2 loss:0.1286829560995102 norm:0.015272844582796097 max memory_allocated 21264.396484375 
+[2025-05-18 04:25:55 root](LRQuant.py 300): INFO layer 4 iter 3 loss:0.12660732865333557 norm:0.014380515553057194 max memory_allocated 21264.396484375 
+[2025-05-18 04:26:59 root](LRQuant.py 300): INFO layer 4 iter 4 loss:0.12490679323673248 norm:0.013652973808348179 max memory_allocated 21264.396484375 
+[2025-05-18 04:28:04 root](LRQuant.py 300): INFO layer 4 iter 5 loss:0.12380620092153549 norm:0.012950053438544273 max memory_allocated 21264.396484375 
+[2025-05-18 04:29:08 root](LRQuant.py 300): INFO layer 4 iter 6 loss:0.1228303462266922 norm:0.012328782118856907 max memory_allocated 21264.396484375 
+[2025-05-18 04:30:12 root](LRQuant.py 300): INFO layer 4 iter 7 loss:0.12197645753622055 norm:0.012262364849448204 max memory_allocated 21264.396484375 
+[2025-05-18 04:31:16 root](LRQuant.py 300): INFO layer 4 iter 8 loss:0.12151597440242767 norm:0.011825425550341606 max memory_allocated 21264.396484375 
+[2025-05-18 04:32:20 root](LRQuant.py 300): INFO layer 4 iter 9 loss:0.12141073495149612 norm:0.011553584598004818 max memory_allocated 21264.396484375 
+[2025-05-18 04:33:25 root](LRQuant.py 300): INFO layer 4 iter 10 loss:0.12107470631599426 norm:0.011411490850150585 max memory_allocated 21264.396484375 
+[2025-05-18 04:34:29 root](LRQuant.py 300): INFO layer 4 iter 11 loss:0.12046346068382263 norm:0.010794557631015778 max memory_allocated 21264.396484375 
+[2025-05-18 04:35:33 root](LRQuant.py 300): INFO layer 4 iter 12 loss:0.11983495950698853 norm:0.011299610137939453 max memory_allocated 21264.396484375 
+[2025-05-18 04:36:37 root](LRQuant.py 300): INFO layer 4 iter 13 loss:0.11982379853725433 norm:0.011396515183150768 max memory_allocated 21264.396484375 
+[2025-05-18 04:37:42 root](LRQuant.py 300): INFO layer 4 iter 14 loss:0.11957041919231415 norm:0.01139743346720934 max memory_allocated 21264.396484375 
+[2025-05-18 04:38:46 root](LRQuant.py 300): INFO layer 4 iter 15 loss:0.11951268464326859 norm:0.01145653985440731 max memory_allocated 21264.396484375 
+[2025-05-18 04:39:50 root](LRQuant.py 300): INFO layer 4 iter 16 loss:0.11887316405773163 norm:0.010730372741818428 max memory_allocated 21264.396484375 
+[2025-05-18 04:40:54 root](LRQuant.py 300): INFO layer 4 iter 17 loss:0.11867578327655792 norm:0.010796201415359974 max memory_allocated 21264.396484375 
+[2025-05-18 04:41:59 root](LRQuant.py 300): INFO layer 4 iter 18 loss:0.11885610222816467 norm:0.011377600952982903 max memory_allocated 21264.396484375 
+[2025-05-18 04:43:03 root](LRQuant.py 300): INFO layer 4 iter 19 loss:0.11876644939184189 norm:0.011099226772785187 max memory_allocated 21264.396484375 
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+[2025-05-18 04:43:07 root](LRQuant.py 173): INFO === Start quantize layer 5 ===
+32
+[2025-05-18 04:44:15 root](LRQuant.py 300): INFO layer 5 iter 0 loss:0.20381313562393188 norm:0.0725191980600357 max memory_allocated 21264.552734375 
+[2025-05-18 04:45:19 root](LRQuant.py 300): INFO layer 5 iter 1 loss:0.1699577122926712 norm:0.018531348556280136 max memory_allocated 21264.552734375 
+[2025-05-18 04:46:23 root](LRQuant.py 300): INFO layer 5 iter 2 loss:0.1662982553243637 norm:0.014353284612298012 max memory_allocated 21264.552734375 
+[2025-05-18 04:47:28 root](LRQuant.py 300): INFO layer 5 iter 3 loss:0.1640481948852539 norm:0.012654738500714302 max memory_allocated 21264.552734375 
+[2025-05-18 04:48:32 root](LRQuant.py 300): INFO layer 5 iter 4 loss:0.16268661618232727 norm:0.01182496827095747 max memory_allocated 21264.552734375 
+[2025-05-18 04:49:36 root](LRQuant.py 300): INFO layer 5 iter 5 loss:0.16147619485855103 norm:0.011490867473185062 max memory_allocated 21264.552734375 
+[2025-05-18 04:50:40 root](LRQuant.py 300): INFO layer 5 iter 6 loss:0.16049398481845856 norm:0.010837186127901077 max memory_allocated 21264.552734375 
+[2025-05-18 04:51:44 root](LRQuant.py 300): INFO layer 5 iter 7 loss:0.1601773500442505 norm:0.010947666130959988 max memory_allocated 21264.552734375 
+[2025-05-18 04:52:49 root](LRQuant.py 300): INFO layer 5 iter 8 loss:0.15932250022888184 norm:0.01061239279806614 max memory_allocated 21264.552734375 
+[2025-05-18 04:53:53 root](LRQuant.py 300): INFO layer 5 iter 9 loss:0.15884895622730255 norm:0.010585753247141838 max memory_allocated 21264.552734375 
+[2025-05-18 04:54:57 root](LRQuant.py 300): INFO layer 5 iter 10 loss:0.15850991010665894 norm:0.01096259243786335 max memory_allocated 21264.552734375 
+[2025-05-18 04:56:01 root](LRQuant.py 300): INFO layer 5 iter 11 loss:0.15806646645069122 norm:0.0104286540299654 max memory_allocated 21264.552734375 
+[2025-05-18 04:57:06 root](LRQuant.py 300): INFO layer 5 iter 12 loss:0.15770605206489563 norm:0.010464835911989212 max memory_allocated 21264.552734375 
+[2025-05-18 04:58:10 root](LRQuant.py 300): INFO layer 5 iter 13 loss:0.1572367548942566 norm:0.009996658191084862 max memory_allocated 21264.552734375 
+[2025-05-18 04:59:14 root](LRQuant.py 300): INFO layer 5 iter 14 loss:0.15676607191562653 norm:0.009873885661363602 max memory_allocated 21264.552734375 
+[2025-05-18 05:00:18 root](LRQuant.py 300): INFO layer 5 iter 15 loss:0.15655797719955444 norm:0.009966062381863594 max memory_allocated 21264.552734375 
+[2025-05-18 05:01:23 root](LRQuant.py 300): INFO layer 5 iter 16 loss:0.1562424898147583 norm:0.00987214595079422 max memory_allocated 21264.552734375 
+[2025-05-18 05:02:27 root](LRQuant.py 300): INFO layer 5 iter 17 loss:0.15605413913726807 norm:0.00974221620708704 max memory_allocated 21264.552734375 
+[2025-05-18 05:03:31 root](LRQuant.py 300): INFO layer 5 iter 18 loss:0.1558898389339447 norm:0.009769126772880554 max memory_allocated 21264.552734375 
+[2025-05-18 05:04:35 root](LRQuant.py 300): INFO layer 5 iter 19 loss:0.15570613741874695 norm:0.009785294532775879 max memory_allocated 21264.552734375 
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+[2025-05-18 05:04:39 root](LRQuant.py 173): INFO === Start quantize layer 6 ===
+32
+[2025-05-18 05:05:48 root](LRQuant.py 300): INFO layer 6 iter 0 loss:0.243515744805336 norm:0.04265042766928673 max memory_allocated 21264.708984375 
+[2025-05-18 05:06:52 root](LRQuant.py 300): INFO layer 6 iter 1 loss:0.21548807621002197 norm:0.013556117191910744 max memory_allocated 21264.708984375 
+[2025-05-18 05:07:56 root](LRQuant.py 300): INFO layer 6 iter 2 loss:0.21181893348693848 norm:0.011223262175917625 max memory_allocated 21264.708984375 
+[2025-05-18 05:09:00 root](LRQuant.py 300): INFO layer 6 iter 3 loss:0.20982083678245544 norm:0.010040237568318844 max memory_allocated 21264.708984375 
+[2025-05-18 05:10:04 root](LRQuant.py 300): INFO layer 6 iter 4 loss:0.20850630104541779 norm:0.009839753620326519 max memory_allocated 21264.708984375 
+[2025-05-18 05:11:09 root](LRQuant.py 300): INFO layer 6 iter 5 loss:0.20753753185272217 norm:0.009471637196838856 max memory_allocated 21264.708984375 
+[2025-05-18 05:12:13 root](LRQuant.py 300): INFO layer 6 iter 6 loss:0.20691445469856262 norm:0.009513533674180508 max memory_allocated 21264.708984375 
+[2025-05-18 05:13:17 root](LRQuant.py 300): INFO layer 6 iter 7 loss:0.20616215467453003 norm:0.009237034246325493 max memory_allocated 21264.708984375 
+[2025-05-18 05:14:21 root](LRQuant.py 300): INFO layer 6 iter 8 loss:0.20547747611999512 norm:0.009147731587290764 max memory_allocated 21264.708984375 
+[2025-05-18 05:15:25 root](LRQuant.py 300): INFO layer 6 iter 9 loss:0.20500674843788147 norm:0.00896979309618473 max memory_allocated 21264.708984375 
+[2025-05-18 05:16:30 root](LRQuant.py 300): INFO layer 6 iter 10 loss:0.20470401644706726 norm:0.008965857326984406 max memory_allocated 21264.708984375 
+[2025-05-18 05:17:34 root](LRQuant.py 300): INFO layer 6 iter 11 loss:0.204294353723526 norm:0.008892804384231567 max memory_allocated 21264.708984375 
+[2025-05-18 05:18:38 root](LRQuant.py 300): INFO layer 6 iter 12 loss:0.20382779836654663 norm:0.008818496018648148 max memory_allocated 21264.708984375 
+[2025-05-18 05:19:42 root](LRQuant.py 300): INFO layer 6 iter 13 loss:0.20344175398349762 norm:0.00873569492250681 max memory_allocated 21264.708984375 
+[2025-05-18 05:20:47 root](LRQuant.py 300): INFO layer 6 iter 14 loss:0.20327924191951752 norm:0.008653195574879646 max memory_allocated 21264.708984375 
+[2025-05-18 05:21:51 root](LRQuant.py 300): INFO layer 6 iter 15 loss:0.20296627283096313 norm:0.008679689839482307 max memory_allocated 21264.708984375 
+[2025-05-18 05:22:55 root](LRQuant.py 300): INFO layer 6 iter 16 loss:0.20283541083335876 norm:0.008762359619140625 max memory_allocated 21264.708984375 
+[2025-05-18 05:23:59 root](LRQuant.py 300): INFO layer 6 iter 17 loss:0.20256349444389343 norm:0.008587796241044998 max memory_allocated 21264.708984375 
+[2025-05-18 05:25:04 root](LRQuant.py 300): INFO layer 6 iter 18 loss:0.20243942737579346 norm:0.008685993030667305 max memory_allocated 21264.708984375 
+[2025-05-18 05:26:08 root](LRQuant.py 300): INFO layer 6 iter 19 loss:0.20226632058620453 norm:0.00865056924521923 max memory_allocated 21264.708984375 
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+[2025-05-18 05:26:12 root](LRQuant.py 173): INFO === Start quantize layer 7 ===
+32
+[2025-05-18 05:27:20 root](LRQuant.py 300): INFO layer 7 iter 0 loss:0.2597435712814331 norm:0.0273592509329319 max memory_allocated 21264.865234375 
+[2025-05-18 05:28:24 root](LRQuant.py 300): INFO layer 7 iter 1 loss:0.23383581638336182 norm:0.011671941727399826 max memory_allocated 21264.865234375 
+[2025-05-18 05:29:28 root](LRQuant.py 300): INFO layer 7 iter 2 loss:0.23030641674995422 norm:0.010054940357804298 max memory_allocated 21264.865234375 
+[2025-05-18 05:30:33 root](LRQuant.py 300): INFO layer 7 iter 3 loss:0.22859109938144684 norm:0.009719125926494598 max memory_allocated 21264.865234375 
+[2025-05-18 05:31:37 root](LRQuant.py 300): INFO layer 7 iter 4 loss:0.2272816300392151 norm:0.009615311399102211 max memory_allocated 21264.865234375 
+[2025-05-18 05:32:41 root](LRQuant.py 300): INFO layer 7 iter 5 loss:0.2263064980506897 norm:0.009323012083768845 max memory_allocated 21264.865234375 
+[2025-05-18 05:33:45 root](LRQuant.py 300): INFO layer 7 iter 6 loss:0.2254922091960907 norm:0.009191242046654224 max memory_allocated 21264.865234375 
+[2025-05-18 05:34:49 root](LRQuant.py 300): INFO layer 7 iter 7 loss:0.22484096884727478 norm:0.009180291555821896 max memory_allocated 21264.865234375 
+[2025-05-18 05:35:54 root](LRQuant.py 300): INFO layer 7 iter 8 loss:0.22422438859939575 norm:0.009071031585335732 max memory_allocated 21264.865234375 
+[2025-05-18 05:36:58 root](LRQuant.py 300): INFO layer 7 iter 9 loss:0.2236901819705963 norm:0.009047064930200577 max memory_allocated 21264.865234375 
+[2025-05-18 05:38:02 root](LRQuant.py 300): INFO layer 7 iter 10 loss:0.2232605516910553 norm:0.008975064381957054 max memory_allocated 21264.865234375 
+[2025-05-18 05:39:06 root](LRQuant.py 300): INFO layer 7 iter 11 loss:0.22297555208206177 norm:0.008979953825473785 max memory_allocated 21264.865234375 
+[2025-05-18 05:40:11 root](LRQuant.py 300): INFO layer 7 iter 12 loss:0.2225554883480072 norm:0.008875669911503792 max memory_allocated 21264.865234375 
+[2025-05-18 05:41:15 root](LRQuant.py 300): INFO layer 7 iter 13 loss:0.22230467200279236 norm:0.009013008326292038 max memory_allocated 21264.865234375 
+[2025-05-18 05:42:19 root](LRQuant.py 300): INFO layer 7 iter 14 loss:0.22195802628993988 norm:0.008856251835823059 max memory_allocated 21264.865234375 
+[2025-05-18 05:43:23 root](LRQuant.py 300): INFO layer 7 iter 15 loss:0.22175374627113342 norm:0.008835740387439728 max memory_allocated 21264.865234375 
+[2025-05-18 05:44:28 root](LRQuant.py 300): INFO layer 7 iter 16 loss:0.2214159071445465 norm:0.008825095370411873 max memory_allocated 21264.865234375 
+[2025-05-18 05:45:32 root](LRQuant.py 300): INFO layer 7 iter 17 loss:0.22126640379428864 norm:0.008782882243394852 max memory_allocated 21264.865234375 
+[2025-05-18 05:46:36 root](LRQuant.py 300): INFO layer 7 iter 18 loss:0.22106140851974487 norm:0.008782222867012024 max memory_allocated 21264.865234375 
+[2025-05-18 05:47:40 root](LRQuant.py 300): INFO layer 7 iter 19 loss:0.22087016701698303 norm:0.008743882179260254 max memory_allocated 21264.865234375 
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+[2025-05-18 05:47:44 root](LRQuant.py 173): INFO === Start quantize layer 8 ===
+32
+[2025-05-18 05:48:53 root](LRQuant.py 300): INFO layer 8 iter 0 loss:0.26478010416030884 norm:0.02937905676662922 max memory_allocated 21265.021484375 
+[2025-05-18 05:49:57 root](LRQuant.py 300): INFO layer 8 iter 1 loss:0.23819631338119507 norm:0.01150453183799982 max memory_allocated 21265.021484375 
+[2025-05-18 05:51:01 root](LRQuant.py 300): INFO layer 8 iter 2 loss:0.23426353931427002 norm:0.009916151873767376 max memory_allocated 21265.021484375 
+[2025-05-18 05:52:05 root](LRQuant.py 300): INFO layer 8 iter 3 loss:0.23223096132278442 norm:0.009353326633572578 max memory_allocated 21265.021484375 
+[2025-05-18 05:53:10 root](LRQuant.py 300): INFO layer 8 iter 4 loss:0.2308911383152008 norm:0.009158835746347904 max memory_allocated 21265.021484375 
+[2025-05-18 05:54:14 root](LRQuant.py 300): INFO layer 8 iter 5 loss:0.22989574074745178 norm:0.009058131836354733 max memory_allocated 21265.021484375 
+[2025-05-18 05:55:18 root](LRQuant.py 300): INFO layer 8 iter 6 loss:0.22906866669654846 norm:0.00889996625483036 max memory_allocated 21265.021484375 
+[2025-05-18 05:56:22 root](LRQuant.py 300): INFO layer 8 iter 7 loss:0.22849996387958527 norm:0.008929658681154251 max memory_allocated 21265.021484375 
+[2025-05-18 05:57:26 root](LRQuant.py 300): INFO layer 8 iter 8 loss:0.2279665768146515 norm:0.008942736312747002 max memory_allocated 21265.021484375 
+[2025-05-18 05:58:31 root](LRQuant.py 300): INFO layer 8 iter 9 loss:0.22743342816829681 norm:0.008963360451161861 max memory_allocated 21265.021484375 
+[2025-05-18 05:59:35 root](LRQuant.py 300): INFO layer 8 iter 10 loss:0.22702288627624512 norm:0.008922288194298744 max memory_allocated 21265.021484375 
+[2025-05-18 06:00:39 root](LRQuant.py 300): INFO layer 8 iter 11 loss:0.22653385996818542 norm:0.00885847955942154 max memory_allocated 21265.021484375 
+[2025-05-18 06:01:43 root](LRQuant.py 300): INFO layer 8 iter 12 loss:0.22617873549461365 norm:0.008862320333719254 max memory_allocated 21265.021484375 
+[2025-05-18 06:02:48 root](LRQuant.py 300): INFO layer 8 iter 13 loss:0.22596311569213867 norm:0.009007852524518967 max memory_allocated 21265.021484375 
+[2025-05-18 06:03:52 root](LRQuant.py 300): INFO layer 8 iter 14 loss:0.22569692134857178 norm:0.00889537762850523 max memory_allocated 21265.021484375 
+[2025-05-18 06:04:56 root](LRQuant.py 300): INFO layer 8 iter 15 loss:0.22534891963005066 norm:0.008837811648845673 max memory_allocated 21265.021484375 
+[2025-05-18 06:06:00 root](LRQuant.py 300): INFO layer 8 iter 16 loss:0.2251541167497635 norm:0.008846807293593884 max memory_allocated 21265.021484375 
+[2025-05-18 06:07:05 root](LRQuant.py 300): INFO layer 8 iter 17 loss:0.22484582662582397 norm:0.008771777153015137 max memory_allocated 21265.021484375 
+[2025-05-18 06:08:09 root](LRQuant.py 300): INFO layer 8 iter 18 loss:0.2246702015399933 norm:0.008769245818257332 max memory_allocated 21265.021484375 
+[2025-05-18 06:09:13 root](LRQuant.py 300): INFO layer 8 iter 19 loss:0.22451740503311157 norm:0.008759899064898491 max memory_allocated 21265.021484375 
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+[2025-05-18 06:09:17 root](LRQuant.py 173): INFO === Start quantize layer 9 ===
+32
+[2025-05-18 06:10:25 root](LRQuant.py 300): INFO layer 9 iter 0 loss:0.2713817358016968 norm:0.02680812031030655 max memory_allocated 21265.177734375 
+[2025-05-18 06:11:29 root](LRQuant.py 300): INFO layer 9 iter 1 loss:0.24239419400691986 norm:0.011440319940447807 max memory_allocated 21265.177734375 
+[2025-05-18 06:12:34 root](LRQuant.py 300): INFO layer 9 iter 2 loss:0.23857417702674866 norm:0.009904884733259678 max memory_allocated 21265.177734375 
+[2025-05-18 06:13:38 root](LRQuant.py 300): INFO layer 9 iter 3 loss:0.23639841377735138 norm:0.009374400600790977 max memory_allocated 21265.177734375 
+[2025-05-18 06:14:42 root](LRQuant.py 300): INFO layer 9 iter 4 loss:0.23496013879776 norm:0.009096471592783928 max memory_allocated 21265.177734375 
+[2025-05-18 06:15:46 root](LRQuant.py 300): INFO layer 9 iter 5 loss:0.2338966727256775 norm:0.008930898271501064 max memory_allocated 21265.177734375 
+[2025-05-18 06:16:50 root](LRQuant.py 300): INFO layer 9 iter 6 loss:0.23297078907489777 norm:0.008974243886768818 max memory_allocated 21265.177734375 
+[2025-05-18 06:17:55 root](LRQuant.py 300): INFO layer 9 iter 7 loss:0.2323055863380432 norm:0.008884204551577568 max memory_allocated 21265.177734375 
+[2025-05-18 06:18:59 root](LRQuant.py 300): INFO layer 9 iter 8 loss:0.231755793094635 norm:0.008852150291204453 max memory_allocated 21265.177734375 
+[2025-05-18 06:20:03 root](LRQuant.py 300): INFO layer 9 iter 9 loss:0.23126186430454254 norm:0.008818119764328003 max memory_allocated 21265.177734375 
+[2025-05-18 06:21:07 root](LRQuant.py 300): INFO layer 9 iter 10 loss:0.23077943921089172 norm:0.00878237746655941 max memory_allocated 21265.177734375 
+[2025-05-18 06:22:12 root](LRQuant.py 300): INFO layer 9 iter 11 loss:0.23050326108932495 norm:0.008915811777114868 max memory_allocated 21265.177734375 
+[2025-05-18 06:23:16 root](LRQuant.py 300): INFO layer 9 iter 12 loss:0.22999006509780884 norm:0.008765759877860546 max memory_allocated 21265.177734375 
+[2025-05-18 06:24:20 root](LRQuant.py 300): INFO layer 9 iter 13 loss:0.22970175743103027 norm:0.008820803835988045 max memory_allocated 21265.177734375 
+[2025-05-18 06:25:24 root](LRQuant.py 300): INFO layer 9 iter 14 loss:0.22947216033935547 norm:0.008870215155184269 max memory_allocated 21265.177734375 
+[2025-05-18 06:26:29 root](LRQuant.py 300): INFO layer 9 iter 15 loss:0.2291819453239441 norm:0.008855955675244331 max memory_allocated 21265.177734375 
+[2025-05-18 06:27:33 root](LRQuant.py 300): INFO layer 9 iter 16 loss:0.22890034317970276 norm:0.00880742259323597 max memory_allocated 21265.177734375 
+[2025-05-18 06:28:37 root](LRQuant.py 300): INFO layer 9 iter 17 loss:0.22861896455287933 norm:0.008806359954178333 max memory_allocated 21265.177734375 
+[2025-05-18 06:29:41 root](LRQuant.py 300): INFO layer 9 iter 18 loss:0.22848764061927795 norm:0.008931178599596024 max memory_allocated 21265.177734375 
+[2025-05-18 06:30:46 root](LRQuant.py 300): INFO layer 9 iter 19 loss:0.22827553749084473 norm:0.008837545290589333 max memory_allocated 21265.177734375 
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+[2025-05-18 06:30:49 root](LRQuant.py 173): INFO === Start quantize layer 10 ===
+32
+[2025-05-18 06:31:58 root](LRQuant.py 300): INFO layer 10 iter 0 loss:0.2814423441886902 norm:0.023624807596206665 max memory_allocated 21265.333984375 
+[2025-05-18 06:33:02 root](LRQuant.py 300): INFO layer 10 iter 1 loss:0.2552412450313568 norm:0.011176756583154202 max memory_allocated 21265.333984375 
+[2025-05-18 06:34:06 root](LRQuant.py 300): INFO layer 10 iter 2 loss:0.2512311637401581 norm:0.00973975658416748 max memory_allocated 21265.333984375 
+[2025-05-18 06:35:10 root](LRQuant.py 300): INFO layer 10 iter 3 loss:0.24900206923484802 norm:0.009370842948555946 max memory_allocated 21265.333984375 
+[2025-05-18 06:36:15 root](LRQuant.py 300): INFO layer 10 iter 4 loss:0.24750667810440063 norm:0.009162377566099167 max memory_allocated 21265.333984375 
+[2025-05-18 06:37:19 root](LRQuant.py 300): INFO layer 10 iter 5 loss:0.24640879034996033 norm:0.009208323433995247 max memory_allocated 21265.333984375 
+[2025-05-18 06:38:23 root](LRQuant.py 300): INFO layer 10 iter 6 loss:0.24555030465126038 norm:0.00914838071912527 max memory_allocated 21265.333984375 
+[2025-05-18 06:39:27 root](LRQuant.py 300): INFO layer 10 iter 7 loss:0.24477383494377136 norm:0.009143834933638573 max memory_allocated 21265.333984375 
+[2025-05-18 06:40:31 root](LRQuant.py 300): INFO layer 10 iter 8 loss:0.2441798597574234 norm:0.009118665009737015 max memory_allocated 21265.333984375 
+[2025-05-18 06:41:35 root](LRQuant.py 300): INFO layer 10 iter 9 loss:0.243545800447464 norm:0.009027693420648575 max memory_allocated 21265.333984375 
+[2025-05-18 06:42:40 root](LRQuant.py 300): INFO layer 10 iter 10 loss:0.24305962026119232 norm:0.00905144214630127 max memory_allocated 21265.333984375 
+[2025-05-18 06:43:44 root](LRQuant.py 300): INFO layer 10 iter 11 loss:0.2426660656929016 norm:0.009069984778761864 max memory_allocated 21265.333984375 
+[2025-05-18 06:44:48 root](LRQuant.py 300): INFO layer 10 iter 12 loss:0.24234171211719513 norm:0.009231969714164734 max memory_allocated 21265.333984375 
+[2025-05-18 06:45:52 root](LRQuant.py 300): INFO layer 10 iter 13 loss:0.2419295608997345 norm:0.00903453677892685 max memory_allocated 21265.333984375 
+[2025-05-18 06:46:57 root](LRQuant.py 300): INFO layer 10 iter 14 loss:0.24171727895736694 norm:0.009066560305655003 max memory_allocated 21265.333984375 
+[2025-05-18 06:48:01 root](LRQuant.py 300): INFO layer 10 iter 15 loss:0.24143336713314056 norm:0.009077362716197968 max memory_allocated 21265.333984375 
+[2025-05-18 06:49:05 root](LRQuant.py 300): INFO layer 10 iter 16 loss:0.2411835491657257 norm:0.009079864248633385 max memory_allocated 21265.333984375 
+[2025-05-18 06:50:09 root](LRQuant.py 300): INFO layer 10 iter 17 loss:0.24089601635932922 norm:0.009049548767507076 max memory_allocated 21265.333984375 
+[2025-05-18 06:51:14 root](LRQuant.py 300): INFO layer 10 iter 18 loss:0.24072471261024475 norm:0.009091733023524284 max memory_allocated 21265.333984375 
+[2025-05-18 06:52:18 root](LRQuant.py 300): INFO layer 10 iter 19 loss:0.24052979052066803 norm:0.009053056128323078 max memory_allocated 21265.333984375 
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+[2025-05-18 06:52:22 root](LRQuant.py 173): INFO === Start quantize layer 11 ===
+32
+[2025-05-18 06:53:30 root](LRQuant.py 300): INFO layer 11 iter 0 loss:0.28792086243629456 norm:0.020143162459135056 max memory_allocated 21265.490234375 
+[2025-05-18 06:54:34 root](LRQuant.py 300): INFO layer 11 iter 1 loss:0.26019400358200073 norm:0.010669244453310966 max memory_allocated 21265.490234375 
+[2025-05-18 06:55:39 root](LRQuant.py 300): INFO layer 11 iter 2 loss:0.25589460134506226 norm:0.009787477552890778 max memory_allocated 21265.490234375 
+[2025-05-18 06:56:43 root](LRQuant.py 300): INFO layer 11 iter 3 loss:0.25362035632133484 norm:0.00961071252822876 max memory_allocated 21265.490234375 
+[2025-05-18 06:57:47 root](LRQuant.py 300): INFO layer 11 iter 4 loss:0.25204235315322876 norm:0.009577082470059395 max memory_allocated 21265.490234375 
+[2025-05-18 06:58:51 root](LRQuant.py 300): INFO layer 11 iter 5 loss:0.25085222721099854 norm:0.00958404503762722 max memory_allocated 21265.490234375 
+[2025-05-18 06:59:55 root](LRQuant.py 300): INFO layer 11 iter 6 loss:0.24999530613422394 norm:0.009635748341679573 max memory_allocated 21265.490234375 
+[2025-05-18 07:00:59 root](LRQuant.py 300): INFO layer 11 iter 7 loss:0.24930043518543243 norm:0.009682967327535152 max memory_allocated 21265.490234375 
+[2025-05-18 07:02:04 root](LRQuant.py 300): INFO layer 11 iter 8 loss:0.24877077341079712 norm:0.009744913317263126 max memory_allocated 21265.490234375 
+[2025-05-18 07:03:08 root](LRQuant.py 300): INFO layer 11 iter 9 loss:0.24800345301628113 norm:0.009648825973272324 max memory_allocated 21265.490234375 
+[2025-05-18 07:04:12 root](LRQuant.py 300): INFO layer 11 iter 10 loss:0.24762436747550964 norm:0.00968259759247303 max memory_allocated 21265.490234375 
+[2025-05-18 07:05:16 root](LRQuant.py 300): INFO layer 11 iter 11 loss:0.24714525043964386 norm:0.009656084701418877 max memory_allocated 21265.490234375 
+[2025-05-18 07:06:21 root](LRQuant.py 300): INFO layer 11 iter 12 loss:0.24688971042633057 norm:0.009800564497709274 max memory_allocated 21265.490234375 
+[2025-05-18 07:07:25 root](LRQuant.py 300): INFO layer 11 iter 13 loss:0.2465074360370636 norm:0.00974554754793644 max memory_allocated 21265.490234375 
+[2025-05-18 07:08:29 root](LRQuant.py 300): INFO layer 11 iter 14 loss:0.24616439640522003 norm:0.009760182350873947 max memory_allocated 21265.490234375 
+[2025-05-18 07:09:33 root](LRQuant.py 300): INFO layer 11 iter 15 loss:0.24592182040214539 norm:0.00978839211165905 max memory_allocated 21265.490234375 
+[2025-05-18 07:10:38 root](LRQuant.py 300): INFO layer 11 iter 16 loss:0.2456936091184616 norm:0.009835584089159966 max memory_allocated 21265.490234375 
+[2025-05-18 07:11:42 root](LRQuant.py 300): INFO layer 11 iter 17 loss:0.24551264941692352 norm:0.00982360914349556 max memory_allocated 21265.490234375 
+[2025-05-18 07:12:46 root](LRQuant.py 300): INFO layer 11 iter 18 loss:0.24518641829490662 norm:0.009786602109670639 max memory_allocated 21265.490234375 
+[2025-05-18 07:13:50 root](LRQuant.py 300): INFO layer 11 iter 19 loss:0.24500374495983124 norm:0.009793444536626339 max memory_allocated 21265.490234375 
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+[2025-05-18 07:13:54 root](LRQuant.py 173): INFO === Start quantize layer 12 ===
+32
+[2025-05-18 07:15:03 root](LRQuant.py 300): INFO layer 12 iter 0 loss:0.3025258779525757 norm:0.01920916885137558 max memory_allocated 21265.646484375 
+[2025-05-18 07:16:07 root](LRQuant.py 300): INFO layer 12 iter 1 loss:0.27369385957717896 norm:0.010766066610813141 max memory_allocated 21265.646484375 
+[2025-05-18 07:17:11 root](LRQuant.py 300): INFO layer 12 iter 2 loss:0.26906755566596985 norm:0.009698059409856796 max memory_allocated 21265.646484375 
+[2025-05-18 07:18:15 root](LRQuant.py 300): INFO layer 12 iter 3 loss:0.2667332887649536 norm:0.009573942050337791 max memory_allocated 21265.646484375 
+[2025-05-18 07:19:19 root](LRQuant.py 300): INFO layer 12 iter 4 loss:0.2650705575942993 norm:0.009493894875049591 max memory_allocated 21265.646484375 
+[2025-05-18 07:20:24 root](LRQuant.py 300): INFO layer 12 iter 5 loss:0.2637711763381958 norm:0.009501145221292973 max memory_allocated 21265.646484375 
+[2025-05-18 07:21:28 root](LRQuant.py 300): INFO layer 12 iter 6 loss:0.26288798451423645 norm:0.009500423446297646 max memory_allocated 21265.646484375 
+[2025-05-18 07:22:32 root](LRQuant.py 300): INFO layer 12 iter 7 loss:0.2620466351509094 norm:0.00954146683216095 max memory_allocated 21265.646484375 
+[2025-05-18 07:23:36 root](LRQuant.py 300): INFO layer 12 iter 8 loss:0.26136845350265503 norm:0.009560352191329002 max memory_allocated 21265.646484375 
+[2025-05-18 07:24:40 root](LRQuant.py 300): INFO layer 12 iter 9 loss:0.2607862949371338 norm:0.009555552154779434 max memory_allocated 21265.646484375 
+[2025-05-18 07:25:45 root](LRQuant.py 300): INFO layer 12 iter 10 loss:0.2602401375770569 norm:0.009548581205308437 max memory_allocated 21265.646484375 
+[2025-05-18 07:26:49 root](LRQuant.py 300): INFO layer 12 iter 11 loss:0.25985172390937805 norm:0.009621946141123772 max memory_allocated 21265.646484375 
+[2025-05-18 07:27:53 root](LRQuant.py 300): INFO layer 12 iter 12 loss:0.25934818387031555 norm:0.009610651060938835 max memory_allocated 21265.646484375 
+[2025-05-18 07:28:57 root](LRQuant.py 300): INFO layer 12 iter 13 loss:0.2589172124862671 norm:0.009591076523065567 max memory_allocated 21265.646484375 
+[2025-05-18 07:30:01 root](LRQuant.py 300): INFO layer 12 iter 14 loss:0.2586197555065155 norm:0.00959383137524128 max memory_allocated 21265.646484375 
+[2025-05-18 07:31:06 root](LRQuant.py 300): INFO layer 12 iter 15 loss:0.25834929943084717 norm:0.009648846462368965 max memory_allocated 21265.646484375 
+[2025-05-18 07:32:10 root](LRQuant.py 300): INFO layer 12 iter 16 loss:0.2580762207508087 norm:0.00965789332985878 max memory_allocated 21265.646484375 
+[2025-05-18 07:33:14 root](LRQuant.py 300): INFO layer 12 iter 17 loss:0.2578945755958557 norm:0.009671316482126713 max memory_allocated 21265.646484375 
+[2025-05-18 07:34:18 root](LRQuant.py 300): INFO layer 12 iter 18 loss:0.25770196318626404 norm:0.009706677868962288 max memory_allocated 21265.646484375 
+[2025-05-18 07:35:23 root](LRQuant.py 300): INFO layer 12 iter 19 loss:0.2574220597743988 norm:0.009714273735880852 max memory_allocated 21265.646484375 
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+[2025-05-18 07:35:26 root](LRQuant.py 173): INFO === Start quantize layer 13 ===
+32
+[2025-05-18 07:36:35 root](LRQuant.py 300): INFO layer 13 iter 0 loss:0.31621822714805603 norm:0.0280761681497097 max memory_allocated 21265.802734375 
+[2025-05-18 07:37:39 root](LRQuant.py 300): INFO layer 13 iter 1 loss:0.28494346141815186 norm:0.012973270379006863 max memory_allocated 21265.802734375 
+[2025-05-18 07:38:43 root](LRQuant.py 300): INFO layer 13 iter 2 loss:0.27985572814941406 norm:0.011042052879929543 max memory_allocated 21265.802734375 
+[2025-05-18 07:39:48 root](LRQuant.py 300): INFO layer 13 iter 3 loss:0.27731677889823914 norm:0.010577424429357052 max memory_allocated 21265.802734375 
+[2025-05-18 07:40:52 root](LRQuant.py 300): INFO layer 13 iter 4 loss:0.27560606598854065 norm:0.010377287864685059 max memory_allocated 21265.802734375 
+[2025-05-18 07:41:56 root](LRQuant.py 300): INFO layer 13 iter 5 loss:0.27413031458854675 norm:0.010133077390491962 max memory_allocated 21265.802734375 
+[2025-05-18 07:43:00 root](LRQuant.py 300): INFO layer 13 iter 6 loss:0.27319008111953735 norm:0.010127763263881207 max memory_allocated 21265.802734375 
+[2025-05-18 07:44:04 root](LRQuant.py 300): INFO layer 13 iter 7 loss:0.27222496271133423 norm:0.010062388144433498 max memory_allocated 21265.802734375 
+[2025-05-18 07:45:08 root](LRQuant.py 300): INFO layer 13 iter 8 loss:0.27153003215789795 norm:0.010076360777020454 max memory_allocated 21265.802734375 
+[2025-05-18 07:46:13 root](LRQuant.py 300): INFO layer 13 iter 9 loss:0.2709205448627472 norm:0.010070428252220154 max memory_allocated 21265.802734375 
+[2025-05-18 07:47:17 root](LRQuant.py 300): INFO layer 13 iter 10 loss:0.270236074924469 norm:0.009990697726607323 max memory_allocated 21265.802734375 
+[2025-05-18 07:48:21 root](LRQuant.py 300): INFO layer 13 iter 11 loss:0.26961904764175415 norm:0.010022872127592564 max memory_allocated 21265.802734375 
+[2025-05-18 07:49:25 root](LRQuant.py 300): INFO layer 13 iter 12 loss:0.26909923553466797 norm:0.010003248229622841 max memory_allocated 21265.802734375 
+[2025-05-18 07:50:30 root](LRQuant.py 300): INFO layer 13 iter 13 loss:0.26872536540031433 norm:0.010027898475527763 max memory_allocated 21265.802734375 
+[2025-05-18 07:51:34 root](LRQuant.py 300): INFO layer 13 iter 14 loss:0.26832062005996704 norm:0.010023657232522964 max memory_allocated 21265.802734375 
+[2025-05-18 07:52:38 root](LRQuant.py 300): INFO layer 13 iter 15 loss:0.2680965065956116 norm:0.010106509551405907 max memory_allocated 21265.802734375 
+[2025-05-18 07:53:42 root](LRQuant.py 300): INFO layer 13 iter 16 loss:0.2678011655807495 norm:0.010172516107559204 max memory_allocated 21265.802734375 
+[2025-05-18 07:54:47 root](LRQuant.py 300): INFO layer 13 iter 17 loss:0.2674962282180786 norm:0.01009698212146759 max memory_allocated 21265.802734375 
+[2025-05-18 07:55:51 root](LRQuant.py 300): INFO layer 13 iter 18 loss:0.26718610525131226 norm:0.010068058036267757 max memory_allocated 21265.802734375 
+[2025-05-18 07:56:55 root](LRQuant.py 300): INFO layer 13 iter 19 loss:0.2669677734375 norm:0.010073047131299973 max memory_allocated 21265.802734375 
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+[2025-05-18 07:56:59 root](LRQuant.py 173): INFO === Start quantize layer 14 ===
+32
+[2025-05-18 07:58:07 root](LRQuant.py 300): INFO layer 14 iter 0 loss:0.3236466944217682 norm:0.020014563575387 max memory_allocated 21265.958984375 
+[2025-05-18 07:59:11 root](LRQuant.py 300): INFO layer 14 iter 1 loss:0.2955612540245056 norm:0.011239673011004925 max memory_allocated 21265.958984375 
+[2025-05-18 08:00:16 root](LRQuant.py 300): INFO layer 14 iter 2 loss:0.2907809019088745 norm:0.010404421016573906 max memory_allocated 21265.958984375 
+[2025-05-18 08:01:20 root](LRQuant.py 300): INFO layer 14 iter 3 loss:0.2882714867591858 norm:0.010032156482338905 max memory_allocated 21265.958984375 
+[2025-05-18 08:02:24 root](LRQuant.py 300): INFO layer 14 iter 4 loss:0.28641992807388306 norm:0.00993877649307251 max memory_allocated 21265.958984375 
+[2025-05-18 08:03:28 root](LRQuant.py 300): INFO layer 14 iter 5 loss:0.28511422872543335 norm:0.00989745557308197 max memory_allocated 21265.958984375 
+[2025-05-18 08:04:32 root](LRQuant.py 300): INFO layer 14 iter 6 loss:0.2840180993080139 norm:0.009925447404384613 max memory_allocated 21265.958984375 
+[2025-05-18 08:05:37 root](LRQuant.py 300): INFO layer 14 iter 7 loss:0.28310850262641907 norm:0.009953499771654606 max memory_allocated 21265.958984375 
+[2025-05-18 08:06:41 root](LRQuant.py 300): INFO layer 14 iter 8 loss:0.2823666036128998 norm:0.009943931363523006 max memory_allocated 21265.958984375 
+[2025-05-18 08:07:45 root](LRQuant.py 300): INFO layer 14 iter 9 loss:0.2817223072052002 norm:0.009962664917111397 max memory_allocated 21265.958984375 
+[2025-05-18 08:08:49 root](LRQuant.py 300): INFO layer 14 iter 10 loss:0.2811713218688965 norm:0.009944482706487179 max memory_allocated 21265.958984375 
+[2025-05-18 08:09:54 root](LRQuant.py 300): INFO layer 14 iter 11 loss:0.280730664730072 norm:0.010074108839035034 max memory_allocated 21265.958984375 
+[2025-05-18 08:10:58 root](LRQuant.py 300): INFO layer 14 iter 12 loss:0.28023386001586914 norm:0.010019422508776188 max memory_allocated 21265.958984375 
+[2025-05-18 08:12:02 root](LRQuant.py 300): INFO layer 14 iter 13 loss:0.2798806428909302 norm:0.010034605860710144 max memory_allocated 21265.958984375 
+[2025-05-18 08:13:06 root](LRQuant.py 300): INFO layer 14 iter 14 loss:0.27961140871047974 norm:0.010000281035900116 max memory_allocated 21265.958984375 
+[2025-05-18 08:14:11 root](LRQuant.py 300): INFO layer 14 iter 15 loss:0.27925628423690796 norm:0.010039159096777439 max memory_allocated 21265.958984375 
+[2025-05-18 08:15:15 root](LRQuant.py 300): INFO layer 14 iter 16 loss:0.27893102169036865 norm:0.009993106126785278 max memory_allocated 21265.958984375 
+[2025-05-18 08:16:19 root](LRQuant.py 300): INFO layer 14 iter 17 loss:0.2785431146621704 norm:0.009960319846868515 max memory_allocated 21265.958984375 
+[2025-05-18 08:17:23 root](LRQuant.py 300): INFO layer 14 iter 18 loss:0.278245747089386 norm:0.010043628513813019 max memory_allocated 21265.958984375 
+[2025-05-18 08:18:28 root](LRQuant.py 300): INFO layer 14 iter 19 loss:0.2780596613883972 norm:0.009955587796866894 max memory_allocated 21265.958984375 
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+[2025-05-18 08:18:31 root](LRQuant.py 173): INFO === Start quantize layer 15 ===
+32
+[2025-05-18 08:19:40 root](LRQuant.py 300): INFO layer 15 iter 0 loss:0.35612404346466064 norm:0.019301123917102814 max memory_allocated 21266.115234375 
+[2025-05-18 08:20:44 root](LRQuant.py 300): INFO layer 15 iter 1 loss:0.3264007866382599 norm:0.011421119794249535 max memory_allocated 21266.115234375 
+[2025-05-18 08:21:48 root](LRQuant.py 300): INFO layer 15 iter 2 loss:0.32151365280151367 norm:0.010673078708350658 max memory_allocated 21266.115234375 
+[2025-05-18 08:22:52 root](LRQuant.py 300): INFO layer 15 iter 3 loss:0.3185502886772156 norm:0.010433737188577652 max memory_allocated 21266.115234375 
+[2025-05-18 08:23:57 root](LRQuant.py 300): INFO layer 15 iter 4 loss:0.31680959463119507 norm:0.010459665209054947 max memory_allocated 21266.115234375 
+[2025-05-18 08:25:01 root](LRQuant.py 300): INFO layer 15 iter 5 loss:0.3153437674045563 norm:0.010468238964676857 max memory_allocated 21266.115234375 
+[2025-05-18 08:26:05 root](LRQuant.py 300): INFO layer 15 iter 6 loss:0.314319908618927 norm:0.01058365497738123 max memory_allocated 21266.115234375 
+[2025-05-18 08:27:09 root](LRQuant.py 300): INFO layer 15 iter 7 loss:0.3133999705314636 norm:0.010562390089035034 max memory_allocated 21266.115234375 
+[2025-05-18 08:28:13 root](LRQuant.py 300): INFO layer 15 iter 8 loss:0.3125321865081787 norm:0.010685207322239876 max memory_allocated 21266.115234375 
+[2025-05-18 08:29:17 root](LRQuant.py 300): INFO layer 15 iter 9 loss:0.311840295791626 norm:0.01064286194741726 max memory_allocated 21266.115234375 
+[2025-05-18 08:30:22 root](LRQuant.py 300): INFO layer 15 iter 10 loss:0.3111058473587036 norm:0.010583991184830666 max memory_allocated 21266.115234375 
+[2025-05-18 08:31:26 root](LRQuant.py 300): INFO layer 15 iter 11 loss:0.3104102611541748 norm:0.010549623519182205 max memory_allocated 21266.115234375 
+[2025-05-18 08:32:30 root](LRQuant.py 300): INFO layer 15 iter 12 loss:0.30992797017097473 norm:0.010570527985692024 max memory_allocated 21266.115234375 
+[2025-05-18 08:33:34 root](LRQuant.py 300): INFO layer 15 iter 13 loss:0.3096032738685608 norm:0.01067601703107357 max memory_allocated 21266.115234375 
+[2025-05-18 08:34:39 root](LRQuant.py 300): INFO layer 15 iter 14 loss:0.30917733907699585 norm:0.01062619686126709 max memory_allocated 21266.115234375 
+[2025-05-18 08:35:43 root](LRQuant.py 300): INFO layer 15 iter 15 loss:0.3088378608226776 norm:0.010634569451212883 max memory_allocated 21266.115234375 
+[2025-05-18 08:36:47 root](LRQuant.py 300): INFO layer 15 iter 16 loss:0.3086356520652771 norm:0.010697882622480392 max memory_allocated 21266.115234375 
+[2025-05-18 08:37:51 root](LRQuant.py 300): INFO layer 15 iter 17 loss:0.3084799647331238 norm:0.01157788559794426 max memory_allocated 21266.115234375 
+[2025-05-18 08:38:56 root](LRQuant.py 300): INFO layer 15 iter 18 loss:0.3081442415714264 norm:0.01076333224773407 max memory_allocated 21266.115234375 
+[2025-05-18 08:40:00 root](LRQuant.py 300): INFO layer 15 iter 19 loss:0.3078117370605469 norm:0.010723885148763657 max memory_allocated 21266.115234375 
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+[2025-05-18 08:40:04 root](LRQuant.py 173): INFO === Start quantize layer 16 ===
+32
+[2025-05-18 08:41:12 root](LRQuant.py 300): INFO layer 16 iter 0 loss:0.3836924135684967 norm:0.02169736847281456 max memory_allocated 21266.271484375 
+[2025-05-18 08:42:16 root](LRQuant.py 300): INFO layer 16 iter 1 loss:0.3514975905418396 norm:0.01310872845351696 max memory_allocated 21266.271484375 
+[2025-05-18 08:43:20 root](LRQuant.py 300): INFO layer 16 iter 2 loss:0.3459833264350891 norm:0.011976259760558605 max memory_allocated 21266.271484375 
+[2025-05-18 08:44:25 root](LRQuant.py 300): INFO layer 16 iter 3 loss:0.34310731291770935 norm:0.011886566877365112 max memory_allocated 21266.271484375 
+[2025-05-18 08:45:29 root](LRQuant.py 300): INFO layer 16 iter 4 loss:0.34092217683792114 norm:0.011525630950927734 max memory_allocated 21266.271484375 
+[2025-05-18 08:46:33 root](LRQuant.py 300): INFO layer 16 iter 5 loss:0.33924394845962524 norm:0.011497164145112038 max memory_allocated 21266.271484375 
+[2025-05-18 08:47:37 root](LRQuant.py 300): INFO layer 16 iter 6 loss:0.3379729986190796 norm:0.011442556977272034 max memory_allocated 21266.271484375 
+[2025-05-18 08:48:41 root](LRQuant.py 300): INFO layer 16 iter 7 loss:0.33694207668304443 norm:0.011555238626897335 max memory_allocated 21266.271484375 
+[2025-05-18 08:49:46 root](LRQuant.py 300): INFO layer 16 iter 8 loss:0.33609187602996826 norm:0.011547006666660309 max memory_allocated 21266.271484375 
+[2025-05-18 08:50:50 root](LRQuant.py 300): INFO layer 16 iter 9 loss:0.3352804183959961 norm:0.011476356536149979 max memory_allocated 21266.271484375 
+[2025-05-18 08:51:54 root](LRQuant.py 300): INFO layer 16 iter 10 loss:0.33457648754119873 norm:0.011433589272201061 max memory_allocated 21266.271484375 
+[2025-05-18 08:52:58 root](LRQuant.py 300): INFO layer 16 iter 11 loss:0.3339361250400543 norm:0.011452993378043175 max memory_allocated 21266.271484375 
+[2025-05-18 08:54:02 root](LRQuant.py 300): INFO layer 16 iter 12 loss:0.33349382877349854 norm:0.011428918689489365 max memory_allocated 21266.271484375 
+[2025-05-18 08:55:07 root](LRQuant.py 300): INFO layer 16 iter 13 loss:0.3327479958534241 norm:0.011379461735486984 max memory_allocated 21266.271484375 
+[2025-05-18 08:56:11 root](LRQuant.py 300): INFO layer 16 iter 14 loss:0.33230525255203247 norm:0.01141989417374134 max memory_allocated 21266.271484375 
+[2025-05-18 08:57:15 root](LRQuant.py 300): INFO layer 16 iter 15 loss:0.3318629562854767 norm:0.011393907479941845 max memory_allocated 21266.271484375 
+[2025-05-18 08:58:19 root](LRQuant.py 300): INFO layer 16 iter 16 loss:0.33156460523605347 norm:0.011412948369979858 max memory_allocated 21266.271484375 
+[2025-05-18 08:59:24 root](LRQuant.py 300): INFO layer 16 iter 17 loss:0.33129966259002686 norm:0.01145494170486927 max memory_allocated 21266.271484375 
+[2025-05-18 09:00:28 root](LRQuant.py 300): INFO layer 16 iter 18 loss:0.3310667872428894 norm:0.011426325887441635 max memory_allocated 21266.271484375 
+[2025-05-18 09:01:32 root](LRQuant.py 300): INFO layer 16 iter 19 loss:0.3307519257068634 norm:0.011458214372396469 max memory_allocated 21266.271484375 
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+[2025-05-18 09:01:36 root](LRQuant.py 173): INFO === Start quantize layer 17 ===
+32
+[2025-05-18 09:02:44 root](LRQuant.py 300): INFO layer 17 iter 0 loss:0.4385012984275818 norm:0.021617289632558823 max memory_allocated 21266.427734375 
+[2025-05-18 09:03:48 root](LRQuant.py 300): INFO layer 17 iter 1 loss:0.4039298892021179 norm:0.013323230668902397 max memory_allocated 21266.427734375 
+[2025-05-18 09:04:53 root](LRQuant.py 300): INFO layer 17 iter 2 loss:0.3975692391395569 norm:0.01250993087887764 max memory_allocated 21266.427734375 
+[2025-05-18 09:05:57 root](LRQuant.py 300): INFO layer 17 iter 3 loss:0.39407581090927124 norm:0.012161551974713802 max memory_allocated 21266.427734375 
+[2025-05-18 09:07:01 root](LRQuant.py 300): INFO layer 17 iter 4 loss:0.3916131556034088 norm:0.012111213058233261 max memory_allocated 21266.427734375 
+[2025-05-18 09:08:05 root](LRQuant.py 300): INFO layer 17 iter 5 loss:0.3899897336959839 norm:0.01210017129778862 max memory_allocated 21266.427734375 
+[2025-05-18 09:09:09 root](LRQuant.py 300): INFO layer 17 iter 6 loss:0.3886454999446869 norm:0.01218363456428051 max memory_allocated 21266.427734375 
+[2025-05-18 09:10:13 root](LRQuant.py 300): INFO layer 17 iter 7 loss:0.3877257704734802 norm:0.012896232306957245 max memory_allocated 21266.427734375 
+[2025-05-18 09:11:18 root](LRQuant.py 300): INFO layer 17 iter 8 loss:0.38658633828163147 norm:0.01227208785712719 max memory_allocated 21266.427734375 
+[2025-05-18 09:12:22 root](LRQuant.py 300): INFO layer 17 iter 9 loss:0.3856809139251709 norm:0.012270289473235607 max memory_allocated 21266.427734375 
+[2025-05-18 09:13:26 root](LRQuant.py 300): INFO layer 17 iter 10 loss:0.3848734498023987 norm:0.012329595163464546 max memory_allocated 21266.427734375 
+[2025-05-18 09:14:30 root](LRQuant.py 300): INFO layer 17 iter 11 loss:0.3841734230518341 norm:0.012319162487983704 max memory_allocated 21266.427734375 
+[2025-05-18 09:15:35 root](LRQuant.py 300): INFO layer 17 iter 12 loss:0.383589506149292 norm:0.012402825057506561 max memory_allocated 21266.427734375 
+[2025-05-18 09:16:39 root](LRQuant.py 300): INFO layer 17 iter 13 loss:0.38300633430480957 norm:0.012454614974558353 max memory_allocated 21266.427734375 
+[2025-05-18 09:17:43 root](LRQuant.py 300): INFO layer 17 iter 14 loss:0.38242626190185547 norm:0.012397641316056252 max memory_allocated 21266.427734375 
+[2025-05-18 09:18:47 root](LRQuant.py 300): INFO layer 17 iter 15 loss:0.3821004331111908 norm:0.012497694231569767 max memory_allocated 21266.427734375 
+[2025-05-18 09:19:51 root](LRQuant.py 300): INFO layer 17 iter 16 loss:0.3817031979560852 norm:0.012482859194278717 max memory_allocated 21266.427734375 
+[2025-05-18 09:20:56 root](LRQuant.py 300): INFO layer 17 iter 17 loss:0.38137033581733704 norm:0.012586628086864948 max memory_allocated 21266.427734375 
+[2025-05-18 09:22:00 root](LRQuant.py 300): INFO layer 17 iter 18 loss:0.38101673126220703 norm:0.012489954940974712 max memory_allocated 21266.427734375 
+[2025-05-18 09:23:04 root](LRQuant.py 300): INFO layer 17 iter 19 loss:0.3806973099708557 norm:0.01256290078163147 max memory_allocated 21266.427734375 
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+[2025-05-18 09:23:08 root](LRQuant.py 173): INFO === Start quantize layer 18 ===
+32
+[2025-05-18 09:24:16 root](LRQuant.py 300): INFO layer 18 iter 0 loss:0.5260723829269409 norm:0.02113180235028267 max memory_allocated 21266.583984375 
+[2025-05-18 09:25:21 root](LRQuant.py 300): INFO layer 18 iter 1 loss:0.48550599813461304 norm:0.014457421377301216 max memory_allocated 21266.583984375 
+[2025-05-18 09:26:25 root](LRQuant.py 300): INFO layer 18 iter 2 loss:0.47791793942451477 norm:0.013361459597945213 max memory_allocated 21266.583984375 
+[2025-05-18 09:27:29 root](LRQuant.py 300): INFO layer 18 iter 3 loss:0.4741045832633972 norm:0.013191750273108482 max memory_allocated 21266.583984375 
+[2025-05-18 09:28:33 root](LRQuant.py 300): INFO layer 18 iter 4 loss:0.47132959961891174 norm:0.013247262686491013 max memory_allocated 21266.583984375 
+[2025-05-18 09:29:37 root](LRQuant.py 300): INFO layer 18 iter 5 loss:0.4693044126033783 norm:0.013326393440365791 max memory_allocated 21266.583984375 
+[2025-05-18 09:30:41 root](LRQuant.py 300): INFO layer 18 iter 6 loss:0.4677615165710449 norm:0.013413038104772568 max memory_allocated 21266.583984375 
+[2025-05-18 09:31:46 root](LRQuant.py 300): INFO layer 18 iter 7 loss:0.4664728045463562 norm:0.013462349772453308 max memory_allocated 21266.583984375 
+[2025-05-18 09:32:50 root](LRQuant.py 300): INFO layer 18 iter 8 loss:0.465293288230896 norm:0.01353075634688139 max memory_allocated 21266.583984375 
+[2025-05-18 09:33:54 root](LRQuant.py 300): INFO layer 18 iter 9 loss:0.46424588561058044 norm:0.013602780178189278 max memory_allocated 21266.583984375 
+[2025-05-18 09:34:58 root](LRQuant.py 300): INFO layer 18 iter 10 loss:0.4634227752685547 norm:0.013642637059092522 max memory_allocated 21266.583984375 
+[2025-05-18 09:36:03 root](LRQuant.py 300): INFO layer 18 iter 11 loss:0.4627281427383423 norm:0.013709654100239277 max memory_allocated 21266.583984375 
+[2025-05-18 09:37:07 root](LRQuant.py 300): INFO layer 18 iter 12 loss:0.4620305895805359 norm:0.013761665672063828 max memory_allocated 21266.583984375 
+[2025-05-18 09:38:11 root](LRQuant.py 300): INFO layer 18 iter 13 loss:0.4614959955215454 norm:0.013830393552780151 max memory_allocated 21266.583984375 
+[2025-05-18 09:39:15 root](LRQuant.py 300): INFO layer 18 iter 14 loss:0.4608430862426758 norm:0.013867078348994255 max memory_allocated 21266.583984375 
+[2025-05-18 09:40:20 root](LRQuant.py 300): INFO layer 18 iter 15 loss:0.46036291122436523 norm:0.01393345557153225 max memory_allocated 21266.583984375 
+[2025-05-18 09:41:24 root](LRQuant.py 300): INFO layer 18 iter 16 loss:0.4598785638809204 norm:0.01393198687583208 max memory_allocated 21266.583984375 
+[2025-05-18 09:42:28 root](LRQuant.py 300): INFO layer 18 iter 17 loss:0.4593598544597626 norm:0.013967711478471756 max memory_allocated 21266.583984375 
+[2025-05-18 09:43:32 root](LRQuant.py 300): INFO layer 18 iter 18 loss:0.45902517437934875 norm:0.014020510949194431 max memory_allocated 21266.583984375 
+[2025-05-18 09:44:37 root](LRQuant.py 300): INFO layer 18 iter 19 loss:0.4588008522987366 norm:0.014086714014410973 max memory_allocated 21266.583984375 
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+[2025-05-18 09:44:40 root](LRQuant.py 173): INFO === Start quantize layer 19 ===
+32
+[2025-05-18 09:45:49 root](LRQuant.py 300): INFO layer 19 iter 0 loss:0.6365014910697937 norm:0.027605371549725533 max memory_allocated 21266.740234375 
+[2025-05-18 09:46:53 root](LRQuant.py 300): INFO layer 19 iter 1 loss:0.5868943929672241 norm:0.017152320593595505 max memory_allocated 21266.740234375 
+[2025-05-18 09:47:57 root](LRQuant.py 300): INFO layer 19 iter 2 loss:0.5777631402015686 norm:0.015945997089147568 max memory_allocated 21266.740234375 
+[2025-05-18 09:49:01 root](LRQuant.py 300): INFO layer 19 iter 3 loss:0.5724524259567261 norm:0.015562682412564754 max memory_allocated 21266.740234375 
+[2025-05-18 09:50:05 root](LRQuant.py 300): INFO layer 19 iter 4 loss:0.5693361163139343 norm:0.015573655255138874 max memory_allocated 21266.740234375 
+[2025-05-18 09:51:10 root](LRQuant.py 300): INFO layer 19 iter 5 loss:0.5669381618499756 norm:0.015652909874916077 max memory_allocated 21266.740234375 
+[2025-05-18 09:52:14 root](LRQuant.py 300): INFO layer 19 iter 6 loss:0.5651015043258667 norm:0.015767566859722137 max memory_allocated 21266.740234375 
+[2025-05-18 09:53:18 root](LRQuant.py 300): INFO layer 19 iter 7 loss:0.563350260257721 norm:0.01589766889810562 max memory_allocated 21266.740234375 
+[2025-05-18 09:54:22 root](LRQuant.py 300): INFO layer 19 iter 8 loss:0.5616991519927979 norm:0.015860971063375473 max memory_allocated 21266.740234375 
+[2025-05-18 09:55:26 root](LRQuant.py 300): INFO layer 19 iter 9 loss:0.560479998588562 norm:0.016032034531235695 max memory_allocated 21266.740234375 
+[2025-05-18 09:56:31 root](LRQuant.py 300): INFO layer 19 iter 10 loss:0.5593627095222473 norm:0.01612034998834133 max memory_allocated 21266.740234375 
+[2025-05-18 09:57:35 root](LRQuant.py 300): INFO layer 19 iter 11 loss:0.5584264993667603 norm:0.016203338280320168 max memory_allocated 21266.740234375 
+[2025-05-18 09:58:39 root](LRQuant.py 300): INFO layer 19 iter 12 loss:0.5575960874557495 norm:0.016249630600214005 max memory_allocated 21266.740234375 
+[2025-05-18 09:59:43 root](LRQuant.py 300): INFO layer 19 iter 13 loss:0.5567234754562378 norm:0.016314255073666573 max memory_allocated 21266.740234375 
+[2025-05-18 10:00:48 root](LRQuant.py 300): INFO layer 19 iter 14 loss:0.5559951066970825 norm:0.016372710466384888 max memory_allocated 21266.740234375 
+[2025-05-18 10:01:52 root](LRQuant.py 300): INFO layer 19 iter 15 loss:0.5554949045181274 norm:0.01648087240755558 max memory_allocated 21266.740234375 
+[2025-05-18 10:02:56 root](LRQuant.py 300): INFO layer 19 iter 16 loss:0.5549827814102173 norm:0.016529705375432968 max memory_allocated 21266.740234375 
+[2025-05-18 10:04:00 root](LRQuant.py 300): INFO layer 19 iter 17 loss:0.5544971227645874 norm:0.016551677137613297 max memory_allocated 21266.740234375 
+[2025-05-18 10:05:05 root](LRQuant.py 300): INFO layer 19 iter 18 loss:0.5540094971656799 norm:0.016628550365567207 max memory_allocated 21266.740234375 
+[2025-05-18 10:06:09 root](LRQuant.py 300): INFO layer 19 iter 19 loss:0.5534242391586304 norm:0.016633719205856323 max memory_allocated 21266.740234375 
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+[2025-05-18 10:06:13 root](LRQuant.py 173): INFO === Start quantize layer 20 ===
+32
+[2025-05-18 10:07:21 root](LRQuant.py 300): INFO layer 20 iter 0 loss:0.7658593654632568 norm:0.029653694480657578 max memory_allocated 21266.896484375 
+[2025-05-18 10:08:25 root](LRQuant.py 300): INFO layer 20 iter 1 loss:0.7079992294311523 norm:0.01923537626862526 max memory_allocated 21266.896484375 
+[2025-05-18 10:09:29 root](LRQuant.py 300): INFO layer 20 iter 2 loss:0.6972099542617798 norm:0.017906757071614265 max memory_allocated 21266.896484375 
+[2025-05-18 10:10:34 root](LRQuant.py 300): INFO layer 20 iter 3 loss:0.6912202835083008 norm:0.017703119665384293 max memory_allocated 21266.896484375 
+[2025-05-18 10:11:38 root](LRQuant.py 300): INFO layer 20 iter 4 loss:0.6869659423828125 norm:0.017748091369867325 max memory_allocated 21266.896484375 
+[2025-05-18 10:12:42 root](LRQuant.py 300): INFO layer 20 iter 5 loss:0.6841115951538086 norm:0.01775074005126953 max memory_allocated 21266.896484375 
+[2025-05-18 10:13:46 root](LRQuant.py 300): INFO layer 20 iter 6 loss:0.6817330121994019 norm:0.017943136394023895 max memory_allocated 21266.896484375 
+[2025-05-18 10:14:50 root](LRQuant.py 300): INFO layer 20 iter 7 loss:0.6796596050262451 norm:0.018016330897808075 max memory_allocated 21266.896484375 
+[2025-05-18 10:15:54 root](LRQuant.py 300): INFO layer 20 iter 8 loss:0.6777164936065674 norm:0.01809878647327423 max memory_allocated 21266.896484375 
+[2025-05-18 10:16:59 root](LRQuant.py 300): INFO layer 20 iter 9 loss:0.6763467192649841 norm:0.018267400562763214 max memory_allocated 21266.896484375 
+[2025-05-18 10:18:03 root](LRQuant.py 300): INFO layer 20 iter 10 loss:0.6755366325378418 norm:0.018601378425955772 max memory_allocated 21266.896484375 
+[2025-05-18 10:19:07 root](LRQuant.py 300): INFO layer 20 iter 11 loss:0.6742106080055237 norm:0.018529657274484634 max memory_allocated 21266.896484375 
+[2025-05-18 10:20:11 root](LRQuant.py 300): INFO layer 20 iter 12 loss:0.6728178262710571 norm:0.018518831580877304 max memory_allocated 21266.896484375 
+[2025-05-18 10:21:16 root](LRQuant.py 300): INFO layer 20 iter 13 loss:0.6716023683547974 norm:0.01855320669710636 max memory_allocated 21266.896484375 
+[2025-05-18 10:22:20 root](LRQuant.py 300): INFO layer 20 iter 14 loss:0.6706259250640869 norm:0.018590770661830902 max memory_allocated 21266.896484375 
+[2025-05-18 10:23:24 root](LRQuant.py 300): INFO layer 20 iter 15 loss:0.670006513595581 norm:0.01873711496591568 max memory_allocated 21266.896484375 
+[2025-05-18 10:24:28 root](LRQuant.py 300): INFO layer 20 iter 16 loss:0.6693602800369263 norm:0.018884126096963882 max memory_allocated 21266.896484375 
+[2025-05-18 10:25:33 root](LRQuant.py 300): INFO layer 20 iter 17 loss:0.6686722040176392 norm:0.018885545432567596 max memory_allocated 21266.896484375 
+[2025-05-18 10:26:37 root](LRQuant.py 300): INFO layer 20 iter 18 loss:0.6681815385818481 norm:0.01898370310664177 max memory_allocated 21266.896484375 
+[2025-05-18 10:27:41 root](LRQuant.py 300): INFO layer 20 iter 19 loss:0.6679575443267822 norm:0.0192745141685009 max memory_allocated 21266.896484375 
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+[2025-05-18 10:27:45 root](LRQuant.py 173): INFO === Start quantize layer 21 ===
+32
+[2025-05-18 10:28:53 root](LRQuant.py 300): INFO layer 21 iter 0 loss:0.9291735291481018 norm:0.029980000108480453 max memory_allocated 21267.052734375 
+[2025-05-18 10:29:57 root](LRQuant.py 300): INFO layer 21 iter 1 loss:0.8622778654098511 norm:0.020777806639671326 max memory_allocated 21267.052734375 
+[2025-05-18 10:31:02 root](LRQuant.py 300): INFO layer 21 iter 2 loss:0.849994421005249 norm:0.01969742216169834 max memory_allocated 21267.052734375 
+[2025-05-18 10:32:06 root](LRQuant.py 300): INFO layer 21 iter 3 loss:0.8429136276245117 norm:0.019576948136091232 max memory_allocated 21267.052734375 
+[2025-05-18 10:33:10 root](LRQuant.py 300): INFO layer 21 iter 4 loss:0.8380701541900635 norm:0.019721560180187225 max memory_allocated 21267.052734375 
+[2025-05-18 10:34:14 root](LRQuant.py 300): INFO layer 21 iter 5 loss:0.8344314694404602 norm:0.019910791888833046 max memory_allocated 21267.052734375 
+[2025-05-18 10:35:18 root](LRQuant.py 300): INFO layer 21 iter 6 loss:0.8318430185317993 norm:0.020360227674245834 max memory_allocated 21267.052734375 
+[2025-05-18 10:36:23 root](LRQuant.py 300): INFO layer 21 iter 7 loss:0.829461932182312 norm:0.02043880894780159 max memory_allocated 21267.052734375 
+[2025-05-18 10:37:27 root](LRQuant.py 300): INFO layer 21 iter 8 loss:0.8275675773620605 norm:0.020693562924861908 max memory_allocated 21267.052734375 
+[2025-05-18 10:38:31 root](LRQuant.py 300): INFO layer 21 iter 9 loss:0.8259279727935791 norm:0.021003931760787964 max memory_allocated 21267.052734375 
+[2025-05-18 10:39:35 root](LRQuant.py 300): INFO layer 21 iter 10 loss:0.824631929397583 norm:0.021340250968933105 max memory_allocated 21267.052734375 
+[2025-05-18 10:40:39 root](LRQuant.py 300): INFO layer 21 iter 11 loss:0.823237955570221 norm:0.02156647853553295 max memory_allocated 21267.052734375 
+[2025-05-18 10:41:44 root](LRQuant.py 300): INFO layer 21 iter 12 loss:0.8224330544471741 norm:0.02188047394156456 max memory_allocated 21267.052734375 
+[2025-05-18 10:42:48 root](LRQuant.py 300): INFO layer 21 iter 13 loss:0.820663571357727 norm:0.021676890552043915 max memory_allocated 21267.052734375 
+[2025-05-18 10:43:52 root](LRQuant.py 300): INFO layer 21 iter 14 loss:0.8193221688270569 norm:0.021759292110800743 max memory_allocated 21267.052734375 
+[2025-05-18 10:44:56 root](LRQuant.py 300): INFO layer 21 iter 15 loss:0.8182990550994873 norm:0.021782780066132545 max memory_allocated 21267.052734375 
+[2025-05-18 10:46:01 root](LRQuant.py 300): INFO layer 21 iter 16 loss:0.8173686265945435 norm:0.02186720073223114 max memory_allocated 21267.052734375 
+[2025-05-18 10:47:05 root](LRQuant.py 300): INFO layer 21 iter 17 loss:0.8167054057121277 norm:0.02195131406188011 max memory_allocated 21267.052734375 
+[2025-05-18 10:48:09 root](LRQuant.py 300): INFO layer 21 iter 18 loss:0.816220760345459 norm:0.02216332033276558 max memory_allocated 21267.052734375 
+[2025-05-18 10:49:13 root](LRQuant.py 300): INFO layer 21 iter 19 loss:0.8156187534332275 norm:0.022273946553468704 max memory_allocated 21267.052734375 
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+[2025-05-18 10:49:17 root](LRQuant.py 173): INFO === Start quantize layer 22 ===
+32
+[2025-05-18 10:50:25 root](LRQuant.py 300): INFO layer 22 iter 0 loss:1.0242542028427124 norm:0.04153814911842346 max memory_allocated 21267.208984375 
+[2025-05-18 10:51:30 root](LRQuant.py 300): INFO layer 22 iter 1 loss:0.955450177192688 norm:0.02460908703505993 max memory_allocated 21267.208984375 
+[2025-05-18 10:52:34 root](LRQuant.py 300): INFO layer 22 iter 2 loss:0.9422793388366699 norm:0.022509805858135223 max memory_allocated 21267.208984375 
+[2025-05-18 10:53:38 root](LRQuant.py 300): INFO layer 22 iter 3 loss:0.9348015189170837 norm:0.022370118647813797 max memory_allocated 21267.208984375 
+[2025-05-18 10:54:42 root](LRQuant.py 300): INFO layer 22 iter 4 loss:0.9295229315757751 norm:0.021828744560480118 max memory_allocated 21267.208984375 
+[2025-05-18 10:55:46 root](LRQuant.py 300): INFO layer 22 iter 5 loss:0.9254332780838013 norm:0.021991955116391182 max memory_allocated 21267.208984375 
+[2025-05-18 10:56:50 root](LRQuant.py 300): INFO layer 22 iter 6 loss:0.9218083620071411 norm:0.022063354030251503 max memory_allocated 21267.208984375 
+[2025-05-18 10:57:55 root](LRQuant.py 300): INFO layer 22 iter 7 loss:0.91869056224823 norm:0.022065581753849983 max memory_allocated 21267.208984375 
+[2025-05-18 10:58:59 root](LRQuant.py 300): INFO layer 22 iter 8 loss:0.9160308837890625 norm:0.022077159956097603 max memory_allocated 21267.208984375 
+[2025-05-18 11:00:03 root](LRQuant.py 300): INFO layer 22 iter 9 loss:0.9140676856040955 norm:0.02249646931886673 max memory_allocated 21267.208984375 
+[2025-05-18 11:01:07 root](LRQuant.py 300): INFO layer 22 iter 10 loss:0.9120961427688599 norm:0.022419214248657227 max memory_allocated 21267.208984375 
+[2025-05-18 11:02:12 root](LRQuant.py 300): INFO layer 22 iter 11 loss:0.9103570580482483 norm:0.022676076740026474 max memory_allocated 21267.208984375 
+[2025-05-18 11:03:16 root](LRQuant.py 300): INFO layer 22 iter 12 loss:0.9087047576904297 norm:0.022589825093746185 max memory_allocated 21267.208984375 
+[2025-05-18 11:04:20 root](LRQuant.py 300): INFO layer 22 iter 13 loss:0.9071927666664124 norm:0.022758163511753082 max memory_allocated 21267.208984375 
+[2025-05-18 11:05:24 root](LRQuant.py 300): INFO layer 22 iter 14 loss:0.9060748815536499 norm:0.02302146703004837 max memory_allocated 21267.208984375 
+[2025-05-18 11:06:29 root](LRQuant.py 300): INFO layer 22 iter 15 loss:0.9047084450721741 norm:0.0230480395257473 max memory_allocated 21267.208984375 
+[2025-05-18 11:07:33 root](LRQuant.py 300): INFO layer 22 iter 16 loss:0.9033679962158203 norm:0.022856920957565308 max memory_allocated 21267.208984375 
+[2025-05-18 11:08:37 root](LRQuant.py 300): INFO layer 22 iter 17 loss:0.9023394584655762 norm:0.02316187135875225 max memory_allocated 21267.208984375 
+[2025-05-18 11:09:41 root](LRQuant.py 300): INFO layer 22 iter 18 loss:0.9019967317581177 norm:0.02357279509305954 max memory_allocated 21267.208984375 
+[2025-05-18 11:10:45 root](LRQuant.py 300): INFO layer 22 iter 19 loss:0.9016234874725342 norm:0.023733332753181458 max memory_allocated 21267.208984375 
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+[2025-05-18 11:10:49 root](LRQuant.py 173): INFO === Start quantize layer 23 ===
+32
+[2025-05-18 11:11:58 root](LRQuant.py 300): INFO layer 23 iter 0 loss:1.2192625999450684 norm:0.05048041045665741 max memory_allocated 21267.365234375 
+[2025-05-18 11:13:02 root](LRQuant.py 300): INFO layer 23 iter 1 loss:1.126513123512268 norm:0.027755562216043472 max memory_allocated 21267.365234375 
+[2025-05-18 11:14:06 root](LRQuant.py 300): INFO layer 23 iter 2 loss:1.1093926429748535 norm:0.025428414344787598 max memory_allocated 21267.365234375 
+[2025-05-18 11:15:10 root](LRQuant.py 300): INFO layer 23 iter 3 loss:1.099660038948059 norm:0.024843642488121986 max memory_allocated 21267.365234375 
+[2025-05-18 11:16:15 root](LRQuant.py 300): INFO layer 23 iter 4 loss:1.0932211875915527 norm:0.024874206632375717 max memory_allocated 21267.365234375 
+[2025-05-18 11:17:19 root](LRQuant.py 300): INFO layer 23 iter 5 loss:1.0883893966674805 norm:0.02533978968858719 max memory_allocated 21267.365234375 
+[2025-05-18 11:18:22 root](LRQuant.py 300): INFO layer 23 iter 6 loss:1.0845788717269897 norm:0.025804806500673294 max memory_allocated 21267.365234375 
+[2025-05-18 11:19:27 root](LRQuant.py 300): INFO layer 23 iter 7 loss:1.0820740461349487 norm:0.02649257704615593 max memory_allocated 21267.365234375 
+[2025-05-18 11:20:31 root](LRQuant.py 300): INFO layer 23 iter 8 loss:1.0786137580871582 norm:0.026223046705126762 max memory_allocated 21267.365234375 
+[2025-05-18 11:21:35 root](LRQuant.py 300): INFO layer 23 iter 9 loss:1.0763390064239502 norm:0.02662300318479538 max memory_allocated 21267.365234375 
+[2025-05-18 11:22:39 root](LRQuant.py 300): INFO layer 23 iter 10 loss:1.0735150575637817 norm:0.026549536734819412 max memory_allocated 21267.365234375 
+[2025-05-18 11:23:44 root](LRQuant.py 300): INFO layer 23 iter 11 loss:1.0712456703186035 norm:0.026932917535305023 max memory_allocated 21267.365234375 
+[2025-05-18 11:24:48 root](LRQuant.py 300): INFO layer 23 iter 12 loss:1.0698482990264893 norm:0.027306895703077316 max memory_allocated 21267.365234375 
+[2025-05-18 11:25:52 root](LRQuant.py 300): INFO layer 23 iter 13 loss:1.068603277206421 norm:0.027666032314300537 max memory_allocated 21267.365234375 
+[2025-05-18 11:26:56 root](LRQuant.py 300): INFO layer 23 iter 14 loss:1.0672945976257324 norm:0.027799375355243683 max memory_allocated 21267.365234375 
+[2025-05-18 11:28:00 root](LRQuant.py 300): INFO layer 23 iter 15 loss:1.0652601718902588 norm:0.027658797800540924 max memory_allocated 21267.365234375 
+[2025-05-18 11:29:05 root](LRQuant.py 300): INFO layer 23 iter 16 loss:1.0636804103851318 norm:0.027710769325494766 max memory_allocated 21267.365234375 
+[2025-05-18 11:30:09 root](LRQuant.py 300): INFO layer 23 iter 17 loss:1.0626988410949707 norm:0.027988433837890625 max memory_allocated 21267.365234375 
+[2025-05-18 11:31:13 root](LRQuant.py 300): INFO layer 23 iter 18 loss:1.0616607666015625 norm:0.028105702251195908 max memory_allocated 21267.365234375 
+[2025-05-18 11:32:17 root](LRQuant.py 300): INFO layer 23 iter 19 loss:1.0609962940216064 norm:0.02839057147502899 max memory_allocated 21267.365234375 
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+[2025-05-18 11:32:21 root](LRQuant.py 173): INFO === Start quantize layer 24 ===
+32
+[2025-05-18 11:33:30 root](LRQuant.py 300): INFO layer 24 iter 0 loss:1.4085469245910645 norm:0.044430993497371674 max memory_allocated 21267.521484375 
+[2025-05-18 11:34:34 root](LRQuant.py 300): INFO layer 24 iter 1 loss:1.3120050430297852 norm:0.02873421274125576 max memory_allocated 21267.521484375 
+[2025-05-18 11:35:38 root](LRQuant.py 300): INFO layer 24 iter 2 loss:1.2933404445648193 norm:0.02674253098666668 max memory_allocated 21267.521484375 
+[2025-05-18 11:36:42 root](LRQuant.py 300): INFO layer 24 iter 3 loss:1.2827333211898804 norm:0.026395943015813828 max memory_allocated 21267.521484375 
+[2025-05-18 11:37:46 root](LRQuant.py 300): INFO layer 24 iter 4 loss:1.2750306129455566 norm:0.026291251182556152 max memory_allocated 21267.521484375 
+[2025-05-18 11:38:50 root](LRQuant.py 300): INFO layer 24 iter 5 loss:1.26901376247406 norm:0.026577148586511612 max memory_allocated 21267.521484375 
+[2025-05-18 11:39:54 root](LRQuant.py 300): INFO layer 24 iter 6 loss:1.2644541263580322 norm:0.026879634708166122 max memory_allocated 21267.521484375 
+[2025-05-18 11:40:59 root](LRQuant.py 300): INFO layer 24 iter 7 loss:1.2610745429992676 norm:0.027314163744449615 max memory_allocated 21267.521484375 
+[2025-05-18 11:42:03 root](LRQuant.py 300): INFO layer 24 iter 8 loss:1.2567331790924072 norm:0.027488330379128456 max memory_allocated 21267.521484375 
+[2025-05-18 11:43:07 root](LRQuant.py 300): INFO layer 24 iter 9 loss:1.2541497945785522 norm:0.02786463312804699 max memory_allocated 21267.521484375 
+[2025-05-18 11:44:11 root](LRQuant.py 300): INFO layer 24 iter 10 loss:1.251163125038147 norm:0.02815510332584381 max memory_allocated 21267.521484375 
+[2025-05-18 11:45:16 root](LRQuant.py 300): INFO layer 24 iter 11 loss:1.2490870952606201 norm:0.028635891154408455 max memory_allocated 21267.521484375 
+[2025-05-18 11:46:20 root](LRQuant.py 300): INFO layer 24 iter 12 loss:1.2470086812973022 norm:0.028754670172929764 max memory_allocated 21267.521484375 
+[2025-05-18 11:47:24 root](LRQuant.py 300): INFO layer 24 iter 13 loss:1.2448999881744385 norm:0.029047749936580658 max memory_allocated 21267.521484375 
+[2025-05-18 11:48:28 root](LRQuant.py 300): INFO layer 24 iter 14 loss:1.2433679103851318 norm:0.02939065545797348 max memory_allocated 21267.521484375 
+[2025-05-18 11:49:32 root](LRQuant.py 300): INFO layer 24 iter 15 loss:1.2413685321807861 norm:0.029555857181549072 max memory_allocated 21267.521484375 
+[2025-05-18 11:50:37 root](LRQuant.py 300): INFO layer 24 iter 16 loss:1.239943027496338 norm:0.029814161360263824 max memory_allocated 21267.521484375 
+[2025-05-18 11:51:41 root](LRQuant.py 300): INFO layer 24 iter 17 loss:1.238785743713379 norm:0.030051879584789276 max memory_allocated 21267.521484375 
+[2025-05-18 11:52:45 root](LRQuant.py 300): INFO layer 24 iter 18 loss:1.237473487854004 norm:0.03038785047829151 max memory_allocated 21267.521484375 
+[2025-05-18 11:53:49 root](LRQuant.py 300): INFO layer 24 iter 19 loss:1.2368804216384888 norm:0.030643504112958908 max memory_allocated 21267.521484375 
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+[2025-05-18 11:53:53 root](LRQuant.py 173): INFO === Start quantize layer 25 ===
+32
+[2025-05-18 11:55:02 root](LRQuant.py 300): INFO layer 25 iter 0 loss:1.6058194637298584 norm:0.04780639708042145 max memory_allocated 21267.677734375 
+[2025-05-18 11:56:06 root](LRQuant.py 300): INFO layer 25 iter 1 loss:1.4959566593170166 norm:0.031379763036966324 max memory_allocated 21267.677734375 
+[2025-05-18 11:57:10 root](LRQuant.py 300): INFO layer 25 iter 2 loss:1.4754984378814697 norm:0.029556971043348312 max memory_allocated 21267.677734375 
+[2025-05-18 11:58:14 root](LRQuant.py 300): INFO layer 25 iter 3 loss:1.4629034996032715 norm:0.029086865484714508 max memory_allocated 21267.677734375 
+[2025-05-18 11:59:18 root](LRQuant.py 300): INFO layer 25 iter 4 loss:1.454312801361084 norm:0.029287800192832947 max memory_allocated 21267.677734375 
+[2025-05-18 12:00:23 root](LRQuant.py 300): INFO layer 25 iter 5 loss:1.4474506378173828 norm:0.02953284978866577 max memory_allocated 21267.677734375 
+[2025-05-18 12:01:26 root](LRQuant.py 300): INFO layer 25 iter 6 loss:1.4418396949768066 norm:0.02980576455593109 max memory_allocated 21267.677734375 
+[2025-05-18 12:02:31 root](LRQuant.py 300): INFO layer 25 iter 7 loss:1.4370765686035156 norm:0.030289508402347565 max memory_allocated 21267.677734375 
+[2025-05-18 12:03:35 root](LRQuant.py 300): INFO layer 25 iter 8 loss:1.4331730604171753 norm:0.030750354751944542 max memory_allocated 21267.677734375 
+[2025-05-18 12:04:39 root](LRQuant.py 300): INFO layer 25 iter 9 loss:1.429975986480713 norm:0.031390395015478134 max memory_allocated 21267.677734375 
+[2025-05-18 12:05:43 root](LRQuant.py 300): INFO layer 25 iter 10 loss:1.4263651371002197 norm:0.031629834324121475 max memory_allocated 21267.677734375 
+[2025-05-18 12:06:48 root](LRQuant.py 300): INFO layer 25 iter 11 loss:1.423814296722412 norm:0.032184239476919174 max memory_allocated 21267.677734375 
+[2025-05-18 12:07:52 root](LRQuant.py 300): INFO layer 25 iter 12 loss:1.4215168952941895 norm:0.032476942986249924 max memory_allocated 21267.677734375 
+[2025-05-18 12:08:56 root](LRQuant.py 300): INFO layer 25 iter 13 loss:1.4188319444656372 norm:0.03262419253587723 max memory_allocated 21267.677734375 
+[2025-05-18 12:10:00 root](LRQuant.py 300): INFO layer 25 iter 14 loss:1.4162852764129639 norm:0.032961130142211914 max memory_allocated 21267.677734375 
+[2025-05-18 12:11:04 root](LRQuant.py 300): INFO layer 25 iter 15 loss:1.4147768020629883 norm:0.03327301889657974 max memory_allocated 21267.677734375 
+[2025-05-18 12:12:09 root](LRQuant.py 300): INFO layer 25 iter 16 loss:1.413296103477478 norm:0.03369593620300293 max memory_allocated 21267.677734375 
+[2025-05-18 12:13:13 root](LRQuant.py 300): INFO layer 25 iter 17 loss:1.4116613864898682 norm:0.033989615738391876 max memory_allocated 21267.677734375 
+[2025-05-18 12:14:17 root](LRQuant.py 300): INFO layer 25 iter 18 loss:1.4105651378631592 norm:0.034140944480895996 max memory_allocated 21267.677734375 
+[2025-05-18 12:15:21 root](LRQuant.py 300): INFO layer 25 iter 19 loss:1.4083070755004883 norm:0.03411754220724106 max memory_allocated 21267.677734375 
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+[2025-05-18 12:15:25 root](LRQuant.py 173): INFO === Start quantize layer 26 ===
+32
+[2025-05-18 12:16:34 root](LRQuant.py 300): INFO layer 26 iter 0 loss:1.8179099559783936 norm:0.05470941960811615 max memory_allocated 21267.833984375 
+[2025-05-18 12:17:38 root](LRQuant.py 300): INFO layer 26 iter 1 loss:1.6984509229660034 norm:0.03558836504817009 max memory_allocated 21267.833984375 
+[2025-05-18 12:18:42 root](LRQuant.py 300): INFO layer 26 iter 2 loss:1.6752400398254395 norm:0.03248131275177002 max memory_allocated 21267.833984375 
+[2025-05-18 12:19:46 root](LRQuant.py 300): INFO layer 26 iter 3 loss:1.6620885133743286 norm:0.032131798565387726 max memory_allocated 21267.833984375 
+[2025-05-18 12:20:50 root](LRQuant.py 300): INFO layer 26 iter 4 loss:1.652106761932373 norm:0.032342344522476196 max memory_allocated 21267.833984375 
+[2025-05-18 12:21:54 root](LRQuant.py 300): INFO layer 26 iter 5 loss:1.6440670490264893 norm:0.032596319913864136 max memory_allocated 21267.833984375 
+[2025-05-18 12:22:58 root](LRQuant.py 300): INFO layer 26 iter 6 loss:1.6379554271697998 norm:0.033118318766355515 max memory_allocated 21267.833984375 
+[2025-05-18 12:24:03 root](LRQuant.py 300): INFO layer 26 iter 7 loss:1.6317665576934814 norm:0.03367636352777481 max memory_allocated 21267.833984375 
+[2025-05-18 12:25:07 root](LRQuant.py 300): INFO layer 26 iter 8 loss:1.62710702419281 norm:0.033888064324855804 max memory_allocated 21267.833984375 
+[2025-05-18 12:26:11 root](LRQuant.py 300): INFO layer 26 iter 9 loss:1.6224441528320312 norm:0.0344020240008831 max memory_allocated 21267.833984375 
+[2025-05-18 12:27:15 root](LRQuant.py 300): INFO layer 26 iter 10 loss:1.618760585784912 norm:0.03485652059316635 max memory_allocated 21267.833984375 
+[2025-05-18 12:28:19 root](LRQuant.py 300): INFO layer 26 iter 11 loss:1.6150336265563965 norm:0.03516784682869911 max memory_allocated 21267.833984375 
+[2025-05-18 12:29:24 root](LRQuant.py 300): INFO layer 26 iter 12 loss:1.611941933631897 norm:0.03548169881105423 max memory_allocated 21267.833984375 
+[2025-05-18 12:30:28 root](LRQuant.py 300): INFO layer 26 iter 13 loss:1.608926773071289 norm:0.035825520753860474 max memory_allocated 21267.833984375 
+[2025-05-18 12:31:32 root](LRQuant.py 300): INFO layer 26 iter 14 loss:1.6067214012145996 norm:0.03651849925518036 max memory_allocated 21267.833984375 
+[2025-05-18 12:32:36 root](LRQuant.py 300): INFO layer 26 iter 15 loss:1.6047358512878418 norm:0.036680132150650024 max memory_allocated 21267.833984375 
+[2025-05-18 12:33:41 root](LRQuant.py 300): INFO layer 26 iter 16 loss:1.6026259660720825 norm:0.03695160523056984 max memory_allocated 21267.833984375 
+[2025-05-18 12:34:45 root](LRQuant.py 300): INFO layer 26 iter 17 loss:1.6006035804748535 norm:0.03719714283943176 max memory_allocated 21267.833984375 
+[2025-05-18 12:35:49 root](LRQuant.py 300): INFO layer 26 iter 18 loss:1.599290132522583 norm:0.03777764365077019 max memory_allocated 21267.833984375 
+[2025-05-18 12:36:53 root](LRQuant.py 300): INFO layer 26 iter 19 loss:1.597522497177124 norm:0.03786597028374672 max memory_allocated 21267.833984375 
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+[2025-05-18 12:36:57 root](LRQuant.py 173): INFO === Start quantize layer 27 ===
+32
+[2025-05-18 12:38:05 root](LRQuant.py 300): INFO layer 27 iter 0 loss:2.0348289012908936 norm:0.0713253766298294 max memory_allocated 21267.990234375 
+[2025-05-18 12:39:10 root](LRQuant.py 300): INFO layer 27 iter 1 loss:1.8854296207427979 norm:0.04239290952682495 max memory_allocated 21267.990234375 
+[2025-05-18 12:40:14 root](LRQuant.py 300): INFO layer 27 iter 2 loss:1.8579471111297607 norm:0.0386175736784935 max memory_allocated 21267.990234375 
+[2025-05-18 12:41:18 root](LRQuant.py 300): INFO layer 27 iter 3 loss:1.8403944969177246 norm:0.037032350897789 max memory_allocated 21267.990234375 
+[2025-05-18 12:42:22 root](LRQuant.py 300): INFO layer 27 iter 4 loss:1.828850269317627 norm:0.036739248782396317 max memory_allocated 21267.990234375 
+[2025-05-18 12:43:26 root](LRQuant.py 300): INFO layer 27 iter 5 loss:1.8187720775604248 norm:0.03652410954236984 max memory_allocated 21267.990234375 
+[2025-05-18 12:44:30 root](LRQuant.py 300): INFO layer 27 iter 6 loss:1.812270164489746 norm:0.03693743050098419 max memory_allocated 21267.990234375 
+[2025-05-18 12:45:35 root](LRQuant.py 300): INFO layer 27 iter 7 loss:1.80515456199646 norm:0.03693819046020508 max memory_allocated 21267.990234375 
+[2025-05-18 12:46:39 root](LRQuant.py 300): INFO layer 27 iter 8 loss:1.8002336025238037 norm:0.03751082345843315 max memory_allocated 21267.990234375 
+[2025-05-18 12:47:43 root](LRQuant.py 300): INFO layer 27 iter 9 loss:1.7978603839874268 norm:0.040409788489341736 max memory_allocated 21267.990234375 
+[2025-05-18 12:48:47 root](LRQuant.py 300): INFO layer 27 iter 10 loss:1.7960847616195679 norm:0.039744239300489426 max memory_allocated 21267.990234375 
+[2025-05-18 12:49:51 root](LRQuant.py 300): INFO layer 27 iter 11 loss:1.788954496383667 norm:0.038581427186727524 max memory_allocated 21267.990234375 
+[2025-05-18 12:50:56 root](LRQuant.py 300): INFO layer 27 iter 12 loss:1.7839246988296509 norm:0.03883139789104462 max memory_allocated 21267.990234375 
+[2025-05-18 12:52:00 root](LRQuant.py 300): INFO layer 27 iter 13 loss:1.780489444732666 norm:0.039142705500125885 max memory_allocated 21267.990234375 
+[2025-05-18 12:53:04 root](LRQuant.py 300): INFO layer 27 iter 14 loss:1.7778393030166626 norm:0.039664242416620255 max memory_allocated 21267.990234375 
+[2025-05-18 12:54:08 root](LRQuant.py 300): INFO layer 27 iter 15 loss:1.7758333683013916 norm:0.04046287760138512 max memory_allocated 21267.990234375 
+[2025-05-18 12:55:13 root](LRQuant.py 300): INFO layer 27 iter 16 loss:1.7731404304504395 norm:0.04035380482673645 max memory_allocated 21267.990234375 
+[2025-05-18 12:56:17 root](LRQuant.py 300): INFO layer 27 iter 17 loss:1.7711830139160156 norm:0.040742985904216766 max memory_allocated 21267.990234375 
+[2025-05-18 12:57:21 root](LRQuant.py 300): INFO layer 27 iter 18 loss:1.769174575805664 norm:0.040853582322597504 max memory_allocated 21267.990234375 
+[2025-05-18 12:58:25 root](LRQuant.py 300): INFO layer 27 iter 19 loss:1.7674975395202637 norm:0.04106239974498749 max memory_allocated 21267.990234375 
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+[2025-05-18 12:58:29 root](LRQuant.py 173): INFO === Start quantize layer 28 ===
+32
+[2025-05-18 12:59:37 root](LRQuant.py 300): INFO layer 28 iter 0 loss:2.3634772300720215 norm:0.09312021732330322 max memory_allocated 21268.146484375 
+[2025-05-18 13:00:42 root](LRQuant.py 300): INFO layer 28 iter 1 loss:2.173689603805542 norm:0.042125437408685684 max memory_allocated 21268.146484375 
+[2025-05-18 13:01:46 root](LRQuant.py 300): INFO layer 28 iter 2 loss:2.140819787979126 norm:0.039262935519218445 max memory_allocated 21268.146484375 
+[2025-05-18 13:02:50 root](LRQuant.py 300): INFO layer 28 iter 3 loss:2.1225576400756836 norm:0.03947736322879791 max memory_allocated 21268.146484375 
+[2025-05-18 13:03:54 root](LRQuant.py 300): INFO layer 28 iter 4 loss:2.1094532012939453 norm:0.03970084711909294 max memory_allocated 21268.146484375 
+[2025-05-18 13:04:58 root](LRQuant.py 300): INFO layer 28 iter 5 loss:2.099348306655884 norm:0.04021309316158295 max memory_allocated 21268.146484375 
+[2025-05-18 13:06:02 root](LRQuant.py 300): INFO layer 28 iter 6 loss:2.091745615005493 norm:0.04125001281499863 max memory_allocated 21268.146484375 
+[2025-05-18 13:07:06 root](LRQuant.py 300): INFO layer 28 iter 7 loss:2.0849509239196777 norm:0.0417458713054657 max memory_allocated 21268.146484375 
+[2025-05-18 13:08:11 root](LRQuant.py 300): INFO layer 28 iter 8 loss:2.079071044921875 norm:0.04266377165913582 max memory_allocated 21268.146484375 
+[2025-05-18 13:09:15 root](LRQuant.py 300): INFO layer 28 iter 9 loss:2.0745034217834473 norm:0.04419934004545212 max memory_allocated 21268.146484375 
+[2025-05-18 13:10:19 root](LRQuant.py 300): INFO layer 28 iter 10 loss:2.0707404613494873 norm:0.044404853135347366 max memory_allocated 21268.146484375 
+[2025-05-18 13:11:23 root](LRQuant.py 300): INFO layer 28 iter 11 loss:2.0668487548828125 norm:0.045321986079216 max memory_allocated 21268.146484375 
+[2025-05-18 13:12:28 root](LRQuant.py 300): INFO layer 28 iter 12 loss:2.0621089935302734 norm:0.04488842934370041 max memory_allocated 21268.146484375 
+[2025-05-18 13:13:32 root](LRQuant.py 300): INFO layer 28 iter 13 loss:2.0583560466766357 norm:0.04523402452468872 max memory_allocated 21268.146484375 
+[2025-05-18 13:14:36 root](LRQuant.py 300): INFO layer 28 iter 14 loss:2.0562191009521484 norm:0.04658951237797737 max memory_allocated 21268.146484375 
+[2025-05-18 13:15:40 root](LRQuant.py 300): INFO layer 28 iter 15 loss:2.053515672683716 norm:0.04626082628965378 max memory_allocated 21268.146484375 
+[2025-05-18 13:16:44 root](LRQuant.py 300): INFO layer 28 iter 16 loss:2.0498340129852295 norm:0.046568021178245544 max memory_allocated 21268.146484375 
+[2025-05-18 13:17:49 root](LRQuant.py 300): INFO layer 28 iter 17 loss:2.0505685806274414 norm:0.048243604600429535 max memory_allocated 21268.146484375 
+[2025-05-18 13:18:53 root](LRQuant.py 300): INFO layer 28 iter 18 loss:2.047656774520874 norm:0.047463223338127136 max memory_allocated 21268.146484375 
+[2025-05-18 13:19:57 root](LRQuant.py 300): INFO layer 28 iter 19 loss:2.0441675186157227 norm:0.04760586470365524 max memory_allocated 21268.146484375 
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+[2025-05-18 13:20:01 root](LRQuant.py 173): INFO === Start quantize layer 29 ===
+32
+[2025-05-18 13:21:09 root](LRQuant.py 300): INFO layer 29 iter 0 loss:2.7631702423095703 norm:0.09177535772323608 max memory_allocated 21268.302734375 
+[2025-05-18 13:22:13 root](LRQuant.py 300): INFO layer 29 iter 1 loss:2.544482707977295 norm:0.05141281709074974 max memory_allocated 21268.302734375 
+[2025-05-18 13:23:18 root](LRQuant.py 300): INFO layer 29 iter 2 loss:2.503981113433838 norm:0.04590441286563873 max memory_allocated 21268.302734375 
+[2025-05-18 13:24:22 root](LRQuant.py 300): INFO layer 29 iter 3 loss:2.481001138687134 norm:0.04472256451845169 max memory_allocated 21268.302734375 
+[2025-05-18 13:25:26 root](LRQuant.py 300): INFO layer 29 iter 4 loss:2.4650628566741943 norm:0.04488392174243927 max memory_allocated 21268.302734375 
+[2025-05-18 13:26:30 root](LRQuant.py 300): INFO layer 29 iter 5 loss:2.4535083770751953 norm:0.04566590487957001 max memory_allocated 21268.302734375 
+[2025-05-18 13:27:34 root](LRQuant.py 300): INFO layer 29 iter 6 loss:2.4439938068389893 norm:0.04671494662761688 max memory_allocated 21268.302734375 
+[2025-05-18 13:28:38 root](LRQuant.py 300): INFO layer 29 iter 7 loss:2.4371206760406494 norm:0.048003312200307846 max memory_allocated 21268.302734375 
+[2025-05-18 13:29:43 root](LRQuant.py 300): INFO layer 29 iter 8 loss:2.4284615516662598 norm:0.04802855849266052 max memory_allocated 21268.302734375 
+[2025-05-18 13:30:47 root](LRQuant.py 300): INFO layer 29 iter 9 loss:2.4211857318878174 norm:0.04814298450946808 max memory_allocated 21268.302734375 
+[2025-05-18 13:31:51 root](LRQuant.py 300): INFO layer 29 iter 10 loss:2.415191411972046 norm:0.04880234971642494 max memory_allocated 21268.302734375 
+[2025-05-18 13:32:55 root](LRQuant.py 300): INFO layer 29 iter 11 loss:2.409909725189209 norm:0.049240630120038986 max memory_allocated 21268.302734375 
+[2025-05-18 13:33:59 root](LRQuant.py 300): INFO layer 29 iter 12 loss:2.406121253967285 norm:0.050364479422569275 max memory_allocated 21268.302734375 
+[2025-05-18 13:35:04 root](LRQuant.py 300): INFO layer 29 iter 13 loss:2.4028055667877197 norm:0.051702335476875305 max memory_allocated 21268.302734375 
+[2025-05-18 13:36:08 root](LRQuant.py 300): INFO layer 29 iter 14 loss:2.40067458152771 norm:0.05280797928571701 max memory_allocated 21268.302734375 
+[2025-05-18 13:37:12 root](LRQuant.py 300): INFO layer 29 iter 15 loss:2.4040985107421875 norm:0.05493064969778061 max memory_allocated 21268.302734375 
+[2025-05-18 13:38:16 root](LRQuant.py 300): INFO layer 29 iter 16 loss:2.39688777923584 norm:0.05301719531416893 max memory_allocated 21268.302734375 
+[2025-05-18 13:39:21 root](LRQuant.py 300): INFO layer 29 iter 17 loss:2.392538070678711 norm:0.05363744497299194 max memory_allocated 21268.302734375 
+[2025-05-18 13:40:25 root](LRQuant.py 300): INFO layer 29 iter 18 loss:2.3869423866271973 norm:0.05229515582323074 max memory_allocated 21268.302734375 
+[2025-05-18 13:41:29 root](LRQuant.py 300): INFO layer 29 iter 19 loss:2.3833465576171875 norm:0.052686624228954315 max memory_allocated 21268.302734375 
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+[2025-05-18 13:41:33 root](LRQuant.py 173): INFO === Start quantize layer 30 ===
+32
+[2025-05-18 13:42:41 root](LRQuant.py 300): INFO layer 30 iter 0 loss:4.0587568283081055 norm:0.17508631944656372 max memory_allocated 21268.458984375 
+[2025-05-18 13:43:45 root](LRQuant.py 300): INFO layer 30 iter 1 loss:3.5432019233703613 norm:0.09620790183544159 max memory_allocated 21268.458984375 
+[2025-05-18 13:44:50 root](LRQuant.py 300): INFO layer 30 iter 2 loss:3.4510507583618164 norm:0.09264914691448212 max memory_allocated 21268.458984375 
+[2025-05-18 13:45:54 root](LRQuant.py 300): INFO layer 30 iter 3 loss:3.3976972103118896 norm:0.09195390343666077 max memory_allocated 21268.458984375 
+[2025-05-18 13:46:58 root](LRQuant.py 300): INFO layer 30 iter 4 loss:3.3861212730407715 norm:0.1201200783252716 max memory_allocated 21268.458984375 
+[2025-05-18 13:48:02 root](LRQuant.py 300): INFO layer 30 iter 5 loss:3.363443613052368 norm:0.09098377823829651 max memory_allocated 21268.458984375 
+[2025-05-18 13:49:06 root](LRQuant.py 300): INFO layer 30 iter 6 loss:3.278116464614868 norm:0.08262388408184052 max memory_allocated 21268.458984375 
+[2025-05-18 13:50:10 root](LRQuant.py 300): INFO layer 30 iter 7 loss:3.2522201538085938 norm:0.07846319675445557 max memory_allocated 21268.458984375 
+[2025-05-18 13:51:15 root](LRQuant.py 300): INFO layer 30 iter 8 loss:3.233884334564209 norm:0.07843141257762909 max memory_allocated 21268.458984375 
+[2025-05-18 13:52:19 root](LRQuant.py 300): INFO layer 30 iter 9 loss:3.21809720993042 norm:0.07648076862096786 max memory_allocated 21268.458984375 
+[2025-05-18 13:53:23 root](LRQuant.py 300): INFO layer 30 iter 10 loss:3.2157204151153564 norm:0.08266325294971466 max memory_allocated 21268.458984375 
+[2025-05-18 13:54:27 root](LRQuant.py 300): INFO layer 30 iter 11 loss:3.209829807281494 norm:0.08679916709661484 max memory_allocated 21268.458984375 
+[2025-05-18 13:55:31 root](LRQuant.py 300): INFO layer 30 iter 12 loss:3.255183458328247 norm:0.09659700095653534 max memory_allocated 21268.458984375 
+[2025-05-18 13:56:36 root](LRQuant.py 300): INFO layer 30 iter 13 loss:3.1985015869140625 norm:0.08622203022241592 max memory_allocated 21268.458984375 
+[2025-05-18 13:57:40 root](LRQuant.py 300): INFO layer 30 iter 14 loss:3.226249933242798 norm:0.08981820195913315 max memory_allocated 21268.458984375 
+[2025-05-18 13:58:44 root](LRQuant.py 300): INFO layer 30 iter 15 loss:3.19543194770813 norm:0.0958603024482727 max memory_allocated 21268.458984375 
+[2025-05-18 13:59:48 root](LRQuant.py 300): INFO layer 30 iter 16 loss:3.2466235160827637 norm:0.0954873114824295 max memory_allocated 21268.458984375 
+[2025-05-18 14:00:52 root](LRQuant.py 300): INFO layer 30 iter 17 loss:3.1756458282470703 norm:0.08938677608966827 max memory_allocated 21268.458984375 
+[2025-05-18 14:01:57 root](LRQuant.py 300): INFO layer 30 iter 18 loss:3.183684825897217 norm:0.09705856442451477 max memory_allocated 21268.458984375 
+[2025-05-18 14:03:01 root](LRQuant.py 300): INFO layer 30 iter 19 loss:3.176420211791992 norm:0.08879852294921875 max memory_allocated 21268.458984375 
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+[2025-05-18 14:03:05 root](LRQuant.py 173): INFO === Start quantize layer 31 ===
+32
+[2025-05-18 14:04:13 root](LRQuant.py 300): INFO layer 31 iter 0 loss:11.870569229125977 norm:1.0456690788269043 max memory_allocated 21268.615234375 
+[2025-05-18 14:05:17 root](LRQuant.py 300): INFO layer 31 iter 1 loss:9.601149559020996 norm:0.7449537515640259 max memory_allocated 21268.615234375 
+[2025-05-18 14:06:21 root](LRQuant.py 300): INFO layer 31 iter 2 loss:9.087157249450684 norm:0.6700392365455627 max memory_allocated 21268.615234375 
+[2025-05-18 14:07:25 root](LRQuant.py 300): INFO layer 31 iter 3 loss:8.821345329284668 norm:0.6318100094795227 max memory_allocated 21268.615234375 
+[2025-05-18 14:08:30 root](LRQuant.py 300): INFO layer 31 iter 4 loss:8.684781074523926 norm:0.6496772170066833 max memory_allocated 21268.615234375 
+[2025-05-18 14:09:34 root](LRQuant.py 300): INFO layer 31 iter 5 loss:8.624671936035156 norm:0.7224273681640625 max memory_allocated 21268.615234375 
+[2025-05-18 14:10:38 root](LRQuant.py 300): INFO layer 31 iter 6 loss:8.71607780456543 norm:0.8809271454811096 max memory_allocated 21268.615234375 
+[2025-05-18 14:11:42 root](LRQuant.py 300): INFO layer 31 iter 7 loss:8.859354019165039 norm:1.036146640777588 max memory_allocated 21268.615234375 
+[2025-05-18 14:12:46 root](LRQuant.py 300): INFO layer 31 iter 8 loss:8.867053985595703 norm:1.036166787147522 max memory_allocated 21268.615234375 
+[2025-05-18 14:13:50 root](LRQuant.py 300): INFO layer 31 iter 9 loss:8.448285102844238 norm:0.7261172533035278 max memory_allocated 21268.615234375 
+[2025-05-18 14:14:55 root](LRQuant.py 300): INFO layer 31 iter 10 loss:8.363204956054688 norm:0.7162454128265381 max memory_allocated 21268.615234375 
+[2025-05-18 14:15:59 root](LRQuant.py 300): INFO layer 31 iter 11 loss:8.300722122192383 norm:0.706282913684845 max memory_allocated 21268.615234375 
+[2025-05-18 14:17:03 root](LRQuant.py 300): INFO layer 31 iter 12 loss:8.26761531829834 norm:0.7219859957695007 max memory_allocated 21268.615234375 
+[2025-05-18 14:18:07 root](LRQuant.py 300): INFO layer 31 iter 13 loss:8.272884368896484 norm:0.7750867605209351 max memory_allocated 21268.615234375 
+[2025-05-18 14:19:11 root](LRQuant.py 300): INFO layer 31 iter 14 loss:8.320213317871094 norm:0.8568607568740845 max memory_allocated 21268.615234375 
+[2025-05-18 14:20:16 root](LRQuant.py 300): INFO layer 31 iter 15 loss:8.477259635925293 norm:1.009416103363037 max memory_allocated 21268.615234375 
+[2025-05-18 14:21:20 root](LRQuant.py 300): INFO layer 31 iter 16 loss:8.423626899719238 norm:0.9793953895568848 max memory_allocated 21268.615234375 
+[2025-05-18 14:22:24 root](LRQuant.py 300): INFO layer 31 iter 17 loss:8.358953475952148 norm:0.8800787925720215 max memory_allocated 21268.615234375 
+[2025-05-18 14:23:28 root](LRQuant.py 300): INFO layer 31 iter 18 loss:8.213201522827148 norm:0.813610315322876 max memory_allocated 21268.615234375 
+[2025-05-18 14:24:33 root](LRQuant.py 300): INFO layer 31 iter 19 loss:8.15706729888916 norm:0.7825816869735718 max memory_allocated 21268.615234375 
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+----error error-----
+[2025-05-18 14:24:36 root](main.py 353): INFO 41110.32787156105
+[2025-05-18 14:24:45 root](main.py 100): INFO load calibration from ./cache/testloader_llama_wikitext2_all.cache
+
+  0%|          | 0/166 [00:00<?, ?it/s]
+  1%|          | 1/166 [00:00<01:58,  1.39it/s]
+  1%|          | 2/166 [00:01<01:56,  1.40it/s]
+  2%|▏         | 3/166 [00:02<01:55,  1.41it/s]
+  2%|▏         | 4/166 [00:02<01:54,  1.42it/s]
+  3%|▎         | 5/166 [00:03<01:53,  1.42it/s]
+  4%|▎         | 6/166 [00:04<01:53,  1.41it/s]
+  4%|▍         | 7/166 [00:04<01:51,  1.42it/s]
+  5%|▍         | 8/166 [00:05<01:51,  1.42it/s]
+  5%|▌         | 9/166 [00:06<01:51,  1.41it/s]
+  6%|▌         | 10/166 [00:07<01:49,  1.42it/s]
+  7%|▋         | 11/166 [00:07<01:49,  1.41it/s]
+  7%|▋         | 12/166 [00:08<01:48,  1.41it/s]
+  8%|▊         | 13/166 [00:09<01:47,  1.42it/s]
+  8%|▊         | 14/166 [00:09<01:47,  1.41it/s]
+  9%|▉         | 15/166 [00:10<01:46,  1.42it/s]
+ 10%|▉         | 16/166 [00:11<01:45,  1.42it/s]
+ 10%|█         | 17/166 [00:12<01:45,  1.42it/s]
+ 11%|█         | 18/166 [00:12<01:44,  1.42it/s]
+ 11%|█▏        | 19/166 [00:13<01:43,  1.42it/s]
+ 12%|█▏        | 20/166 [00:14<01:43,  1.41it/s]
+ 13%|█▎        | 21/166 [00:14<01:42,  1.42it/s]
+ 13%|█▎        | 22/166 [00:15<01:41,  1.42it/s]
+ 14%|█▍        | 23/166 [00:16<01:41,  1.41it/s]
+ 14%|█▍        | 24/166 [00:16<01:39,  1.42it/s]
+ 15%|█▌        | 25/166 [00:17<01:39,  1.41it/s]
+ 16%|█▌        | 26/166 [00:18<01:39,  1.41it/s]
+ 16%|█▋        | 27/166 [00:19<01:37,  1.42it/s]
+ 17%|█▋        | 28/166 [00:19<01:37,  1.41it/s]
+ 17%|█▋        | 29/166 [00:20<01:36,  1.42it/s]
+ 18%|█▊        | 30/166 [00:21<01:35,  1.42it/s]
+ 19%|█▊        | 31/166 [00:21<01:35,  1.42it/s]
+ 19%|█▉        | 32/166 [00:22<01:34,  1.42it/s]
+ 20%|█▉        | 33/166 [00:23<01:33,  1.42it/s]
+ 20%|██        | 34/166 [00:24<01:33,  1.42it/s]
+ 21%|██        | 35/166 [00:24<01:31,  1.42it/s]
+ 22%|██▏       | 36/166 [00:25<01:31,  1.42it/s]
+ 22%|██▏       | 37/166 [00:26<01:31,  1.41it/s]
+ 23%|██▎       | 38/166 [00:26<01:30,  1.42it/s]
+ 23%|██▎       | 39/166 [00:27<01:29,  1.41it/s]
+ 24%|██▍       | 40/166 [00:28<01:29,  1.41it/s]
+ 25%|██▍       | 41/166 [00:28<01:28,  1.42it/s]
+ 25%|██▌       | 42/166 [00:29<01:27,  1.41it/s]
+ 26%|██▌       | 43/166 [00:30<01:27,  1.41it/s]
+ 27%|██▋       | 44/166 [00:31<01:25,  1.42it/s]
+ 27%|██▋       | 45/166 [00:31<01:25,  1.42it/s]
+ 28%|██▊       | 46/166 [00:32<01:24,  1.42it/s]
+ 28%|██▊       | 47/166 [00:33<01:23,  1.42it/s]
+ 29%|██▉       | 48/166 [00:33<01:23,  1.41it/s]
+ 30%|██▉       | 49/166 [00:34<01:22,  1.42it/s]
+ 30%|███       | 50/166 [00:35<01:21,  1.42it/s]
+ 31%|███       | 51/166 [00:36<01:21,  1.41it/s]
+ 31%|███▏      | 52/166 [00:36<01:20,  1.42it/s]
+ 32%|███▏      | 53/166 [00:37<01:19,  1.42it/s]
+ 33%|███▎      | 54/166 [00:38<01:19,  1.41it/s]
+ 33%|███▎      | 55/166 [00:38<01:18,  1.42it/s]
+ 34%|███▎      | 56/166 [00:39<01:17,  1.42it/s]
+ 34%|███▍      | 57/166 [00:40<01:17,  1.41it/s]
+ 35%|███▍      | 58/166 [00:40<01:15,  1.42it/s]
+ 36%|███▌      | 59/166 [00:41<01:15,  1.42it/s]
+ 36%|███▌      | 60/166 [00:42<01:15,  1.41it/s]
+ 37%|███▋      | 61/166 [00:43<01:13,  1.42it/s]
+ 37%|███▋      | 62/166 [00:43<01:13,  1.42it/s]
+ 38%|███▊      | 63/166 [00:44<01:12,  1.42it/s]
+ 39%|███▊      | 64/166 [00:45<01:12,  1.42it/s]
+ 39%|███▉      | 65/166 [00:45<01:11,  1.41it/s]
+ 40%|███▉      | 66/166 [00:46<01:10,  1.42it/s]
+ 40%|████      | 67/166 [00:47<01:09,  1.42it/s]
+ 41%|████      | 68/166 [00:47<01:09,  1.41it/s]
+ 42%|████▏     | 69/166 [00:48<01:08,  1.42it/s]
+ 42%|████▏     | 70/166 [00:49<01:07,  1.42it/s]
+ 43%|████▎     | 71/166 [00:50<01:07,  1.41it/s]
+ 43%|████▎     | 72/166 [00:50<01:06,  1.42it/s]
+ 44%|████▍     | 73/166 [00:51<01:05,  1.42it/s]
+ 45%|████▍     | 74/166 [00:52<01:05,  1.41it/s]
+ 45%|████▌     | 75/166 [00:52<01:04,  1.42it/s]
+ 46%|████▌     | 76/166 [00:53<01:03,  1.42it/s]
+ 46%|████▋     | 77/166 [00:54<01:02,  1.42it/s]
+ 47%|████▋     | 78/166 [00:55<01:01,  1.42it/s]
+ 48%|████▊     | 79/166 [00:55<01:01,  1.42it/s]
+ 48%|████▊     | 80/166 [00:56<01:00,  1.42it/s]
+ 49%|████▉     | 81/166 [00:57<01:00,  1.42it/s]
+ 49%|████▉     | 82/166 [00:57<00:59,  1.41it/s]
+ 50%|█████     | 83/166 [00:58<00:58,  1.42it/s]
+ 51%|█████     | 84/166 [00:59<00:57,  1.42it/s]
+ 51%|█████     | 85/166 [00:59<00:57,  1.41it/s]
+ 52%|█████▏    | 86/166 [01:00<00:56,  1.42it/s]
+ 52%|█████▏    | 87/166 [01:01<00:55,  1.42it/s]
+ 53%|█████▎    | 88/166 [01:02<00:55,  1.41it/s]
+ 54%|█████▎    | 89/166 [01:02<00:54,  1.42it/s]
+ 54%|█████▍    | 90/166 [01:03<00:53,  1.42it/s]
+ 55%|█████▍    | 91/166 [01:04<00:52,  1.42it/s]
+ 55%|█████▌    | 92/166 [01:04<00:52,  1.42it/s]
+ 56%|█████▌    | 93/166 [01:05<00:51,  1.42it/s]
+ 57%|█████▋    | 94/166 [01:06<00:50,  1.42it/s]
+ 57%|█████▋    | 95/166 [01:07<00:50,  1.42it/s]
+ 58%|█████▊    | 96/166 [01:07<00:49,  1.41it/s]
+ 58%|█████▊    | 97/166 [01:08<00:48,  1.42it/s]
+ 59%|█████▉    | 98/166 [01:09<00:47,  1.42it/s]
+ 60%|█████▉    | 99/166 [01:09<00:47,  1.41it/s]
+ 60%|██████    | 100/166 [01:10<00:46,  1.42it/s]
+ 61%|██████    | 101/166 [01:11<00:45,  1.42it/s]
+ 61%|██████▏   | 102/166 [01:11<00:45,  1.41it/s]
+ 62%|██████▏   | 103/166 [01:12<00:44,  1.42it/s]
+ 63%|██████▎   | 104/166 [01:13<00:43,  1.41it/s]
+ 63%|██████▎   | 105/166 [01:14<00:43,  1.41it/s]
+ 64%|██████▍   | 106/166 [01:14<00:42,  1.42it/s]
+ 64%|██████▍   | 107/166 [01:15<00:41,  1.42it/s]
+ 65%|██████▌   | 108/166 [01:16<00:40,  1.42it/s]
+ 66%|██████▌   | 109/166 [01:16<00:40,  1.42it/s]
+ 66%|██████▋   | 110/166 [01:17<00:39,  1.42it/s]
+ 67%|██████▋   | 111/166 [01:18<00:38,  1.42it/s]
+ 67%|██████▋   | 112/166 [01:19<00:38,  1.42it/s]
+ 68%|██████▊   | 113/166 [01:19<00:37,  1.41it/s]
+ 69%|██████▊   | 114/166 [01:20<00:36,  1.42it/s]
+ 69%|██████▉   | 115/166 [01:21<00:35,  1.42it/s]
+ 70%|██████▉   | 116/166 [01:21<00:35,  1.42it/s]
+ 70%|███████   | 117/166 [01:22<00:34,  1.42it/s]
+ 71%|███████   | 118/166 [01:23<00:33,  1.42it/s]
+ 72%|███████▏  | 119/166 [01:23<00:33,  1.41it/s]
+ 72%|███████▏  | 120/166 [01:24<00:32,  1.42it/s]
+ 73%|███████▎  | 121/166 [01:25<00:31,  1.42it/s]
+ 73%|███████▎  | 122/166 [01:26<00:31,  1.41it/s]
+ 74%|███████▍  | 123/166 [01:26<00:30,  1.42it/s]
+ 75%|███████▍  | 124/166 [01:27<00:29,  1.42it/s]
+ 75%|███████▌  | 125/166 [01:28<00:28,  1.42it/s]
+ 76%|███████▌  | 126/166 [01:28<00:28,  1.42it/s]
+ 77%|███████▋  | 127/166 [01:29<00:27,  1.41it/s]
+ 77%|███████▋  | 128/166 [01:30<00:26,  1.42it/s]
+ 78%|███████▊  | 129/166 [01:31<00:26,  1.42it/s]
+ 78%|███████▊  | 130/166 [01:31<00:25,  1.41it/s]
+ 79%|███████▉  | 131/166 [01:32<00:24,  1.42it/s]
+ 80%|███████▉  | 132/166 [01:33<00:24,  1.42it/s]
+ 80%|████████  | 133/166 [01:33<00:23,  1.41it/s]
+ 81%|████████  | 134/166 [01:34<00:22,  1.42it/s]
+ 81%|████████▏ | 135/166 [01:35<00:21,  1.41it/s]
+ 82%|████████▏ | 136/166 [01:35<00:21,  1.41it/s]
+ 83%|████████▎ | 137/166 [01:36<00:20,  1.42it/s]
+ 83%|████████▎ | 138/166 [01:37<00:19,  1.41it/s]
+ 84%|████████▎ | 139/166 [01:38<00:18,  1.42it/s]
+ 84%|████████▍ | 140/166 [01:38<00:18,  1.42it/s]
+ 85%|████████▍ | 141/166 [01:39<00:17,  1.41it/s]
+ 86%|████████▌ | 142/166 [01:40<00:16,  1.42it/s]
+ 86%|████████▌ | 143/166 [01:40<00:16,  1.42it/s]
+ 87%|████████▋ | 144/166 [01:41<00:15,  1.41it/s]
+ 87%|████████▋ | 145/166 [01:42<00:14,  1.42it/s]
+ 88%|████████▊ | 146/166 [01:43<00:14,  1.42it/s]
+ 89%|████████▊ | 147/166 [01:43<00:13,  1.41it/s]
+ 89%|████████▉ | 148/166 [01:44<00:12,  1.42it/s]
+ 90%|████████▉ | 149/166 [01:45<00:11,  1.42it/s]
+ 90%|█████████ | 150/166 [01:45<00:11,  1.41it/s]
+ 91%|█████████ | 151/166 [01:46<00:10,  1.42it/s]
+ 92%|█████████▏| 152/166 [01:47<00:09,  1.41it/s]
+ 92%|█████████▏| 153/166 [01:47<00:09,  1.42it/s]
+ 93%|█████████▎| 154/166 [01:48<00:08,  1.42it/s]
+ 93%|█████████▎| 155/166 [01:49<00:07,  1.42it/s]
+ 94%|█████████▍| 156/166 [01:50<00:07,  1.42it/s]
+ 95%|█████████▍| 157/166 [01:50<00:06,  1.42it/s]
+ 95%|█████████▌| 158/166 [01:51<00:05,  1.41it/s]
+ 96%|█████████▌| 159/166 [01:52<00:04,  1.42it/s]
+ 96%|█████████▋| 160/166 [01:52<00:04,  1.42it/s]
+ 97%|█████████▋| 161/166 [01:53<00:03,  1.41it/s]
+ 98%|█████████▊| 162/166 [01:54<00:02,  1.42it/s]
+ 98%|█████████▊| 163/166 [01:55<00:02,  1.42it/s]
+ 99%|█████████▉| 164/166 [01:55<00:01,  1.41it/s]
+ 99%|█████████▉| 165/166 [01:56<00:00,  1.42it/s]
+100%|██████████| 166/166 [01:57<00:00,  1.42it/s]
+100%|██████████| 166/166 [01:57<00:00,  1.42it/s]
+[2025-05-18 14:26:42 root](main.py 144): INFO wikitext2 : 6629.74853515625
+You are using the default legacy behaviour of the <class 'transformers.models.llama.tokenization_llama.LlamaTokenizer'>. This is expected, and simply means that the `legacy` (previous) behavior will be used so nothing changes for you. If you want to use the new behaviour, set `legacy=False`. This should only be set if you understand what it means, and thoroughly read the reason why this was added as explained in https://github.com/huggingface/transformers/pull/24565
+Token indices sequence length is longer than the specified maximum sequence length for this model (1284249 > 2048). Running this sequence through the model will result in indexing errors
+get_ptb
+
+  0%|          | 0/49 [00:00<?, ?it/s]
+  2%|▏         | 1/49 [00:00<00:33,  1.44it/s]
+  4%|▍         | 2/49 [00:01<00:33,  1.42it/s]
+  6%|▌         | 3/49 [00:02<00:32,  1.41it/s]
+  8%|▊         | 4/49 [00:02<00:31,  1.42it/s]
+ 10%|█         | 5/49 [00:03<00:30,  1.42it/s]
+ 12%|█▏        | 6/49 [00:04<00:30,  1.42it/s]
+ 14%|█▍        | 7/49 [00:04<00:29,  1.43it/s]
+ 16%|█▋        | 8/49 [00:05<00:28,  1.42it/s]
+ 18%|█▊        | 9/49 [00:06<00:28,  1.42it/s]
+ 20%|██        | 10/49 [00:07<00:27,  1.42it/s]
+ 22%|██▏       | 11/49 [00:07<00:26,  1.42it/s]
+ 24%|██▍       | 12/49 [00:08<00:26,  1.42it/s]
+ 27%|██▋       | 13/49 [00:09<00:25,  1.42it/s]
+ 29%|██▊       | 14/49 [00:09<00:24,  1.41it/s]
+ 31%|███       | 15/49 [00:10<00:23,  1.42it/s]
+ 33%|███▎      | 16/49 [00:11<00:23,  1.42it/s]
+ 35%|███▍      | 17/49 [00:11<00:22,  1.41it/s]
+ 37%|███▋      | 18/49 [00:12<00:21,  1.42it/s]
+ 39%|███▉      | 19/49 [00:13<00:21,  1.42it/s]
+ 41%|████      | 20/49 [00:14<00:20,  1.41it/s]
+ 43%|████▎     | 21/49 [00:14<00:19,  1.42it/s]
+ 45%|████▍     | 22/49 [00:15<00:19,  1.42it/s]
+ 47%|████▋     | 23/49 [00:16<00:18,  1.41it/s]
+ 49%|████▉     | 24/49 [00:16<00:17,  1.42it/s]
+ 51%|█████     | 25/49 [00:17<00:16,  1.42it/s]
+ 53%|█████▎    | 26/49 [00:18<00:16,  1.42it/s]
+ 55%|█████▌    | 27/49 [00:19<00:15,  1.42it/s]
+ 57%|█████▋    | 28/49 [00:19<00:14,  1.42it/s]
+ 59%|█████▉    | 29/49 [00:20<00:14,  1.42it/s]
+ 61%|██████    | 30/49 [00:21<00:13,  1.42it/s]
+ 63%|██████▎   | 31/49 [00:21<00:12,  1.42it/s]
+ 65%|██████▌   | 32/49 [00:22<00:11,  1.42it/s]
+ 67%|██████▋   | 33/49 [00:23<00:11,  1.42it/s]
+ 69%|██████▉   | 34/49 [00:23<00:10,  1.42it/s]
+ 71%|███████▏  | 35/49 [00:24<00:09,  1.43it/s]
+ 73%|███████▎  | 36/49 [00:25<00:09,  1.42it/s]
+ 76%|███████▌  | 37/49 [00:26<00:08,  1.41it/s]
+ 78%|███████▊  | 38/49 [00:26<00:07,  1.42it/s]
+ 80%|███████▉  | 39/49 [00:27<00:07,  1.42it/s]
+ 82%|████████▏ | 40/49 [00:28<00:06,  1.41it/s]
+ 84%|████████▎ | 41/49 [00:28<00:05,  1.42it/s]
+ 86%|████████▌ | 42/49 [00:29<00:04,  1.42it/s]
+ 88%|████████▊ | 43/49 [00:30<00:04,  1.42it/s]
+ 90%|████████▉ | 44/49 [00:30<00:03,  1.42it/s]
+ 92%|█████████▏| 45/49 [00:31<00:02,  1.42it/s]
+ 94%|█████████▍| 46/49 [00:32<00:02,  1.42it/s]
+ 96%|█████████▌| 47/49 [00:33<00:01,  1.42it/s]
+ 98%|█████████▊| 48/49 [00:33<00:00,  1.41it/s]
+100%|██████████| 49/49 [00:34<00:00,  1.42it/s]
+100%|██████████| 49/49 [00:34<00:00,  1.42it/s]
+[2025-05-18 14:27:34 root](main.py 144): INFO ptb : 4724.224609375
+get_c4
+
+Generating train split: 0 examples [00:00, ? examples/s]
+Generating train split: 22590 examples [00:00, 149817.18 examples/s]
+Generating train split: 41546 examples [00:00, 163984.68 examples/s]
+Generating train split: 59531 examples [00:00, 167586.17 examples/s]
+Generating train split: 77743 examples [00:00, 170496.50 examples/s]
+Generating train split: 95787 examples [00:00, 168426.77 examples/s]
+Generating train split: 113857 examples [00:00, 169239.05 examples/s]
+Generating train split: 132051 examples [00:00, 169516.53 examples/s]
+Generating train split: 150440 examples [00:00, 168521.52 examples/s]
+Generating train split: 168803 examples [00:01, 169214.55 examples/s]
+Generating train split: 186637 examples [00:01, 169405.02 examples/s]
+Generating train split: 209378 examples [00:01, 173095.41 examples/s]
+Generating train split: 227618 examples [00:01, 175141.32 examples/s]
+Generating train split: 245816 examples [00:01, 176125.19 examples/s]
+Generating train split: 263922 examples [00:01, 170155.10 examples/s]
+Generating train split: 282396 examples [00:01, 170248.37 examples/s]
+Generating train split: 300440 examples [00:01, 169753.29 examples/s]
+Generating train split: 318529 examples [00:01, 169804.73 examples/s]
+Generating train split: 336793 examples [00:01, 169576.83 examples/s]
+Generating train split: 354936 examples [00:02, 168618.58 examples/s]
+Generating train split: 356317 examples [00:02, 169327.33 examples/s]
+
+Generating validation split: 0 examples [00:00, ? examples/s]
+Generating validation split: 45576 examples [00:01, 23658.53 examples/s]
+Generating validation split: 45576 examples [00:01, 23570.53 examples/s]
+Token indices sequence length is longer than the specified maximum sequence length for this model (2191 > 2048). Running this sequence through the model will result in indexing errors
+
+  0%|          | 0/256 [00:00<?, ?it/s]
+  0%|          | 1/256 [00:00<03:01,  1.40it/s]
+  1%|          | 2/256 [00:01<02:57,  1.43it/s]
+  1%|          | 3/256 [00:02<02:58,  1.42it/s]
+  2%|▏         | 4/256 [00:02<02:58,  1.41it/s]
+  2%|▏         | 5/256 [00:03<02:56,  1.42it/s]
+  2%|▏         | 6/256 [00:04<02:56,  1.41it/s]
+  3%|▎         | 7/256 [00:04<02:56,  1.41it/s]
+  3%|▎         | 8/256 [00:05<02:54,  1.42it/s]
+  4%|▎         | 9/256 [00:06<02:54,  1.42it/s]
+  4%|▍         | 10/256 [00:07<02:52,  1.42it/s]
+  4%|▍         | 11/256 [00:07<02:52,  1.42it/s]
+  5%|▍         | 12/256 [00:08<02:52,  1.41it/s]
+  5%|▌         | 13/256 [00:09<02:50,  1.42it/s]
+  5%|▌         | 14/256 [00:09<02:50,  1.42it/s]
+  6%|▌         | 15/256 [00:10<02:50,  1.41it/s]
+  6%|▋         | 16/256 [00:11<02:48,  1.42it/s]
+  7%|▋         | 17/256 [00:11<02:48,  1.41it/s]
+  7%|▋         | 18/256 [00:12<02:48,  1.41it/s]
+  7%|▋         | 19/256 [00:13<02:46,  1.42it/s]
+  8%|▊         | 20/256 [00:14<02:46,  1.42it/s]
+  8%|▊         | 21/256 [00:14<02:46,  1.41it/s]
+  9%|▊         | 22/256 [00:15<02:44,  1.42it/s]
+  9%|▉         | 23/256 [00:16<02:44,  1.42it/s]
+  9%|▉         | 24/256 [00:16<02:43,  1.42it/s]
+ 10%|▉         | 25/256 [00:17<02:42,  1.42it/s]
+ 10%|█         | 26/256 [00:18<02:42,  1.41it/s]
+ 11%|█         | 27/256 [00:19<02:40,  1.42it/s]
+ 11%|█         | 28/256 [00:19<02:40,  1.42it/s]
+ 11%|█▏        | 29/256 [00:20<02:40,  1.41it/s]
+ 12%|█▏        | 30/256 [00:21<02:38,  1.42it/s]
+ 12%|█▏        | 31/256 [00:21<02:38,  1.42it/s]
+ 12%|█▎        | 32/256 [00:22<02:38,  1.41it/s]
+ 13%|█▎        | 33/256 [00:23<02:36,  1.42it/s]
+ 13%|█▎        | 34/256 [00:23<02:36,  1.42it/s]
+ 14%|█▎        | 35/256 [00:24<02:36,  1.41it/s]
+ 14%|█▍        | 36/256 [00:25<02:34,  1.42it/s]
+ 14%|█▍        | 37/256 [00:26<02:34,  1.42it/s]
+ 15%|█▍        | 38/256 [00:26<02:34,  1.41it/s]
+ 15%|█▌        | 39/256 [00:27<02:32,  1.42it/s]
+ 16%|█▌        | 40/256 [00:28<02:32,  1.42it/s]
+ 16%|█▌        | 41/256 [00:28<02:31,  1.42it/s]
+ 16%|█▋        | 42/256 [00:29<02:30,  1.42it/s]
+ 17%|█▋        | 43/256 [00:30<02:30,  1.41it/s]
+ 17%|█▋        | 44/256 [00:31<02:29,  1.42it/s]
+ 18%|█▊        | 45/256 [00:31<02:29,  1.42it/s]
+ 18%|█▊        | 46/256 [00:32<02:28,  1.41it/s]
+ 18%|█▊        | 47/256 [00:33<02:27,  1.42it/s]
+ 19%|█▉        | 48/256 [00:33<02:26,  1.42it/s]
+ 19%|█▉        | 49/256 [00:34<02:26,  1.41it/s]
+ 20%|█▉        | 50/256 [00:35<02:24,  1.42it/s]
+ 20%|█▉        | 51/256 [00:35<02:24,  1.42it/s]
+ 20%|██        | 52/256 [00:36<02:24,  1.41it/s]
+ 21%|██        | 53/256 [00:37<02:22,  1.43it/s]
+ 21%|██        | 54/256 [00:38<02:22,  1.42it/s]
+ 21%|██▏       | 55/256 [00:38<02:21,  1.42it/s]
+ 22%|██▏       | 56/256 [00:39<02:20,  1.43it/s]
+ 22%|██▏       | 57/256 [00:40<02:20,  1.42it/s]
+ 23%|██▎       | 58/256 [00:40<02:19,  1.42it/s]
+ 23%|██▎       | 59/256 [00:41<02:18,  1.42it/s]
+ 23%|██▎       | 60/256 [00:42<02:18,  1.42it/s]
+ 24%|██▍       | 61/256 [00:43<02:16,  1.42it/s]
+ 24%|██▍       | 62/256 [00:43<02:16,  1.42it/s]
+ 25%|██▍       | 63/256 [00:44<02:16,  1.41it/s]
+ 25%|██▌       | 64/256 [00:45<02:15,  1.42it/s]
+ 25%|██▌       | 65/256 [00:45<02:14,  1.42it/s]
+ 26%|██▌       | 66/256 [00:46<02:14,  1.41it/s]
+ 26%|██▌       | 67/256 [00:47<02:12,  1.42it/s]
+ 27%|██▋       | 68/256 [00:47<02:12,  1.42it/s]
+ 27%|██▋       | 69/256 [00:48<02:12,  1.42it/s]
+ 27%|██▋       | 70/256 [00:49<02:10,  1.42it/s]
+ 28%|██▊       | 71/256 [00:50<02:10,  1.42it/s]
+ 28%|██▊       | 72/256 [00:50<02:09,  1.42it/s]
+ 29%|██▊       | 73/256 [00:51<02:08,  1.43it/s]
+ 29%|██▉       | 74/256 [00:52<02:08,  1.42it/s]
+ 29%|██▉       | 75/256 [00:52<02:07,  1.42it/s]
+ 30%|██▉       | 76/256 [00:53<02:06,  1.43it/s]
+ 30%|███       | 77/256 [00:54<02:05,  1.42it/s]
+ 30%|███       | 78/256 [00:54<02:05,  1.42it/s]
+ 31%|███       | 79/256 [00:55<02:04,  1.42it/s]
+ 31%|███▏      | 80/256 [00:56<02:04,  1.42it/s]
+ 32%|███▏      | 81/256 [00:57<02:02,  1.43it/s]
+ 32%|███▏      | 82/256 [00:57<02:02,  1.42it/s]
+ 32%|███▏      | 83/256 [00:58<02:02,  1.42it/s]
+ 33%|███▎      | 84/256 [00:59<02:00,  1.42it/s]
+ 33%|███▎      | 85/256 [00:59<02:00,  1.42it/s]
+ 34%|███▎      | 86/256 [01:00<02:00,  1.41it/s]
+ 34%|███▍      | 87/256 [01:01<01:58,  1.42it/s]
+ 34%|███▍      | 88/256 [01:02<01:58,  1.42it/s]
+ 35%|███▍      | 89/256 [01:02<01:58,  1.41it/s]
+ 35%|███▌      | 90/256 [01:03<01:56,  1.42it/s]
+ 36%|███▌      | 91/256 [01:04<01:56,  1.42it/s]
+ 36%|███▌      | 92/256 [01:04<01:56,  1.41it/s]
+ 36%|███▋      | 93/256 [01:05<01:54,  1.42it/s]
+ 37%|███▋      | 94/256 [01:06<01:54,  1.41it/s]
+ 37%|███▋      | 95/256 [01:06<01:53,  1.42it/s]
+ 38%|███▊      | 96/256 [01:07<01:52,  1.42it/s]
+ 38%|███▊      | 97/256 [01:08<01:52,  1.42it/s]
+ 38%|███▊      | 98/256 [01:09<01:50,  1.42it/s]
+ 39%|███▊      | 99/256 [01:09<01:50,  1.42it/s]
+ 39%|███▉      | 100/256 [01:10<01:50,  1.41it/s]
+ 39%|███▉      | 101/256 [01:11<01:49,  1.42it/s]
+ 40%|███▉      | 102/256 [01:11<01:48,  1.42it/s]
+ 40%|████      | 103/256 [01:12<01:48,  1.41it/s]
+ 41%|████      | 104/256 [01:13<01:46,  1.42it/s]
+ 41%|████      | 105/256 [01:14<01:46,  1.42it/s]
+ 41%|████▏     | 106/256 [01:14<01:46,  1.41it/s]
+ 42%|████▏     | 107/256 [01:15<01:44,  1.42it/s]
+ 42%|████▏     | 108/256 [01:16<01:44,  1.41it/s]
+ 43%|████▎     | 109/256 [01:16<01:43,  1.41it/s]
+ 43%|████▎     | 110/256 [01:17<01:42,  1.42it/s]
+ 43%|████▎     | 111/256 [01:18<01:42,  1.42it/s]
+ 44%|████▍     | 112/256 [01:18<01:41,  1.42it/s]
+ 44%|████▍     | 113/256 [01:19<01:40,  1.42it/s]
+ 45%|████▍     | 114/256 [01:20<01:40,  1.42it/s]
+ 45%|████▍     | 115/256 [01:21<01:39,  1.42it/s]
+ 45%|████▌     | 116/256 [01:21<01:38,  1.42it/s]
+ 46%|████▌     | 117/256 [01:22<01:38,  1.41it/s]
+ 46%|████▌     | 118/256 [01:23<01:36,  1.42it/s]
+ 46%|████▋     | 119/256 [01:23<01:36,  1.42it/s]
+ 47%|████▋     | 120/256 [01:24<01:36,  1.41it/s]
+ 47%|████▋     | 121/256 [01:25<01:34,  1.42it/s]
+ 48%|████▊     | 122/256 [01:26<01:34,  1.42it/s]
+ 48%|████▊     | 123/256 [01:26<01:34,  1.41it/s]
+ 48%|████▊     | 124/256 [01:27<01:32,  1.42it/s]
+ 49%|████▉     | 125/256 [01:28<01:32,  1.42it/s]
+ 49%|████▉     | 126/256 [01:28<01:31,  1.42it/s]
+ 50%|████▉     | 127/256 [01:29<01:30,  1.42it/s]
+ 50%|█████     | 128/256 [01:30<01:30,  1.42it/s]
+ 50%|█████     | 129/256 [01:30<01:29,  1.42it/s]
+ 51%|█████     | 130/256 [01:31<01:28,  1.42it/s]
+ 51%|█████     | 131/256 [01:32<01:28,  1.41it/s]
+ 52%|█████▏    | 132/256 [01:33<01:27,  1.42it/s]
+ 52%|█████▏    | 133/256 [01:33<01:26,  1.42it/s]
+ 52%|█████▏    | 134/256 [01:34<01:26,  1.41it/s]
+ 53%|█████▎    | 135/256 [01:35<01:25,  1.42it/s]
+ 53%|█████▎    | 136/256 [01:35<01:24,  1.42it/s]
+ 54%|█████▎    | 137/256 [01:36<01:24,  1.41it/s]
+ 54%|█████▍    | 138/256 [01:37<01:22,  1.42it/s]
+ 54%|█████▍    | 139/256 [01:38<01:22,  1.42it/s]
+ 55%|█████▍    | 140/256 [01:38<01:21,  1.42it/s]
+ 55%|█████▌    | 141/256 [01:39<01:20,  1.42it/s]
+ 55%|█████▌    | 142/256 [01:40<01:20,  1.42it/s]
+ 56%|█████▌    | 143/256 [01:40<01:19,  1.42it/s]
+ 56%|█████▋    | 144/256 [01:41<01:18,  1.42it/s]
+ 57%|█████▋    | 145/256 [01:42<01:18,  1.42it/s]
+ 57%|█████▋    | 146/256 [01:42<01:17,  1.42it/s]
+ 57%|█████▋    | 147/256 [01:43<01:16,  1.42it/s]
+ 58%|█████▊    | 148/256 [01:44<01:16,  1.41it/s]
+ 58%|█████▊    | 149/256 [01:45<01:15,  1.42it/s]
+ 59%|█████▊    | 150/256 [01:45<01:15,  1.41it/s]
+ 59%|█████▉    | 151/256 [01:46<01:14,  1.41it/s]
+ 59%|█████▉    | 152/256 [01:47<01:13,  1.42it/s]
+ 60%|█████▉    | 153/256 [01:47<01:12,  1.42it/s]
+ 60%|██████    | 154/256 [01:48<01:12,  1.42it/s]
+ 61%|██████    | 155/256 [01:49<01:10,  1.43it/s]
+ 61%|██████    | 156/256 [01:50<01:10,  1.42it/s]
+ 61%|██████▏   | 157/256 [01:50<01:10,  1.41it/s]
+ 62%|██████▏   | 158/256 [01:51<01:08,  1.42it/s]
+ 62%|██████▏   | 159/256 [01:52<01:08,  1.42it/s]
+ 62%|██████▎   | 160/256 [01:52<01:07,  1.42it/s]
+ 63%|██████▎   | 161/256 [01:53<01:06,  1.42it/s]
+ 63%|██████▎   | 162/256 [01:54<01:06,  1.41it/s]
+ 64%|██████▎   | 163/256 [01:54<01:05,  1.42it/s]
+ 64%|██████▍   | 164/256 [01:55<01:04,  1.42it/s]
+ 64%|██████▍   | 165/256 [01:56<01:04,  1.41it/s]
+ 65%|██████▍   | 166/256 [01:57<01:03,  1.42it/s]
+ 65%|██████▌   | 167/256 [01:57<01:02,  1.42it/s]
+ 66%|██████▌   | 168/256 [01:58<01:02,  1.41it/s]
+ 66%|██████▌   | 169/256 [01:59<01:01,  1.42it/s]
+ 66%|██████▋   | 170/256 [01:59<01:00,  1.42it/s]
+ 67%|██████▋   | 171/256 [02:00<01:00,  1.41it/s]
+ 67%|██████▋   | 172/256 [02:01<00:59,  1.42it/s]
+ 68%|██████▊   | 173/256 [02:01<00:58,  1.42it/s]
+ 68%|██████▊   | 174/256 [02:02<00:57,  1.41it/s]
+ 68%|██████▊   | 175/256 [02:03<00:56,  1.42it/s]
+ 69%|██████▉   | 176/256 [02:04<00:56,  1.42it/s]
+ 69%|██████▉   | 177/256 [02:04<00:55,  1.42it/s]
+ 70%|██████▉   | 178/256 [02:05<00:54,  1.42it/s]
+ 70%|██████▉   | 179/256 [02:06<00:54,  1.42it/s]
+ 70%|███████   | 180/256 [02:06<00:53,  1.42it/s]
+ 71%|███████   | 181/256 [02:07<00:52,  1.42it/s]
+ 71%|███████   | 182/256 [02:08<00:52,  1.41it/s]
+ 71%|███████▏  | 183/256 [02:09<00:51,  1.42it/s]
+ 72%|███████▏  | 184/256 [02:09<00:50,  1.41it/s]
+ 72%|███████▏  | 185/256 [02:10<00:50,  1.41it/s]
+ 73%|███████▎  | 186/256 [02:11<00:49,  1.42it/s]
+ 73%|███████▎  | 187/256 [02:11<00:48,  1.42it/s]
+ 73%|███████▎  | 188/256 [02:12<00:48,  1.41it/s]
+ 74%|███████▍  | 189/256 [02:13<00:47,  1.42it/s]
+ 74%|███████▍  | 190/256 [02:13<00:46,  1.41it/s]
+ 75%|███████▍  | 191/256 [02:14<00:45,  1.42it/s]
+ 75%|███████▌  | 192/256 [02:15<00:45,  1.42it/s]
+ 75%|███████▌  | 193/256 [02:16<00:44,  1.41it/s]
+ 76%|███████▌  | 194/256 [02:16<00:43,  1.42it/s]
+ 76%|███████▌  | 195/256 [02:17<00:42,  1.42it/s]
+ 77%|███████▋  | 196/256 [02:18<00:42,  1.42it/s]
+ 77%|███████▋  | 197/256 [02:18<00:41,  1.43it/s]
+ 77%|███████▋  | 198/256 [02:19<00:40,  1.42it/s]
+ 78%|███████▊  | 199/256 [02:20<00:40,  1.41it/s]
+ 78%|███████▊  | 200/256 [02:21<00:39,  1.42it/s]
+ 79%|███████▊  | 201/256 [02:21<00:38,  1.42it/s]
+ 79%|███████▉  | 202/256 [02:22<00:38,  1.42it/s]
+ 79%|███████▉  | 203/256 [02:23<00:37,  1.42it/s]
+ 80%|███████▉  | 204/256 [02:23<00:36,  1.42it/s]
+ 80%|████████  | 205/256 [02:24<00:36,  1.41it/s]
+ 80%|████████  | 206/256 [02:25<00:35,  1.42it/s]
+ 81%|████████  | 207/256 [02:25<00:34,  1.42it/s]
+ 81%|████████▏ | 208/256 [02:26<00:33,  1.41it/s]
+ 82%|████████▏ | 209/256 [02:27<00:33,  1.42it/s]
+ 82%|████████▏ | 210/256 [02:28<00:32,  1.42it/s]
+ 82%|████████▏ | 211/256 [02:28<00:31,  1.42it/s]
+ 83%|████████▎ | 212/256 [02:29<00:30,  1.42it/s]
+ 83%|████████▎ | 213/256 [02:30<00:30,  1.42it/s]
+ 84%|████████▎ | 214/256 [02:30<00:29,  1.42it/s]
+ 84%|████████▍ | 215/256 [02:31<00:28,  1.42it/s]
+ 84%|████████▍ | 216/256 [02:32<00:28,  1.41it/s]
+ 85%|████████▍ | 217/256 [02:33<00:27,  1.42it/s]
+ 85%|████████▌ | 218/256 [02:33<00:26,  1.42it/s]
+ 86%|████████▌ | 219/256 [02:34<00:26,  1.41it/s]
+ 86%|████████▌ | 220/256 [02:35<00:25,  1.42it/s]
+ 86%|████████▋ | 221/256 [02:35<00:24,  1.42it/s]
+ 87%|████████▋ | 222/256 [02:36<00:24,  1.41it/s]
+ 87%|████████▋ | 223/256 [02:37<00:23,  1.42it/s]
+ 88%|████████▊ | 224/256 [02:37<00:22,  1.41it/s]
+ 88%|████████▊ | 225/256 [02:38<00:21,  1.41it/s]
+ 88%|████████▊ | 226/256 [02:39<00:21,  1.42it/s]
+ 89%|████████▊ | 227/256 [02:40<00:20,  1.42it/s]
+ 89%|████████▉ | 228/256 [02:40<00:19,  1.42it/s]
+ 89%|████████▉ | 229/256 [02:41<00:19,  1.42it/s]
+ 90%|████████▉ | 230/256 [02:42<00:18,  1.41it/s]
+ 90%|█████████ | 231/256 [02:42<00:17,  1.42it/s]
+ 91%|█████████ | 232/256 [02:43<00:16,  1.42it/s]
+ 91%|█████████ | 233/256 [02:44<00:16,  1.41it/s]
+ 91%|█████████▏| 234/256 [02:44<00:15,  1.42it/s]
+ 92%|█████████▏| 235/256 [02:45<00:14,  1.42it/s]
+ 92%|█████████▏| 236/256 [02:46<00:14,  1.41it/s]
+ 93%|█████████▎| 237/256 [02:47<00:13,  1.42it/s]
+ 93%|█████████▎| 238/256 [02:47<00:12,  1.42it/s]
+ 93%|█████████▎| 239/256 [02:48<00:12,  1.41it/s]
+ 94%|█████████▍| 240/256 [02:49<00:11,  1.42it/s]
+ 94%|█████████▍| 241/256 [02:49<00:10,  1.42it/s]
+ 95%|█████████▍| 242/256 [02:50<00:09,  1.41it/s]
+ 95%|█████████▍| 243/256 [02:51<00:09,  1.42it/s]
+ 95%|█████████▌| 244/256 [02:52<00:08,  1.42it/s]
+ 96%|█████████▌| 245/256 [02:52<00:07,  1.42it/s]
+ 96%|█████████▌| 246/256 [02:53<00:07,  1.42it/s]
+ 96%|█████████▋| 247/256 [02:54<00:06,  1.41it/s]
+ 97%|█████████▋| 248/256 [02:54<00:05,  1.42it/s]
+ 97%|█████████▋| 249/256 [02:55<00:04,  1.42it/s]
+ 98%|█████████▊| 250/256 [02:56<00:04,  1.41it/s]
+ 98%|█████████▊| 251/256 [02:56<00:03,  1.42it/s]
+ 98%|█████████▊| 252/256 [02:57<00:02,  1.42it/s]
+ 99%|█████████▉| 253/256 [02:58<00:02,  1.42it/s]
+ 99%|█████████▉| 254/256 [02:59<00:01,  1.42it/s]
+100%|█████████▉| 255/256 [02:59<00:00,  1.42it/s]
+100%|██████████| 256/256 [03:00<00:00,  1.41it/s]
+100%|██████████| 256/256 [03:00<00:00,  1.42it/s]
+[2025-05-18 14:31:02 root](main.py 144): INFO c4 : 5907.21337890625
+Token indices sequence length is longer than the specified maximum sequence length for this model (1195302 > 2048). Running this sequence through the model will result in indexing errors
+get_ptb_new
+
+  0%|          | 0/52 [00:00<?, ?it/s]
+  2%|▏         | 1/52 [00:00<00:37,  1.36it/s]
+  4%|▍         | 2/52 [00:01<00:36,  1.36it/s]
+  6%|▌         | 3/52 [00:02<00:36,  1.36it/s]
+  8%|▊         | 4/52 [00:02<00:35,  1.36it/s]
+ 10%|▉         | 5/52 [00:03<00:34,  1.36it/s]
+ 12%|█▏        | 6/52 [00:04<00:33,  1.36it/s]
+ 13%|█▎        | 7/52 [00:05<00:33,  1.36it/s]
+ 15%|█▌        | 8/52 [00:05<00:32,  1.36it/s]
+ 17%|█▋        | 9/52 [00:06<00:31,  1.36it/s]
+ 19%|█▉        | 10/52 [00:07<00:30,  1.36it/s]
+ 21%|██        | 11/52 [00:08<00:30,  1.36it/s]
+ 23%|██▎       | 12/52 [00:08<00:29,  1.36it/s]
+ 25%|██▌       | 13/52 [00:09<00:28,  1.36it/s]
+ 27%|██▋       | 14/52 [00:10<00:27,  1.36it/s]
+ 29%|██▉       | 15/52 [00:11<00:27,  1.36it/s]
+ 31%|███       | 16/52 [00:11<00:26,  1.36it/s]
+ 33%|███▎      | 17/52 [00:12<00:25,  1.36it/s]
+ 35%|███▍      | 18/52 [00:13<00:24,  1.36it/s]
+ 37%|███▋      | 19/52 [00:13<00:24,  1.36it/s]
+ 38%|███▊      | 20/52 [00:14<00:23,  1.36it/s]
+ 40%|████      | 21/52 [00:15<00:22,  1.36it/s]
+ 42%|████▏     | 22/52 [00:16<00:22,  1.36it/s]
+ 44%|████▍     | 23/52 [00:16<00:21,  1.36it/s]
+ 46%|████▌     | 24/52 [00:17<00:20,  1.36it/s]
+ 48%|████▊     | 25/52 [00:18<00:19,  1.36it/s]
+ 50%|█████     | 26/52 [00:19<00:19,  1.36it/s]
+ 52%|█████▏    | 27/52 [00:19<00:18,  1.36it/s]
+ 54%|█████▍    | 28/52 [00:20<00:17,  1.36it/s]
+ 56%|█████▌    | 29/52 [00:21<00:16,  1.36it/s]
+ 58%|█████▊    | 30/52 [00:22<00:16,  1.36it/s]
+ 60%|█████▉    | 31/52 [00:22<00:15,  1.36it/s]
+ 62%|██████▏   | 32/52 [00:23<00:14,  1.36it/s]
+ 63%|██████▎   | 33/52 [00:24<00:13,  1.36it/s]
+ 65%|██████▌   | 34/52 [00:24<00:13,  1.36it/s]
+ 67%|██████▋   | 35/52 [00:25<00:12,  1.36it/s]
+ 69%|██████▉   | 36/52 [00:26<00:11,  1.36it/s]
+ 71%|███████   | 37/52 [00:27<00:11,  1.36it/s]
+ 73%|███████▎  | 38/52 [00:27<00:10,  1.36it/s]
+ 75%|███████▌  | 39/52 [00:28<00:09,  1.36it/s]
+ 77%|███████▋  | 40/52 [00:29<00:08,  1.37it/s]
+ 79%|███████▉  | 41/52 [00:30<00:08,  1.36it/s]
+ 81%|████████  | 42/52 [00:30<00:07,  1.36it/s]
+ 83%|████████▎ | 43/52 [00:31<00:06,  1.36it/s]
+ 85%|████████▍ | 44/52 [00:32<00:05,  1.36it/s]
+ 87%|████████▋ | 45/52 [00:33<00:05,  1.36it/s]
+ 88%|████████▊ | 46/52 [00:33<00:04,  1.36it/s]
+ 90%|█████████ | 47/52 [00:34<00:03,  1.36it/s]
+ 92%|█████████▏| 48/52 [00:35<00:02,  1.36it/s]
+ 94%|█████████▍| 49/52 [00:36<00:02,  1.36it/s]
+ 96%|█████████▌| 50/52 [00:36<00:01,  1.36it/s]
+ 98%|█████████▊| 51/52 [00:37<00:00,  1.36it/s]
+100%|██████████| 52/52 [00:38<00:00,  1.36it/s]
+100%|██████████| 52/52 [00:38<00:00,  1.36it/s]
+[2025-05-18 14:31:57 root](main.py 144): INFO ptb-new : 6269.11279296875
+Token indices sequence length is longer than the specified maximum sequence length for this model (2191 > 2048). Running this sequence through the model will result in indexing errors
+get_c4_new
+
+  0%|          | 0/256 [00:00<?, ?it/s]
+  0%|          | 1/256 [00:00<03:07,  1.36it/s]
+  1%|          | 2/256 [00:01<03:06,  1.36it/s]
+  1%|          | 3/256 [00:02<03:06,  1.36it/s]
+  2%|▏         | 4/256 [00:02<03:04,  1.36it/s]
+  2%|▏         | 5/256 [00:03<03:04,  1.36it/s]
+  2%|▏         | 6/256 [00:04<03:03,  1.36it/s]
+  3%|▎         | 7/256 [00:05<03:02,  1.36it/s]
+  3%|▎         | 8/256 [00:05<03:02,  1.36it/s]
+  4%|▎         | 9/256 [00:06<03:01,  1.36it/s]
+  4%|▍         | 10/256 [00:07<03:00,  1.36it/s]
+  4%|▍         | 11/256 [00:08<02:59,  1.36it/s]
+  5%|▍         | 12/256 [00:08<02:59,  1.36it/s]
+  5%|▌         | 13/256 [00:09<02:58,  1.36it/s]
+  5%|▌         | 14/256 [00:10<02:57,  1.36it/s]
+  6%|▌         | 15/256 [00:11<02:56,  1.36it/s]
+  6%|▋         | 16/256 [00:11<02:56,  1.36it/s]
+  7%|▋         | 17/256 [00:12<02:55,  1.36it/s]
+  7%|▋         | 18/256 [00:13<02:54,  1.36it/s]
+  7%|▋         | 19/256 [00:13<02:54,  1.36it/s]
+  8%|▊         | 20/256 [00:14<02:53,  1.36it/s]
+  8%|▊         | 21/256 [00:15<02:52,  1.36it/s]
+  9%|▊         | 22/256 [00:16<02:51,  1.36it/s]
+  9%|▉         | 23/256 [00:16<02:51,  1.36it/s]
+  9%|▉         | 24/256 [00:17<02:50,  1.36it/s]
+ 10%|▉         | 25/256 [00:18<02:49,  1.36it/s]
+ 10%|█         | 26/256 [00:19<02:48,  1.36it/s]
+ 11%|█         | 27/256 [00:19<02:48,  1.36it/s]
+ 11%|█         | 28/256 [00:20<02:47,  1.36it/s]
+ 11%|█▏        | 29/256 [00:21<02:46,  1.36it/s]
+ 12%|█▏        | 30/256 [00:22<02:45,  1.36it/s]
+ 12%|█▏        | 31/256 [00:22<02:45,  1.36it/s]
+ 12%|█▎        | 32/256 [00:23<02:44,  1.36it/s]
+ 13%|█▎        | 33/256 [00:24<02:43,  1.36it/s]
+ 13%|█▎        | 34/256 [00:24<02:43,  1.36it/s]
+ 14%|█▎        | 35/256 [00:25<02:42,  1.36it/s]
+ 14%|█▍        | 36/256 [00:26<02:41,  1.36it/s]
+ 14%|█▍        | 37/256 [00:27<02:40,  1.36it/s]
+ 15%|█▍        | 38/256 [00:27<02:21,  1.54it/s]
+ 15%|█▌        | 39/256 [00:27<02:00,  1.81it/s]
+ 16%|█▌        | 40/256 [00:28<01:44,  2.06it/s]
+ 16%|█▌        | 41/256 [00:28<01:34,  2.28it/s]
+ 16%|█▋        | 42/256 [00:28<01:26,  2.46it/s]
+ 17%|█▋        | 43/256 [00:29<01:21,  2.61it/s]
+ 17%|█▋        | 44/256 [00:29<01:17,  2.73it/s]
+ 18%|█▊        | 45/256 [00:29<01:14,  2.82it/s]
+ 18%|█▊        | 46/256 [00:30<01:13,  2.88it/s]
+ 18%|█▊        | 47/256 [00:30<01:11,  2.92it/s]
+ 19%|█▉        | 48/256 [00:30<01:10,  2.96it/s]
+ 19%|█▉        | 49/256 [00:31<01:09,  2.98it/s]
+ 20%|█▉        | 50/256 [00:31<01:08,  3.00it/s]
+ 20%|█▉        | 51/256 [00:31<01:08,  3.01it/s]
+ 20%|██        | 52/256 [00:32<01:07,  3.02it/s]
+ 21%|██        | 53/256 [00:32<01:07,  3.03it/s]
+ 21%|██        | 54/256 [00:32<01:06,  3.03it/s]
+ 21%|██▏       | 55/256 [00:33<01:06,  3.03it/s]
+ 22%|██▏       | 56/256 [00:33<01:05,  3.03it/s]
+ 22%|██▏       | 57/256 [00:33<01:05,  3.04it/s]
+ 23%|██▎       | 58/256 [00:34<01:05,  3.04it/s]
+ 23%|██▎       | 59/256 [00:34<01:04,  3.04it/s]
+ 23%|██▎       | 60/256 [00:34<01:04,  3.04it/s]
+ 24%|██▍       | 61/256 [00:35<01:04,  3.04it/s]
+ 24%|██▍       | 62/256 [00:35<01:03,  3.04it/s]
+ 25%|██▍       | 63/256 [00:35<01:03,  3.04it/s]
+ 25%|██▌       | 64/256 [00:36<01:03,  3.04it/s]
+ 25%|██▌       | 65/256 [00:36<01:02,  3.04it/s]
+ 26%|██▌       | 66/256 [00:36<01:02,  3.04it/s]
+ 26%|██▌       | 67/256 [00:37<01:02,  3.04it/s]
+ 27%|██▋       | 68/256 [00:37<01:01,  3.04it/s]
+ 27%|██▋       | 69/256 [00:37<01:01,  3.04it/s]
+ 27%|██▋       | 70/256 [00:38<01:01,  3.04it/s]
+ 28%|██▊       | 71/256 [00:38<01:00,  3.04it/s]
+ 28%|██▊       | 72/256 [00:38<01:00,  3.04it/s]
+ 29%|██▊       | 73/256 [00:39<01:00,  3.04it/s]
+ 29%|██▉       | 74/256 [00:39<00:59,  3.04it/s]
+ 29%|██▉       | 75/256 [00:39<00:59,  3.04it/s]
+ 30%|██▉       | 76/256 [00:40<00:59,  3.04it/s]
+ 30%|███       | 77/256 [00:40<00:58,  3.04it/s]
+ 30%|███       | 78/256 [00:40<00:58,  3.04it/s]
+ 31%|███       | 79/256 [00:41<00:58,  3.04it/s]
+ 31%|███▏      | 80/256 [00:41<00:57,  3.04it/s]
+ 32%|███▏      | 81/256 [00:41<00:57,  3.04it/s]
+ 32%|███▏      | 82/256 [00:42<00:57,  3.04it/s]
+ 32%|███▏      | 83/256 [00:42<00:56,  3.04it/s]
+ 33%|███▎      | 84/256 [00:42<00:56,  3.04it/s]
+ 33%|███▎      | 85/256 [00:43<00:56,  3.04it/s]
+ 34%|███▎      | 86/256 [00:43<00:55,  3.04it/s]
+ 34%|███▍      | 87/256 [00:43<00:55,  3.04it/s]
+ 34%|███▍      | 88/256 [00:44<00:55,  3.04it/s]
+ 35%|███▍      | 89/256 [00:44<00:56,  2.97it/s]
+ 35%|███▌      | 90/256 [00:45<01:15,  2.19it/s]
+ 36%|███▌      | 91/256 [00:45<01:29,  1.85it/s]
+ 36%|███▌      | 92/256 [00:46<01:38,  1.67it/s]
+ 36%|███▋      | 93/256 [00:47<01:44,  1.57it/s]
+ 37%|███▋      | 94/256 [00:48<01:48,  1.50it/s]
+ 37%|███▋      | 95/256 [00:48<01:50,  1.46it/s]
+ 38%|███▊      | 96/256 [00:49<01:52,  1.43it/s]
+ 38%|███▊      | 97/256 [00:50<01:53,  1.41it/s]
+ 38%|███▊      | 98/256 [00:51<01:53,  1.39it/s]
+ 39%|███▊      | 99/256 [00:51<01:53,  1.38it/s]
+ 39%|███▉      | 100/256 [00:52<01:53,  1.38it/s]
+ 39%|███▉      | 101/256 [00:53<01:53,  1.37it/s]
+ 40%|███▉      | 102/256 [00:53<01:52,  1.37it/s]
+ 40%|████      | 103/256 [00:54<01:52,  1.37it/s]
+ 41%|████      | 104/256 [00:55<01:51,  1.36it/s]
+ 41%|████      | 105/256 [00:56<01:50,  1.36it/s]
+ 41%|████▏     | 106/256 [00:56<01:50,  1.36it/s]
+ 42%|████▏     | 107/256 [00:57<01:49,  1.36it/s]
+ 42%|████▏     | 108/256 [00:58<01:48,  1.36it/s]
+ 43%|████▎     | 109/256 [00:59<01:47,  1.36it/s]
+ 43%|████▎     | 110/256 [00:59<01:47,  1.36it/s]
+ 43%|████▎     | 111/256 [01:00<01:46,  1.36it/s]
+ 44%|████▍     | 112/256 [01:01<01:45,  1.36it/s]
+ 44%|████▍     | 113/256 [01:02<01:44,  1.36it/s]
+ 45%|████▍     | 114/256 [01:02<01:44,  1.36it/s]
+ 45%|████▍     | 115/256 [01:03<01:43,  1.36it/s]
+ 45%|████▌     | 116/256 [01:04<01:42,  1.37it/s]
+ 46%|████▌     | 117/256 [01:04<01:41,  1.36it/s]
+ 46%|████▌     | 118/256 [01:05<01:41,  1.36it/s]
+ 46%|████▋     | 119/256 [01:06<01:40,  1.36it/s]
+ 47%|████▋     | 120/256 [01:07<01:39,  1.36it/s]
+ 47%|████▋     | 121/256 [01:07<01:38,  1.37it/s]
+ 48%|████▊     | 122/256 [01:08<01:38,  1.36it/s]
+ 48%|████▊     | 123/256 [01:09<01:37,  1.37it/s]
+ 48%|████▊     | 124/256 [01:10<01:36,  1.36it/s]
+ 49%|████▉     | 125/256 [01:10<01:36,  1.36it/s]
+ 49%|████▉     | 126/256 [01:11<01:35,  1.36it/s]
+ 50%|████▉     | 127/256 [01:12<01:34,  1.36it/s]
+ 50%|█████     | 128/256 [01:13<01:33,  1.36it/s]
+ 50%|█████     | 129/256 [01:13<01:33,  1.36it/s]
+ 51%|█████     | 130/256 [01:14<01:32,  1.36it/s]
+ 51%|█████     | 131/256 [01:15<01:31,  1.36it/s]
+ 52%|█████▏    | 132/256 [01:15<01:31,  1.36it/s]
+ 52%|█████▏    | 133/256 [01:16<01:30,  1.36it/s]
+ 52%|█████▏    | 134/256 [01:17<01:29,  1.36it/s]
+ 53%|█████▎    | 135/256 [01:18<01:28,  1.36it/s]
+ 53%|█████▎    | 136/256 [01:18<01:28,  1.36it/s]
+ 54%|█████▎    | 137/256 [01:19<01:27,  1.36it/s]
+ 54%|█████▍    | 138/256 [01:20<01:26,  1.36it/s]
+ 54%|█████▍    | 139/256 [01:20<01:11,  1.63it/s]
+ 55%|█████▍    | 140/256 [01:21<01:01,  1.89it/s]
+ 55%|█████▌    | 141/256 [01:21<00:53,  2.13it/s]
+ 55%|█████▌    | 142/256 [01:21<00:48,  2.34it/s]
+ 56%|█████▌    | 143/256 [01:22<00:44,  2.52it/s]
+ 56%|█████▋    | 144/256 [01:22<00:42,  2.66it/s]
+ 57%|█████▋    | 145/256 [01:22<00:40,  2.76it/s]
+ 57%|█████▋    | 146/256 [01:23<00:38,  2.84it/s]
+ 57%|█████▋    | 147/256 [01:23<00:37,  2.90it/s]
+ 58%|█████▊    | 148/256 [01:23<00:36,  2.94it/s]
+ 58%|█████▊    | 149/256 [01:24<00:36,  2.97it/s]
+ 59%|█████▊    | 150/256 [01:24<00:35,  2.99it/s]
+ 59%|█████▉    | 151/256 [01:24<00:34,  3.00it/s]
+ 59%|█████▉    | 152/256 [01:25<00:34,  3.02it/s]
+ 60%|█████▉    | 153/256 [01:25<00:34,  3.02it/s]
+ 60%|██████    | 154/256 [01:25<00:33,  3.03it/s]
+ 61%|██████    | 155/256 [01:25<00:33,  3.03it/s]
+ 61%|██████    | 156/256 [01:26<00:32,  3.03it/s]
+ 61%|██████▏   | 157/256 [01:26<00:32,  3.04it/s]
+ 62%|██████▏   | 158/256 [01:26<00:32,  3.04it/s]
+ 62%|██████▏   | 159/256 [01:27<00:31,  3.04it/s]
+ 62%|██████▎   | 160/256 [01:27<00:31,  3.04it/s]
+ 63%|██████▎   | 161/256 [01:27<00:31,  3.03it/s]
+ 63%|██████▎   | 162/256 [01:28<00:30,  3.04it/s]
+ 64%|██████▎   | 163/256 [01:28<00:30,  3.04it/s]
+ 64%|██████▍   | 164/256 [01:28<00:30,  3.03it/s]
+ 64%|██████▍   | 165/256 [01:29<00:29,  3.04it/s]
+ 65%|██████▍   | 166/256 [01:29<00:29,  3.04it/s]
+ 65%|██████▌   | 167/256 [01:29<00:29,  3.04it/s]
+ 66%|██████▌   | 168/256 [01:30<00:28,  3.04it/s]
+ 66%|██████▌   | 169/256 [01:30<00:28,  3.04it/s]
+ 66%|██████▋   | 170/256 [01:30<00:28,  3.04it/s]
+ 67%|██████▋   | 171/256 [01:31<00:27,  3.04it/s]
+ 67%|██████▋   | 172/256 [01:31<00:27,  3.04it/s]
+ 68%|██████▊   | 173/256 [01:31<00:27,  3.04it/s]
+ 68%|██████▊   | 174/256 [01:32<00:26,  3.04it/s]
+ 68%|██████▊   | 175/256 [01:32<00:26,  3.04it/s]
+ 69%|██████▉   | 176/256 [01:32<00:26,  3.04it/s]
+ 69%|██████▉   | 177/256 [01:33<00:25,  3.04it/s]
+ 70%|██████▉   | 178/256 [01:33<00:25,  3.04it/s]
+ 70%|██████▉   | 179/256 [01:33<00:25,  3.04it/s]
+ 70%|███████   | 180/256 [01:34<00:24,  3.04it/s]
+ 71%|███████   | 181/256 [01:34<00:24,  3.04it/s]
+ 71%|███████   | 182/256 [01:34<00:24,  3.04it/s]
+ 71%|███████▏  | 183/256 [01:35<00:24,  3.04it/s]
+ 72%|███████▏  | 184/256 [01:35<00:23,  3.04it/s]
+ 72%|███████▏  | 185/256 [01:35<00:23,  3.04it/s]
+ 73%|███████▎  | 186/256 [01:36<00:23,  3.04it/s]
+ 73%|███████▎  | 187/256 [01:36<00:22,  3.04it/s]
+ 73%|███████▎  | 188/256 [01:36<00:22,  3.04it/s]
+ 74%|███████▍  | 189/256 [01:37<00:22,  3.04it/s]
+ 74%|███████▍  | 190/256 [01:37<00:21,  3.04it/s]
+ 75%|███████▍  | 191/256 [01:37<00:21,  3.04it/s]
+ 75%|███████▌  | 192/256 [01:38<00:21,  3.03it/s]
+ 75%|███████▌  | 193/256 [01:38<00:20,  3.04it/s]
+ 76%|███████▌  | 194/256 [01:38<00:20,  3.04it/s]
+ 76%|███████▌  | 195/256 [01:39<00:20,  3.04it/s]
+ 77%|███████▋  | 196/256 [01:39<00:19,  3.04it/s]
+ 77%|███████▋  | 197/256 [01:39<00:19,  3.04it/s]
+ 77%|███████▋  | 198/256 [01:40<00:19,  3.04it/s]
+ 78%|███████▊  | 199/256 [01:40<00:18,  3.04it/s]
+ 78%|███████▊  | 200/256 [01:40<00:18,  3.03it/s]
+ 79%|███████▊  | 201/256 [01:41<00:18,  3.04it/s]
+ 79%|███████▉  | 202/256 [01:41<00:17,  3.04it/s]
+ 79%|███████▉  | 203/256 [01:41<00:17,  3.04it/s]
+ 80%|███████▉  | 204/256 [01:42<00:17,  3.04it/s]
+ 80%|████████  | 205/256 [01:42<00:16,  3.04it/s]
+ 80%|████████  | 206/256 [01:42<00:16,  3.04it/s]
+ 81%|████████  | 207/256 [01:43<00:16,  3.04it/s]
+ 81%|████████▏ | 208/256 [01:43<00:15,  3.04it/s]
+ 82%|████████▏ | 209/256 [01:43<00:15,  3.04it/s]
+ 82%|████████▏ | 210/256 [01:44<00:15,  3.03it/s]
+ 82%|████████▏ | 211/256 [01:44<00:14,  3.04it/s]
+ 83%|████████▎ | 212/256 [01:44<00:16,  2.59it/s]
+ 83%|████████▎ | 213/256 [01:45<00:21,  2.04it/s]
+ 84%|████████▎ | 214/256 [01:46<00:23,  1.78it/s]
+ 84%|████████▍ | 215/256 [01:47<00:25,  1.63it/s]
+ 84%|████████▍ | 216/256 [01:47<00:26,  1.54it/s]
+ 85%|████████▍ | 217/256 [01:48<00:26,  1.48it/s]
+ 85%|████████▌ | 218/256 [01:49<00:26,  1.44it/s]
+ 86%|████████▌ | 219/256 [01:50<00:26,  1.42it/s]
+ 86%|████████▌ | 220/256 [01:50<00:25,  1.40it/s]
+ 86%|████████▋ | 221/256 [01:51<00:25,  1.39it/s]
+ 87%|████████▋ | 222/256 [01:52<00:24,  1.38it/s]
+ 87%|████████▋ | 223/256 [01:53<00:24,  1.37it/s]
+ 88%|████████▊ | 224/256 [01:53<00:23,  1.37it/s]
+ 88%|████████▊ | 225/256 [01:54<00:22,  1.37it/s]
+ 88%|████████▊ | 226/256 [01:55<00:21,  1.37it/s]
+ 89%|████████▊ | 227/256 [01:55<00:21,  1.36it/s]
+ 89%|████████▉ | 228/256 [01:56<00:20,  1.36it/s]
+ 89%|████████▉ | 229/256 [01:57<00:19,  1.36it/s]
+ 90%|████████▉ | 230/256 [01:58<00:19,  1.36it/s]
+ 90%|█████████ | 231/256 [01:58<00:18,  1.36it/s]
+ 91%|█████████ | 232/256 [01:59<00:17,  1.36it/s]
+ 91%|█████████ | 233/256 [02:00<00:16,  1.36it/s]
+ 91%|█████████▏| 234/256 [02:01<00:16,  1.36it/s]
+ 92%|█████████▏| 235/256 [02:01<00:15,  1.36it/s]
+ 92%|█████████▏| 236/256 [02:02<00:14,  1.36it/s]
+ 93%|█████████▎| 237/256 [02:03<00:13,  1.36it/s]
+ 93%|█████████▎| 238/256 [02:04<00:13,  1.36it/s]
+ 93%|█████████▎| 239/256 [02:04<00:12,  1.36it/s]
+ 94%|█████████▍| 240/256 [02:05<00:11,  1.36it/s]
+ 94%|█████████▍| 241/256 [02:06<00:11,  1.36it/s]
+ 95%|█████████▍| 242/256 [02:06<00:10,  1.36it/s]
+ 95%|█████████▍| 243/256 [02:07<00:09,  1.36it/s]
+ 95%|█████████▌| 244/256 [02:08<00:08,  1.36it/s]
+ 96%|█████████▌| 245/256 [02:09<00:08,  1.36it/s]
+ 96%|█████████▌| 246/256 [02:09<00:07,  1.36it/s]
+ 96%|█████████▋| 247/256 [02:10<00:06,  1.36it/s]
+ 97%|█████████▋| 248/256 [02:11<00:05,  1.36it/s]
+ 97%|█████████▋| 249/256 [02:12<00:05,  1.36it/s]
+ 98%|█████████▊| 250/256 [02:12<00:04,  1.36it/s]
+ 98%|█████████▊| 251/256 [02:13<00:03,  1.36it/s]
+ 98%|█████████▊| 252/256 [02:14<00:02,  1.36it/s]
+ 99%|█████████▉| 253/256 [02:15<00:02,  1.36it/s]
+ 99%|█████████▉| 254/256 [02:15<00:01,  1.36it/s]
+100%|█████████▉| 255/256 [02:16<00:00,  1.36it/s]
+100%|██████████| 256/256 [02:17<00:00,  1.36it/s]
+100%|██████████| 256/256 [02:17<00:00,  1.86it/s]
+[2025-05-18 14:34:28 root](main.py 144): INFO c4-new : 5882.5673828125

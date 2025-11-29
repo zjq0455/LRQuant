@@ -11,7 +11,24 @@ import utils
 import os
 import pdb
 import gc
+from scipy.stats import kurtosis
+import scipy.stats
+from quantize.utils import let_parameters, lwc_parameters, get_omni_parameters,\
+                            omni_state_dict, register_scales_and_zeros,smooth_and_quant_temporary,\
+                            smooth_and_quant_inplace,clear_temp_variable,set_quant_state, get_rlq_parameters,rlq_state_dict
 
+def add_new_module(name, original_module, added_module):
+    levels = name.split('.')
+    if len(levels) > 1:
+        mod_ = original_module
+        for l_idx in range(len(levels)-1):
+            if levels[l_idx].isdigit():
+                mod_ = mod_[int(levels[l_idx])]
+            else:
+                mod_ = getattr(mod_, levels[l_idx])
+        setattr(mod_, levels[-1], added_module)
+    else:
+        setattr(original_module, name, added_module) 
 
 
 def get_named_linears(module):
@@ -130,7 +147,15 @@ def LRQuant(
     
 
     attention_mask = cache["attention_mask"]
-    attention_mask_batch = attention_mask.repeat(args.batch_size,1,1,1) if args.deactive_amp else attention_mask.repeat(args.batch_size,1,1,1).float()
+    # attention_mask_batch = attention_mask.repeat(args.batch_size,1,1,1) if args.deactive_amp else attention_mask.repeat(args.batch_size,1,1,1).float()
+    if attention_mask is not None:
+        attention_mask_batch = attention_mask.repeat(args.batch_size,1,1,1).float()
+    else:
+        logger.info(
+            "No attention mask caught from the first layer."
+            " Seems that model's attention works without a mask."
+        )
+        attention_mask_batch = None
     loss_func = torch.nn.MSELoss()
     # loss_func = torch.nn.L1Loss()
     if is_llama:
@@ -149,12 +174,55 @@ def LRQuant(
         print(len(layers))
         
         layer = layers[i].to(dev)
-        qlayer = DecoderLayer(lm.model.config, layer, args)
+        # w3-mix
+        # if  i in [27, 25, 26, 28, 29, 24]:
+        # if  i in [25, 27, 23, 28, 18, 15]:
+        #     args.weight_quant_params['n_bits'] = 2
+        #     print(args.weight_quant_params)
+        #     args.epochs=40
+        # # elif i in [0, 31, 1, 6, 4, 7]:
+        # elif i in [ 2, 22, 30, 31, 1, 0]:
+        #     args.weight_quant_params['n_bits'] = 4
+        #     print(args.weight_quant_params)
+        #     args.epochs=20
+        # else:
+        #     args.weight_quant_params['n_bits'] = 3
+        #     args.epochs=20
+        # if i in [ 2, 22, 30, 31, 1, 0]:
+        #     args.weight_quant_params['n_bits'] = 4
+        #     print(args.weight_quant_params)
+        #     args.epochs=20
+        # else:
+        #     args.weight_quant_params['n_bits'] = 3
+        #     args.epochs=20
+        # logger.info(args.weight_quant_params)
+        if False:
+            # for llava, we only leverage lwc, which can be achieve by simply replace Linear with QuantLinear
+            qlayer = copy.deepcopy(layer)
+            for name, module in qlayer.named_modules():
+                if isinstance(module,torch.nn.Linear):
+                    kurt = scipy.stats.kurtosis(module.weight.data.detach().cpu().flatten().numpy())
+                    # if kurt < 0.14:
+                    if kurt < 0.077:
+                        args.weight_quant_params['n_bits'] = 3
+                        logger.info(f'{name} has weight bits 3')
+                    # elif kurt > 1.83:
+                    elif kurt > 2.11:
+                        args.weight_quant_params['n_bits'] = 5
+                        logger.info(f'{name} has weight bits 5')
+                    else:
+                        args.weight_quant_params['n_bits'] = 4
+                        logger.info(f'{name} has weight bits 4')
+                    quantlinear = QuantLinear(module, args.weight_quant_params, args.act_quant_params)
+                    add_new_module(name, qlayer, quantlinear)  
+        else:
+            qlayer = DecoderLayer(lm.model.config, layer, args) 
+        # qlayer = DecoderLayer(lm.model.config, layer, args)
         qlayer = qlayer.to(dev)
 
         
         # obtain output of full-precision model
-        qlayer.set_quant_state(weight_quant=False, act_quant=False)
+        set_quant_state(qlayer, weight_quant=False, act_quant=False)
         if args.epochs > 0:
             with torch.no_grad():
                 with torch.cuda.amp.autocast():
@@ -163,7 +231,7 @@ def LRQuant(
                         quant_inps_fp[j] = qlayer(quant_inps[j].unsqueeze(0), attention_mask=attention_mask,position_ids=position_ids)[0]
 
         # init smooth parameters
-        qlayer.set_quant_state(weight_quant=False, act_quant=True)  # weight will be manually quantized before forward
+        set_quant_state(qlayer, weight_quant=False, act_quant=True)  # weight will be manually quantized before forward
         qlayer.let = args.let
         use_shift = True 
         
@@ -175,7 +243,6 @@ def LRQuant(
                     for key in pairs.keys():
                         if key in name:
                             act = act_scales[f"{layer_name_prefix}.{i}.{name}"].to(device=dev, dtype=dtype).clamp(min=1e-5) #4096
-                            r1 = torch.ones(module.weight.shape[0], 1).to(dev)
                             scale = (act/torch.log2(2+act)).clamp(min=1e-5) #weight
                             if use_shift and not is_llama:
                                 shift = act_shifts[f"{layer_name_prefix}.{i}.{name}"].to(device=dev, dtype=dtype)
@@ -183,9 +250,13 @@ def LRQuant(
                                 shift = torch.zeros_like(act)  
                             qlayer.register_parameter(f"{pairs[key]}_smooth_shift",torch.nn.Parameter(shift))
                             qlayer.register_parameter(f"{pairs[key]}_smooth_scale",torch.nn.Parameter(scale))
-                            if args.lr_plus:
-                                name_tmp = name.replace(".","_")
-                                qlayer.register_parameter(f"{name_tmp}_smooth_rotate",torch.nn.Parameter(r1,requires_grad=True))  
+                    if args.lr_plus:
+                        r1 = torch.ones(module.weight.shape[0], args.rotate_rank).to(dev)
+                        r2 = torch.ones(args.rotate_rank, module.weight.shape[1]).to(dev)
+                        name_tmp = name.replace(".","_")
+                        # print('----rotate register-----')
+                        qlayer.register_parameter(f"{name_tmp}_rotate_1",torch.nn.Parameter(r1,requires_grad=True))
+                        qlayer.register_parameter(f"{name_tmp}_rotate_2",torch.nn.Parameter(r2,requires_grad=True))  
         
         if args.resume:
             qlayer.load_state_dict(rlq_parameters[i], strict=False)
@@ -195,7 +266,7 @@ def LRQuant(
                 qlayer.float()      # required for AMP training
             # create optimizer
             optimizer = torch.optim.AdamW(
-                [{"params":qlayer.let_parameters(use_shift),"lr":args.let_lr}, {"params":qlayer.lwc_parameters(),"lr":args.lwc_lr}],weight_decay=args.wd)
+                [{"params":let_parameters(qlayer, use_shift),"lr":args.let_lr}, {"params":lwc_parameters(qlayer),"lr":args.lwc_lr}],weight_decay=args.wd)
             loss_scaler = utils.NativeScalerWithGradNormCount()
                    
             for epochs in range(args.epochs):
@@ -205,7 +276,7 @@ def LRQuant(
                     index = j * args.batch_size
                     # obtain output of quantization model
                     with traincast():
-                        qlayer.smooth_and_quant_temporary()
+                        smooth_and_quant_temporary(qlayer, args, True)
                         quant_out = qlayer(quant_inps[index:index+args.batch_size,], attention_mask=attention_mask_batch,position_ids=position_ids)[0]
                         loss1 =  loss_func(fp_inps[index:index+args.batch_size,], quant_out)
                         cos1 = cossim(quant_out,fp_inps[index:index+args.batch_size,]).mean().abs()
@@ -221,29 +292,29 @@ def LRQuant(
                         
                     loss_list.append(loss.data)
                     optimizer.zero_grad()
-                    norm = loss_scaler(loss, optimizer,parameters=qlayer.rlq_parameters(use_shift))
+                    norm = loss_scaler(loss, optimizer,parameters=get_rlq_parameters(qlayer, use_shift))
                     norm_list.append(norm.data)
 
                 loss_mean = torch.stack(loss_list).mean()
                 norm_mean = torch.stack(norm_list).mean()
                 logger.info(f"layer {i} iter {epochs} loss:{loss_mean} norm:{norm_mean} max memory_allocated {torch.cuda.max_memory_allocated(lm._device) / 1024**2} ")
-            qlayer.clear_temp_variable()
+            clear_temp_variable(qlayer)
             del optimizer
         
         # real smooth and quantization
-        qlayer.smooth_and_quant_inplace()       
+        smooth_and_quant_inplace(qlayer, args, True)     
         if args.epochs>=0:
             # update input of quantization model
             with torch.no_grad():
                 with torch.cuda.amp.autocast():
                     for j in range(args.nsamples):
                         quant_inps[j] = qlayer(quant_inps[j].unsqueeze(0), attention_mask=attention_mask,position_ids=position_ids)[0]
-            qlayer.register_scales_and_zeros()
+            register_scales_and_zeros(qlayer)
             qlayer.half()
             layers[i] = qlayer.to("cpu")
-            rlq_parameters[i] = qlayer.rlq_state_dict()
+            rlq_parameters[i] = rlq_state_dict(qlayer)
         else:
-            qlayer.register_scales_and_zeros()
+            register_scales_and_zeros(qlayer)
             qlayer.half()
             layers[i] = qlayer.to("cpu")          
         

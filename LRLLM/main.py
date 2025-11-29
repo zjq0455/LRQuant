@@ -213,6 +213,7 @@ def main():
     parser.add_argument("--lwc_lr", type=float, default=1e-2)
     parser.add_argument("--wd", type=float, default=0)
     parser.add_argument("--epochs", type=int, default=10)
+    parser.add_argument("--rotate_rank", type=int, default=1)
     parser.add_argument("--lr_plus",default=False, action="store_true",help="LRQuant+")
     parser.add_argument("--let",default=False, action="store_true",help="activate learnable equivalent transformation")
     parser.add_argument("--lwc",default=False, action="store_true",help="activate learnable weight clipping")
